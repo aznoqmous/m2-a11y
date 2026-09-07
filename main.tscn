@@ -1,8 +1,104 @@
 [gd_scene format=3 uid="uid://bhtudkyerpkoj"]
 
 [ext_resource type="Script" uid="uid://d3p85ep1xwr2b" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="Shader" uid="uid://c415l53bkoffy" path="res://main.gdshader" id="2_0xm2m"]
+[ext_resource type="Shader" uid="uid://bsjh6ph4t6p1x" path="res://blit.gdshader" id="2_h2yge"]
+[ext_resource type="Texture2D" uid="uid://dsnyvbbkrrl8t" path="res://sprites/brush.png" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://dmpwahq60xas3" path="res://sprites/rect.png" id="5_lquwl"]
 
-[node name="Main" type="Node2D" unique_id=259715746]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h2yge"]
+shader = ExtResource("2_h2yge")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0xm2m"]
+shader = ExtResource("2_0xm2m")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ig7tw"]
+size = Vector2(851.5, 554.5)
+
+[sub_resource type="DrawableTexture2D" id="DrawableTexture2D_lquwl"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qmn6i"]
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+color = Color(1, 0, 1, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1bvp3"]
+particle_flag_disable_z = true
+particle_flag_inherit_emitter_scale = true
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+color = Color(0, 1, 1, 1)
+
+[node name="Main" type="Node2D" unique_id=259715746 node_paths=PackedStringArray("reference_particles", "player_particles", "reference_node", "player_node", "state_fill_rect")]
 script = ExtResource("1_ig7tw")
+reference_particles = NodePath("ReferenceNode/ReferenceParticles")
+player_particles = NodePath("PlayerNode/PlayerParticles")
+reference_node = NodePath("ReferenceNode")
+player_node = NodePath("PlayerNode")
+state_fill_rect = NodePath("CanvasLayer/Control/State/StateFill")
+reference_speed = 0.5
+player_rotation_speed = 10.0
+reference_rotation_speed = 5.0
+blit_material = SubResource("ShaderMaterial_h2yge")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1655387417]
+visible = false
+material = SubResource("ShaderMaterial_0xm2m")
+mesh = SubResource("QuadMesh_ig7tw")
+texture = SubResource("DrawableTexture2D_lquwl")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=326661253]
+
+[node name="ReferenceNode" type="Node2D" parent="." unique_id=1401998448]
+position = Vector2(393, -108.541794)
+
+[node name="ReferenceParticles" type="GPUParticles2D" parent="ReferenceNode" unique_id=952775802]
+amount = 1000
+texture = ExtResource("4_1bvp3")
+lifetime = 12.0
+trail_lifetime = 1.0
+process_material = SubResource("ParticleProcessMaterial_qmn6i")
+
+[node name="PlayerNode" type="Node2D" parent="." unique_id=1004822030]
+position = Vector2(393, -354.34863)
+
+[node name="PlayerParticles" type="GPUParticles2D" parent="PlayerNode" unique_id=381877796]
+amount = 1000
+texture = ExtResource("4_1bvp3")
+lifetime = 12.0
+trail_lifetime = 1.0
+process_material = SubResource("ParticleProcessMaterial_1bvp3")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1327059218]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1270954090]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="State" type="Control" parent="CanvasLayer/Control" unique_id=1968642648]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 20.0
+grow_horizontal = 2
+
+[node name="StateFill" type="TextureRect" parent="CanvasLayer/Control/State" unique_id=1575890335]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1)
+texture = ExtResource("5_lquwl")
