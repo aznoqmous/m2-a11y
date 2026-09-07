@@ -6,6 +6,8 @@ var playback # Will hold the AudioStreamGeneratorPlayback.
 @onready var sample_hz = _asp.stream.mix_rate
 var pulse_hz = 440.0 # The frequency of the sound wave.
 var phase = 0.0
+var pitch_control : float
+var volume_control : float
 
 func _ready():
 	_asp.play()
@@ -17,7 +19,7 @@ func fill_buffer():
 	var frames_available = playback.get_frames_available()
 
 	for i in range(frames_available):
-		playback.push_frame(Vector2.ONE * sin(phase * TAU))
+		playback.push_frame(Vector2.ONE * sin(phase * TAU) * cos(phase * TAU))
 		phase = fmod(phase + increment, 1.0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -42,4 +44,13 @@ func _process(delta: float) -> void:
 	if(Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT)):
 		_asp.pitch_scale = 1
 		print("Pitch reset")
+	
+	pitch_control = get_local_mouse_position().x / 100
+	print(pitch_control)
+	_asp.pitch_scale = pitch_control
+	volume_control = get_local_mouse_position().y / 10
+	print(volume_control)
+	_asp.volume_db = volume_control
+		
+		
 	pass
