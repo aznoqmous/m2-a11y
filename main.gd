@@ -1,6 +1,8 @@
 @tool
 extends Node2D
 
+@onready var serial: Node2D = $Serial
+
 @export var reference_particles: GPUParticles2D
 @export var player_particles: GPUParticles2D
 @export var reference_node: Node2D
@@ -45,12 +47,15 @@ func set_next_reference_target():
 	#print(reference_target)
 	await get_tree().create_timer(randf_range(1.0, 3.0)).timeout
 	set_next_reference_target()
-	
+
+
 func _process(delta: float) -> void:
 	player_target = get_global_mouse_position().y
+	player_target = serial.value / 40.0 * mesh_size.y - mesh_size.y / 2.0
+	
 	var player_target_dist = abs(player_target - player_node.position.y) / 100.0
 	player_current_speed = move_toward(player_current_speed, sign(player_target - player_node.position.y) * player_speed * player_target_dist, delta * player_rotation_speed)
-	player_node.position.y += player_current_speed 
+	player_node.position.y += player_current_speed
 	#player_particles.scale = player_particles.scale.move_toward(get_global_mouse_position().x / mesh_size.x * Vector2.ONE, delta)
 	
 	#reference_particles.scale = reference_particles.scale.move_toward(reference_scale_target * Vector2.ONE, delta)

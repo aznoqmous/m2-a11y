@@ -5,6 +5,7 @@
 [ext_resource type="Shader" uid="uid://bsjh6ph4t6p1x" path="res://blit.gdshader" id="2_h2yge"]
 [ext_resource type="Texture2D" uid="uid://dsnyvbbkrrl8t" path="res://sprites/brush.png" id="4_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://dmpwahq60xas3" path="res://sprites/rect.png" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://c5ownt22gf1nq" path="res://serial.gd" id="6_7mycd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h2yge"]
 shader = ExtResource("2_h2yge")
@@ -13,9 +14,9 @@ shader = ExtResource("2_h2yge")
 shader = ExtResource("2_0xm2m")
 
 [sub_resource type="QuadMesh" id="QuadMesh_ig7tw"]
-size = Vector2(851.5, 554.5)
+size = Vector2(790.5, 547.5)
 
-[sub_resource type="DrawableTexture2D" id="DrawableTexture2D_lquwl"]
+[sub_resource type="DrawableTexture2D" id="DrawableTexture2D_7mycd"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qmn6i"]
 particle_flag_disable_z = true
@@ -43,8 +44,9 @@ player_particles = NodePath("PlayerNode/PlayerParticles")
 reference_node = NodePath("ReferenceNode")
 player_node = NodePath("PlayerNode")
 state_fill_rect = NodePath("CanvasLayer/Control/State/StateFill")
+player_speed = 2.0
 reference_speed = 0.5
-player_rotation_speed = 10.0
+player_rotation_speed = 20.0
 reference_rotation_speed = 5.0
 blit_material = SubResource("ShaderMaterial_h2yge")
 
@@ -52,12 +54,12 @@ blit_material = SubResource("ShaderMaterial_h2yge")
 visible = false
 material = SubResource("ShaderMaterial_0xm2m")
 mesh = SubResource("QuadMesh_ig7tw")
-texture = SubResource("DrawableTexture2D_lquwl")
+texture = SubResource("DrawableTexture2D_7mycd")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=326661253]
 
 [node name="ReferenceNode" type="Node2D" parent="." unique_id=1401998448]
-position = Vector2(393, -108.541794)
+position = Vector2(393, 79.04832)
 
 [node name="ReferenceParticles" type="GPUParticles2D" parent="ReferenceNode" unique_id=952775802]
 amount = 1000
@@ -67,7 +69,7 @@ trail_lifetime = 1.0
 process_material = SubResource("ParticleProcessMaterial_qmn6i")
 
 [node name="PlayerNode" type="Node2D" parent="." unique_id=1004822030]
-position = Vector2(393, -354.34863)
+position = Vector2(393, 1064.9751)
 
 [node name="PlayerParticles" type="GPUParticles2D" parent="PlayerNode" unique_id=381877796]
 amount = 1000
@@ -102,3 +104,6 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1e-05, 1)
 texture = ExtResource("5_lquwl")
+
+[node name="Serial" type="Node2D" parent="." unique_id=1993022613]
+script = ExtResource("6_7mycd")
