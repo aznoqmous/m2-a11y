@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://c4se0ckbe01k5"]
+
+[ext_resource type="Script" uid="uid://g3oyf45612th" path="res://generator.gd" id="1_qcf81"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_gafi8"]
+buffer_length = 4.0
+
+[node name="AudioGenerator" type="Node2D" unique_id=1099815716]
+
+[node name="Generator" type="Node2D" parent="." unique_id=605994228]
+script = ExtResource("1_qcf81")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=892567417]
+stream = SubResource("AudioStreamGenerator_gafi8")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1590744186]
+
+[node name="Control" type="Control" parent="." unique_id=815315368]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1149.0
+offset_bottom = 645.0
+
+[node name="Label" type="Label" parent="Control" unique_id=1656646223]
+layout_mode = 0
+offset_right = 1154.0
+offset_bottom = 649.0
+text = "- Vertical arrows to control the pitch
+
+- Horizontal arrows to control the volume
+
+- Space to generate a sine wave (base duration is 4 seconds)
+
+- Left click to reset the pitch
+
+- Right click to reset the volume"
+horizontal_alignment = 1
+vertical_alignment = 1
