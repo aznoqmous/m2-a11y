@@ -4,6 +4,7 @@
 [ext_resource type="Shader" uid="uid://c415l53bkoffy" path="res://main.gdshader" id="2_0xm2m"]
 [ext_resource type="Shader" uid="uid://bsjh6ph4t6p1x" path="res://blit.gdshader" id="2_h2yge"]
 [ext_resource type="Texture2D" uid="uid://dsnyvbbkrrl8t" path="res://sprites/brush.png" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://bsqyvvrf0aeok" path="res://sprites/circle.png" id="5_272bh"]
 [ext_resource type="Texture2D" uid="uid://dmpwahq60xas3" path="res://sprites/rect.png" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://c5ownt22gf1nq" path="res://serial.gd" id="6_7mycd"]
 
@@ -16,7 +17,7 @@ shader = ExtResource("2_0xm2m")
 [sub_resource type="QuadMesh" id="QuadMesh_ig7tw"]
 size = Vector2(851.5, 463.5)
 
-[sub_resource type="DrawableTexture2D" id="DrawableTexture2D_7mycd"]
+[sub_resource type="DrawableTexture2D" id="DrawableTexture2D_5vw27"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qmn6i"]
 particle_flag_disable_z = true
@@ -37,10 +38,31 @@ initial_velocity_max = 100.0
 gravity = Vector3(0, 0, 0)
 color = Color(0, 1, 1, 1)
 
-[node name="Main" type="Node2D" unique_id=259715746 node_paths=PackedStringArray("reference_particles", "player_particles", "reference_node", "player_node", "state_fill_rect")]
+[sub_resource type="Curve" id="Curve_200of"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xancx"]
+curve = SubResource("Curve_200of")
+
+[sub_resource type="Curve" id="Curve_kek77"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_naghh"]
+curve = SubResource("Curve_kek77")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eo3ih"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_naghh")
+alpha_curve = SubResource("CurveTexture_xancx")
+
+[node name="Main" type="Node2D" unique_id=259715746 node_paths=PackedStringArray("reference_particles", "player_particles", "feedback_particles", "reference_node", "player_node", "state_fill_rect")]
 script = ExtResource("1_ig7tw")
 reference_particles = NodePath("ReferenceNode/ReferenceParticles")
 player_particles = NodePath("PlayerNode/PlayerParticles")
+feedback_particles = NodePath("PlayerNode/FeedBackParticles")
 reference_node = NodePath("ReferenceNode")
 player_node = NodePath("PlayerNode")
 state_fill_rect = NodePath("CanvasLayer/Control/State/StateFill")
@@ -57,7 +79,7 @@ blit_material = SubResource("ShaderMaterial_h2yge")
 visible = false
 material = SubResource("ShaderMaterial_0xm2m")
 mesh = SubResource("QuadMesh_ig7tw")
-texture = SubResource("DrawableTexture2D_7mycd")
+texture = SubResource("DrawableTexture2D_5vw27")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=326661253]
 
@@ -72,7 +94,7 @@ trail_lifetime = 1.0
 process_material = SubResource("ParticleProcessMaterial_qmn6i")
 
 [node name="PlayerNode" type="Node2D" parent="." unique_id=1004822030]
-position = Vector2(393, 151.42752)
+position = Vector2(393, 43.470726)
 
 [node name="PlayerParticles" type="GPUParticles2D" parent="PlayerNode" unique_id=381877796]
 amount = 1000
@@ -80,6 +102,14 @@ texture = ExtResource("4_1bvp3")
 lifetime = 12.0
 trail_lifetime = 1.0
 process_material = SubResource("ParticleProcessMaterial_1bvp3")
+
+[node name="FeedBackParticles" type="GPUParticles2D" parent="PlayerNode" unique_id=1218360848]
+emitting = false
+amount = 1
+texture = ExtResource("5_272bh")
+one_shot = true
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_eo3ih")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1327059218]
 

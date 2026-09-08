@@ -5,6 +5,7 @@ extends Node2D
 
 @export var reference_particles: GPUParticles2D
 @export var player_particles: GPUParticles2D
+@export var feedback_particles: GPUParticles2D
 @export var reference_node: Node2D
 @export var player_node: Node2D
 @export var state_fill_rect: TextureRect
@@ -74,10 +75,13 @@ func _process(delta: float) -> void:
 	reference_current_speed = move_toward(reference_current_speed, sign(reference_target - reference_node.position.y) * reference_speed * reference_target_dist, delta * reference_rotation_speed)
 	reference_node.position.y += reference_current_speed 
 	
-	state = move_toward(state, 1.0 if abs(player_target - reference_target) < 50 and abs(player_scale_target - reference_scale_target) < 0.1 else 0.0, delta)
+	if abs(player_target - reference_target) < 50 and abs(player_scale_target - reference_scale_target) < 0.1:
+		state += delta
+		
 	state_fill_rect.scale = Vector2(state, 1.0)
-	if state == 1.0:
+	if state >= 1.0:
 		target_note_index += 1
+		feedback_particles.emitting = true
 		set_target_note(target_notes[target_note_index % target_notes.size()], randf())
 	
 	draw_to_texture()
