@@ -13,9 +13,8 @@ shader = ExtResource("2_h2yge")
 shader = ExtResource("2_0xm2m")
 
 [sub_resource type="QuadMesh" id="QuadMesh_ig7tw"]
-size = Vector2(912, 483.5)
 
-[sub_resource type="DrawableTexture2D" id="DrawableTexture2D_272bh"]
+[sub_resource type="DrawableTexture2D" id="DrawableTexture2D_lquwl"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qmn6i"]
 particle_flag_disable_z = true
@@ -52,12 +51,12 @@ blit_material = SubResource("ShaderMaterial_h2yge")
 visible = false
 material = SubResource("ShaderMaterial_0xm2m")
 mesh = SubResource("QuadMesh_ig7tw")
-texture = SubResource("DrawableTexture2D_272bh")
+texture = SubResource("DrawableTexture2D_lquwl")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=326661253]
 
 [node name="ReferenceNode" type="Node2D" parent="." unique_id=1401998448]
-position = Vector2(393, 98.04714)
+position = Vector2(393, 0.3207646)
 
 [node name="ReferenceParticles" type="GPUParticles2D" parent="ReferenceNode" unique_id=952775802]
 amount = 1000
@@ -67,7 +66,7 @@ trail_lifetime = 1.0
 process_material = SubResource("ParticleProcessMaterial_qmn6i")
 
 [node name="PlayerNode" type="Node2D" parent="." unique_id=1004822030]
-position = Vector2(393, -8.07592)
+position = Vector2(393, 1123.1677)
 
 [node name="PlayerParticles" type="GPUParticles2D" parent="PlayerNode" unique_id=381877796]
 amount = 1000
