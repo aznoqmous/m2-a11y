@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://g3oyf45612th" path="res://scripts/generator.gd" id="1_qcf81"]
 [ext_resource type="Script" uid="uid://c3pg8uf7dvlej" path="res://scripts/audio_effect_manager.gd" id="2_7ldk7"]
-
-[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_gafi8"]
+[ext_resource type="AudioStream" uid="uid://dit1l0k44utje" path="res://audio/bass_wave.wav" id="2_73nho"]
 
 [node name="AudioGenerator" type="Node2D" unique_id=1099815716]
 script = ExtResource("1_qcf81")
@@ -11,12 +10,8 @@ script = ExtResource("1_qcf81")
 [node name="Generator" type="Node2D" parent="." unique_id=605994228]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=892567417]
-stream = SubResource("AudioStreamGenerator_gafi8")
-pitch_scale = 0.01
+stream = ExtResource("2_73nho")
 autoplay = true
-
-[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1590744186]
-current = true
 
 [node name="Control" type="Control" parent="." unique_id=815315368]
 visible = false

@@ -18,10 +18,10 @@ func _ready():
 		_asp.seek(0)
 		_asp.play()
 	)
-	fill_buffer()
+	#fill_buffer()
 
 func _process(_delta: float) -> void:
-	fill_buffer()
+	#fill_buffer()
 	pass
 	#if(Input.is_action_just_pressed("ui_accept")):
 		#fill_buffer()
