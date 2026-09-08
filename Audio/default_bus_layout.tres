@@ -1,0 +1,33 @@
+[gd_resource type="AudioBusLayout" format=3 uid="uid://c1cabd4xq701c"]
+
+[sub_resource type="AudioEffectChorus" id="AudioEffectChorus_j3pel"]
+resource_name = "Chorus"
+voice_count = 4
+wet = 0.0
+voice/3/delay_ms = 12.0
+voice/3/rate_hz = 1.0
+voice/3/depth_ms = 0.0
+voice/3/level_db = 0.0
+voice/3/cutoff_hz = 16000.0
+voice/3/pan = 0.0
+voice/4/delay_ms = 12.0
+voice/4/rate_hz = 1.0
+voice/4/depth_ms = 0.0
+voice/4/level_db = 0.0
+voice/4/cutoff_hz = 16000.0
+voice/4/pan = 0.0
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_j3pel"]
+resource_name = "Compressor"
+
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_j3pel"]
+resource_name = "Distortion"
+
+[resource]
+bus/0/volume_db = -14.343837
+bus/0/effect/0/effect = SubResource("AudioEffectChorus_j3pel")
+bus/0/effect/0/enabled = true
+bus/0/effect/1/effect = SubResource("AudioEffectCompressor_j3pel")
+bus/0/effect/1/enabled = true
+bus/0/effect/2/effect = SubResource("AudioEffectDistortion_j3pel")
+bus/0/effect/2/enabled = true
