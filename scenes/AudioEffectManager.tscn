@@ -1,6 +1,12 @@
 [gd_scene format=3 uid="uid://bbm2i1fgffdiy"]
 
 [ext_resource type="Script" uid="uid://c3pg8uf7dvlej" path="res://scripts/audio_effect_manager.gd" id="1_ldvii"]
+[ext_resource type="AudioStream" uid="uid://b5mcmxmpxkhfe" path="res://audio/feedbacks/completion_stab.wav" id="2_ykbb4"]
 
 [node name="AudioEffectManager" type="Node2D" unique_id=1480341746]
 script = ExtResource("1_ldvii")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1994688250]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1987242257]
+stream = ExtResource("2_ykbb4")

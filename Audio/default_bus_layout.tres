@@ -24,7 +24,7 @@ resource_name = "Compressor"
 resource_name = "Distortion"
 
 [resource]
-bus/0/volume_db = -6.3419724
+bus/0/volume_db = -14.343837
 bus/0/effect/0/effect = SubResource("AudioEffectChorus_j3pel")
 bus/0/effect/0/enabled = true
 bus/0/effect/1/effect = SubResource("AudioEffectCompressor_j3pel")
