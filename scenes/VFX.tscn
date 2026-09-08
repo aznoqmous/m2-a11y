@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://c5x8d6kqut3io"]
+
+[ext_resource type="Texture2D" uid="uid://c8g6emk1iwpuy" path="res://sprites/T_VFX_N41.PNG" id="1_ntjik"]
+[ext_resource type="Script" uid="uid://da185m3ldrgnh" path="res://scripts/Trail2.gd" id="2_ntjik"]
+
+[sub_resource type="Curve" id="Curve_u8v7j"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_ntjik"]
+offsets = PackedFloat32Array(0, 0.5327869)
+colors = PackedColorArray(0.9136233, 6.285876e-05, 0.6920994, 0, 9.433627e-06, 0.90115386, 0.9725229, 1)
+
+[node name="Vfx" type="Node2D" unique_id=846204079]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1056151084]
+
+[node name="Trail" type="Line2D" parent="CharacterBody2D" unique_id=332694878]
+top_level = true
+points = PackedVector2Array(540, 416)
+width = 29.745
+width_curve = SubResource("Curve_u8v7j")
+gradient = SubResource("Gradient_ntjik")
+texture = ExtResource("1_ntjik")
+texture_mode = 2
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+script = ExtResource("2_ntjik")
+
+[node name="Trail Timer" type="Timer" parent="." unique_id=1342958970]
+wait_time = 0.018000000000000002
