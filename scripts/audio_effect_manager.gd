@@ -9,6 +9,8 @@ var master_fx_compressor: AudioEffect
 var master_fx_distortion: AudioEffect
 
 var fx_count : int 
+@onready var audio_completion: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
