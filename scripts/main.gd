@@ -3,17 +3,14 @@ extends Node2D
 
 @onready var serial: Node2D = $Serial
 
-@export var reference_particles: GPUParticles2D
-@export var player_particles: GPUParticles2D
-@export var feedback_particles: GPUParticles2D
-@export var reference_node: Node2D
-@export var player_node: Node2D
-@export var state_fill_rect: TextureRect
-
+@export_category("Colors")
 @export var player_color: Color
 @export var reference_color: Color
 
+@export_category("Game")
 @export var target_notes : Array[float]
+@export var time_to_reach := 10.0
+var current_time_to_reach := 0.0
 var target_note_index := 0
 
 var state = 0.5
@@ -28,6 +25,13 @@ var reference_scale_target : float
 var player_current_speed : float
 var reference_current_speed : float
 
+@export_category("Nodes")
+@export var reference_particles: GPUParticles2D
+@export var player_particles: GPUParticles2D
+@export var feedback_particles: GPUParticles2D
+@export var reference_node: Node2D
+@export var player_node: Node2D
+@export var state_fill_rect: TextureRect
 @onready var mesh_instance_2d: MeshInstance2D = $MeshInstance2D
 @export var blit_material: ShaderMaterial
 
@@ -50,6 +54,7 @@ func draw_to_texture():
 	drawable_texture.blit_rect(rect, preload("res://sprites/brush.png"), Color.BLACK, 0, blit_material)
 
 func set_target_note(pitch_value: float, volume_value:float):
+	current_time_to_reach = Time.get_ticks_msec() / 1000.0
 	reference_target = pitch_value * mesh_size.y * 2.0 - mesh_size.y
 	reference_scale_target = volume_value
 	state = 0
@@ -79,7 +84,7 @@ func _process(delta: float) -> void:
 		state += delta
 		
 	state_fill_rect.scale = Vector2(state, 1.0)
-	if state >= 1.0:
+	if state >= 1.0 or Time.get_ticks_msec() / 1000.0 - current_time_to_reach > time_to_reach:
 		target_note_index += 1
 		feedback_particles.emitting = true
 		set_target_note(target_notes[target_note_index % target_notes.size()], randf())
