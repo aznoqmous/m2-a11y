@@ -9,6 +9,9 @@ extends Node2D
 @export_category("Game")
 @export var target_notes : Array[float]
 @export var time_to_reach := 10.0
+@export var hand_distance := 30.0
+@export var pitch_validation_distance := 0.05
+@export var volume_validation_distance := 0.2
 var current_time_to_reach := 0.0
 var target_note_index := 0
 
@@ -25,7 +28,8 @@ var player_current_speed : float
 var reference_current_speed : float
 
 @export_category("Nodes")
-@export var audio_generator: AudioGenerator
+@export var player_audio_generator: AudioGenerator
+@export var reference_audio_generator: AudioGenerator
 @export var reference_particles: GPUParticles2D
 @export var player_particles: GPUParticles2D
 @export var feedback_particles: GPUParticles2D
@@ -63,9 +67,8 @@ func set_target_note(pitch_value: float, volume_value:float):
 
 func _process(delta: float) -> void:
 	if serial.is_connected:
-		
-		player_target = clamp(serial.value_a, 0, 30) / 30.0 * mesh_size.y * 2.0 - mesh_size.y
-		player_scale_target = move_toward(player_scale_target, 1.0 - clamp(serial.value_b, 0, 30) / 30.0, delta * 2.0)
+		player_target = clamp(serial.value_a, 0, hand_distance) / hand_distance * mesh_size.y * 2.0 - mesh_size.y
+		player_scale_target = move_toward(player_scale_target, 1.0 - clamp(serial.value_b, 0, hand_distance) / hand_distance, delta * 2.0)
 	else:
 		player_target = get_global_mouse_position().y
 		player_scale_target = get_global_mouse_position().x / mesh_size.x
@@ -80,10 +83,10 @@ func _process(delta: float) -> void:
 	var reference_target_dist = abs(reference_target - reference_node.position.y) / 100.0
 	reference_current_speed = move_toward(reference_current_speed, sign(reference_target - reference_node.position.y) * reference_speed * reference_target_dist, delta * reference_rotation_speed)
 	reference_node.position.y += reference_current_speed 
-	
-	if abs(player_target - reference_target) < 50 and abs(player_scale_target - reference_scale_target) < 0.1:
+
+	if abs(player_target - reference_target) < pitch_validation_distance * 500.0 and abs(player_scale_target - reference_scale_target) < volume_validation_distance:
 		state += delta
-		
+	
 	state_fill_rect.scale = Vector2(state, 1.0)
 	if state >= 1.0 or Time.get_ticks_msec() / 1000.0 - current_time_to_reach > time_to_reach:
 		if state >= 1.0:
@@ -92,8 +95,11 @@ func _process(delta: float) -> void:
 		target_note_index += 1
 		set_target_note(target_notes[target_note_index % target_notes.size()], randf())
 	
-	audio_generator.set_pitch((player_node.position.y + mesh_size.y ) / mesh_size.y / 2.0  )
-	audio_generator.set_volume(player_scale_target * 16.0 - 16.0)
+	player_audio_generator.set_pitch((player_node.position.y + mesh_size.y ) / mesh_size.y / 2.0  )
+	player_audio_generator.set_volume(player_scale_target * 16.0 - 16.0)
+	
+	reference_audio_generator.set_pitch((reference_node.position.y + mesh_size.y ) / mesh_size.y / 2.0  )
+	reference_audio_generator.set_volume(reference_scale_target * 16.0 - 16.0)
 	
 	#audio_generator.set_pitch(reference_target)
 	#audio_generator.set_volume(reference_scale_target)

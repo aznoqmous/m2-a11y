@@ -59,17 +59,18 @@ gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_naghh")
 alpha_curve = SubResource("CurveTexture_xancx")
 
-[node name="Main" type="Node2D" unique_id=259715746 node_paths=PackedStringArray("audio_generator", "reference_particles", "player_particles", "feedback_particles", "reference_node", "player_node", "state_fill_rect")]
+[node name="Main" type="Node2D" unique_id=259715746 node_paths=PackedStringArray("player_audio_generator", "reference_audio_generator", "reference_particles", "player_particles", "feedback_particles", "reference_node", "player_node", "state_fill_rect")]
 script = ExtResource("1_ig7tw")
 player_color = Color(0, 1, 1, 1)
 reference_color = Color(1, 0, 1, 1)
 target_notes = Array[float]([0.6, 0.3, 0.2, 0.5, 0.7])
-time_to_reach = 5.0
+time_to_reach = 100000000.0
 player_speed = 2.0
 reference_speed = 2.0
 player_rotation_speed = 20.0
 reference_rotation_speed = 5.0
-audio_generator = NodePath("AudioGenerator")
+player_audio_generator = NodePath("PlayerAudioGenerator")
+reference_audio_generator = NodePath("ReferenceAudioGenerator")
 reference_particles = NodePath("ReferenceNode/ReferenceParticles")
 player_particles = NodePath("PlayerNode/PlayerParticles")
 feedback_particles = NodePath("PlayerNode/FeedBackParticles")
@@ -78,7 +79,9 @@ player_node = NodePath("PlayerNode")
 state_fill_rect = NodePath("CanvasLayer/Control/State/StateFill")
 blit_material = SubResource("ShaderMaterial_h2yge")
 
-[node name="AudioGenerator" parent="." unique_id=1099815716 instance=ExtResource("3_5vw27")]
+[node name="PlayerAudioGenerator" parent="." unique_id=1099815716 instance=ExtResource("3_5vw27")]
+
+[node name="ReferenceAudioGenerator" parent="." unique_id=597659095 instance=ExtResource("3_5vw27")]
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1655387417]
 visible = false
