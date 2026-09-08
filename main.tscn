@@ -5,6 +5,7 @@
 [ext_resource type="Shader" uid="uid://bsjh6ph4t6p1x" path="res://shaders/blit.gdshader" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://c4se0ckbe01k5" path="res://scenes/audioGenerator.tscn" id="3_5vw27"]
 [ext_resource type="Texture2D" uid="uid://dsnyvbbkrrl8t" path="res://sprites/brush.png" id="4_1bvp3"]
+[ext_resource type="AudioStream" uid="uid://dit1l0k44utje" path="res://Audio/bass_wave.wav" id="4_kek77"]
 [ext_resource type="Texture2D" uid="uid://bsqyvvrf0aeok" path="res://sprites/circle.png" id="5_272bh"]
 [ext_resource type="Texture2D" uid="uid://dmpwahq60xas3" path="res://sprites/rect.png" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://c5ownt22gf1nq" path="res://scripts/serial.gd" id="6_7mycd"]
@@ -80,8 +81,10 @@ state_fill_rect = NodePath("CanvasLayer/Control/State/StateFill")
 blit_material = SubResource("ShaderMaterial_h2yge")
 
 [node name="PlayerAudioGenerator" parent="." unique_id=1099815716 instance=ExtResource("3_5vw27")]
+audio_stream = ExtResource("4_kek77")
 
 [node name="ReferenceAudioGenerator" parent="." unique_id=597659095 instance=ExtResource("3_5vw27")]
+audio_stream = ExtResource("4_kek77")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1655387417]
 visible = false

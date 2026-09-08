@@ -91,7 +91,8 @@ func _process(delta: float) -> void:
 	if state >= 1.0 or Time.get_ticks_msec() / 1000.0 - current_time_to_reach > time_to_reach:
 		if state >= 1.0:
 			feedback_particles.emitting = true
-			
+		
+		AudioEffectManager.audio_completion.play()
 		target_note_index += 1
 		set_target_note(target_notes[target_note_index % target_notes.size()], randf())
 	

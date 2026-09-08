@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://b5mcmxmpxkhfe"
-path="res://.godot/imported/completion_stab.wav-69d597da77b1d758348a3591854bf86f.sample"
+path="res://.godot/imported/completion_stab.wav-4c4d8f88950d2b0ee3b3c1c91a250876.sample"
 
 [deps]
 
-source_file="res://audio/feedbacks/completion_stab.wav"
-dest_files=["res://.godot/imported/completion_stab.wav-69d597da77b1d758348a3591854bf86f.sample"]
+source_file="res://Audio/feedbacks/completion_stab.wav"
+dest_files=["res://.godot/imported/completion_stab.wav-4c4d8f88950d2b0ee3b3c1c91a250876.sample"]
 
 [params]
 
