@@ -56,8 +56,9 @@ func set_target_note(pitch_value: float, volume_value:float):
 
 func _process(delta: float) -> void:
 	if serial.is_connected:
-		player_target = serial.value_a / 40.0 * mesh_size.y - mesh_size.y / 2.0
-		reference_target = serial.value_b / 40.0 * mesh_size.y - mesh_size.y / 2.0
+		
+		player_target = clamp(serial.value_a, 0, 30) / 30.0 * mesh_size.y * 2.0 - mesh_size.y
+		player_scale_target = move_toward(player_scale_target, 1.0 - clamp(serial.value_b, 0, 30) / 30.0, delta * 2.0)
 	else:
 		player_target = get_global_mouse_position().y
 		player_scale_target = get_global_mouse_position().x / mesh_size.x

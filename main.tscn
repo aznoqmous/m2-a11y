@@ -62,7 +62,7 @@ texture = SubResource("DrawableTexture2D_7mycd")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=326661253]
 
 [node name="ReferenceNode" type="Node2D" parent="." unique_id=1401998448]
-position = Vector2(393, -278.09216)
+position = Vector2(393, -185.39963)
 
 [node name="ReferenceParticles" type="GPUParticles2D" parent="ReferenceNode" unique_id=952775802]
 amount = 1000
@@ -72,7 +72,7 @@ trail_lifetime = 1.0
 process_material = SubResource("ParticleProcessMaterial_qmn6i")
 
 [node name="PlayerNode" type="Node2D" parent="." unique_id=1004822030]
-position = Vector2(393, 436.48193)
+position = Vector2(393, 151.42752)
 
 [node name="PlayerParticles" type="GPUParticles2D" parent="PlayerNode" unique_id=381877796]
 amount = 1000

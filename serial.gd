@@ -45,10 +45,12 @@ func monitor_serial():
 		if not value.size() == 2: return;
 		if not str_to_var(value[0]): return
 		if not str_to_var(value[1]): return
-		value_a = str_to_var(value[0])
-		value_b = str_to_var(value[1])
+		var va = str_to_var(value[0])
+		var vb = str_to_var(value[1])
+		if va != -1: value_a = va
+		if vb != -1: value_b = vb
 		if data != "":
-			print("Monitor: ", data)
+			print("Monitor: ", value_a, " ", value_b)
 			# Traite vos données ici
 	
 	serial.clear_buffer()
