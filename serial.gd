@@ -2,6 +2,8 @@
 
 var serial: GdSerial
 var is_connected: bool = false
+var value_a : float
+var value_b : float
 
 func _ready():
 	connect_port()
@@ -14,30 +16,37 @@ func connect_port():
 	
 	
 	for port in ports:
+		if ports[port].device_name == "Unknown Serial Device": continue;
 		# Configuration et connexion unique
-		serial.set_port(ports[ports.size()-1].port_name)  # Ajustez selon votre système
+		serial.set_port(ports[port].port_name)  # Ajustez selon votre système
 		serial.set_baud_rate(115200)
 		
 		# Ouvre la connexion une seule fois et la maintient ouverte
 		if serial.open():
 			is_connected = true
-			print("Connecté")
+			print("Connection successful")
 			break
 		else:
-			print("Échec de la connexion")
-
+			print("Connection failure")
+	
+	print("Serial connected" if is_connected else "Serial not connected")
+	
 func _process(delta: float) -> void:
 	if is_connected:
 		monitor_serial()
 
-var value : float
 func monitor_serial():
 	# Vérifie si des données sont disponibles avant d'essayer de lire
 	var bytes_count = serial.bytes_available()
 	if bytes_count > 0:
 		var data = serial.readline()
-		if not data or not str_to_var(data): return;
-		value = str_to_var(data)
+		if not data: return;
+		var value = data.split("/")
+		if not value.size() == 2: return;
+		if not str_to_var(value[0]): return
+		if not str_to_var(value[1]): return
+		value_a = str_to_var(value[0])
+		value_b = str_to_var(value[1])
 		if data != "":
 			print("Monitor: ", data)
 			# Traite vos données ici
