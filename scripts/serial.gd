@@ -36,7 +36,6 @@ func _process(delta: float) -> void:
 		monitor_serial()
 
 func monitor_serial():
-	# Vérifie si des données sont disponibles avant d'essayer de lire
 	var bytes_count = serial.bytes_available()
 	if bytes_count > 0:
 		var data = serial.readline()
@@ -49,13 +48,11 @@ func monitor_serial():
 		var vb = str_to_var(value[1])
 		if va != -1: value_a = va
 		if vb != -1: value_b = vb
-		if data != "":
-			print("Monitor: ", value_a, " ", value_b)
-			# Traite vos données ici
+		#if data != "": print("Monitor: ", value_a, " ", value_b)
+
 	
 	serial.clear_buffer()
 
 func _exit_tree():
-	# Nettoie les ressources à la fermeture
 	if is_connected:
 		serial.close()

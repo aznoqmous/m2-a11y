@@ -1,4 +1,3 @@
-@tool
 extends Node2D
 
 @onready var serial: Node2D = $Serial
@@ -26,6 +25,7 @@ var player_current_speed : float
 var reference_current_speed : float
 
 @export_category("Nodes")
+@export var audio_generator: AudioGenerator
 @export var reference_particles: GPUParticles2D
 @export var player_particles: GPUParticles2D
 @export var feedback_particles: GPUParticles2D
@@ -47,6 +47,7 @@ func _ready() -> void:
 	player_node.position.y = 0.0
 	reference_node.position.y = 0.0
 	set_target_note(target_notes[target_note_index], 0.5)
+	
 	
 func draw_to_texture():
 	var mouse_position = get_global_mouse_position() + mesh_size / 2.0
@@ -85,9 +86,17 @@ func _process(delta: float) -> void:
 		
 	state_fill_rect.scale = Vector2(state, 1.0)
 	if state >= 1.0 or Time.get_ticks_msec() / 1000.0 - current_time_to_reach > time_to_reach:
+		if state >= 1.0:
+			feedback_particles.emitting = true
+			
 		target_note_index += 1
-		feedback_particles.emitting = true
 		set_target_note(target_notes[target_note_index % target_notes.size()], randf())
+	
+	audio_generator.set_pitch((player_node.position.y + mesh_size.y ) / mesh_size.y / 2.0  )
+	audio_generator.set_volume(player_scale_target * 16.0 - 16.0)
+	
+	#audio_generator.set_pitch(reference_target)
+	#audio_generator.set_volume(reference_scale_target)
 	
 	draw_to_texture()
 	queue_redraw()
