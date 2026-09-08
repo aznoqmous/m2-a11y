@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c5x8d6kqut3io"]
+
+[ext_resource type="Script" uid="uid://bgkg5q48r3lru" path="res://scripts/trail.gd" id="1_5wiyh"]
+[ext_resource type="Texture2D" uid="uid://c8g6emk1iwpuy" path="res://sprites/T_VFX_N41.PNG" id="1_ntjik"]
+
+[sub_resource type="Curve" id="Curve_u8v7j"]
+_data = [Vector2(0, 1), 0.0, 0.22338071, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Vfx" type="Node2D" unique_id=846204079]
+
+[node name="Trail" type="Line2D" parent="." unique_id=332694878]
+points = PackedVector2Array(540, 416)
+width = 23.34
+width_curve = SubResource("Curve_u8v7j")
+texture = ExtResource("1_ntjik")
+texture_mode = 2
+script = ExtResource("1_5wiyh")
+MAX_length = 391
