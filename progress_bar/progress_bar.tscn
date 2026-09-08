@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://b2sg6xifikqbv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vw27"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.98234254, 0.9823423, 0.9823424, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+corner_detail = 20
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 4.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kek77"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.74138474, 0.7413847, 0.74138457, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(0.98039216, 0.98039216, 0.98039216, 0)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+corner_detail = 20
+
+[node name="ProgressBar" type="ProgressBar" unique_id=595242573]
+offset_left = 20.0
+offset_top = 16.0
+offset_right = 1133.0
+offset_bottom = 65.0
+theme_override_styles/background = SubResource("StyleBoxFlat_5vw27")
+theme_override_styles/fill = SubResource("StyleBoxFlat_kek77")
+value = 100.0
+show_percentage = false
