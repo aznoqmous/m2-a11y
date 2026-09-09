@@ -75,7 +75,9 @@ func _process(delta: float) -> void:
 		player_target = get_global_mouse_position().y
 		player_scale_target = get_global_mouse_position().x / mesh_size.x
 	
-	
+	AudioEffectManager.player_scale = player_scale_target
+	AudioEffectManager.target_scale = reference_scale_target
+
 	var player_target_dist = abs(player_target - player_node.position.y) / 100.0
 	player_current_speed = move_toward(player_current_speed, sign(player_target - player_node.position.y) * player_speed * player_target_dist, delta * player_rotation_speed)
 	player_node.position.y += player_current_speed
@@ -85,9 +87,14 @@ func _process(delta: float) -> void:
 	var reference_target_dist = abs(reference_target - reference_node.position.y) / 100.0
 	reference_current_speed = move_toward(reference_current_speed, sign(reference_target - reference_node.position.y) * reference_speed * reference_target_dist, delta * reference_rotation_speed)
 	reference_node.position.y += reference_current_speed 
+	
 
 	if abs(player_target - reference_target) < pitch_validation_distance * 500.0 and abs(player_scale_target - reference_scale_target) < volume_validation_distance:
 		state += delta
+		print("Volume and pitch are matching")
+	
+	AudioEffectManager._value_snapping()
+	AudioEffectManager._fx_application()
 	
 	state_fill_rect.scale = Vector2(state, 1.0)
 	set_progress_bar_value(state)
