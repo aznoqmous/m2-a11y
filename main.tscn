@@ -4,10 +4,10 @@
 [ext_resource type="Shader" uid="uid://c415l53bkoffy" path="res://shaders/main.gdshader" id="2_0xm2m"]
 [ext_resource type="Shader" uid="uid://bsjh6ph4t6p1x" path="res://shaders/blit.gdshader" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://c4se0ckbe01k5" path="res://scenes/audioGenerator.tscn" id="3_5vw27"]
+[ext_resource type="Script" uid="uid://xt4wfoqnq35o" path="res://scripts/game_manager.gd" id="3_w48qg"]
 [ext_resource type="Texture2D" uid="uid://dsnyvbbkrrl8t" path="res://sprites/brush.png" id="4_1bvp3"]
 [ext_resource type="AudioStream" uid="uid://dit1l0k44utje" path="res://Audio/bass_wave.wav" id="4_kek77"]
 [ext_resource type="Texture2D" uid="uid://bsqyvvrf0aeok" path="res://sprites/circle.png" id="5_272bh"]
-[ext_resource type="Texture2D" uid="uid://dmpwahq60xas3" path="res://sprites/rect.png" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://c5ownt22gf1nq" path="res://scripts/serial.gd" id="6_7mycd"]
 [ext_resource type="Shader" uid="uid://cqna3nq8f202y" path="res://shaders/wavy_lines.gdshader" id="7_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://b2sg6xifikqbv" path="res://scenes/uis/progress_bar.tscn" id="8_4c57u"]
@@ -122,7 +122,7 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_getpj"]
 colors = PackedColorArray(1, 0.4117647, 0.78431374, 0, 0.03137255, 1, 1, 1)
 
-[node name="Main" type="Node2D" unique_id=259715746 node_paths=PackedStringArray("player_audio_generator", "reference_audio_generator", "reference_particles", "player_particles", "feedback_particles", "reference_node", "player_node", "state_fill_rect", "progress_bar")]
+[node name="Main" type="Node2D" unique_id=259715746 node_paths=PackedStringArray("player_audio_generator", "reference_audio_generator", "reference_particles", "player_particles", "feedback_particles", "reference_node", "player_node", "progress_bar")]
 script = ExtResource("1_ig7tw")
 player_color = Color(0, 1, 1, 1)
 reference_color = Color(1, 0, 1, 1)
@@ -139,16 +139,16 @@ player_particles = NodePath("PlayerNode/PlayerParticles")
 feedback_particles = NodePath("PlayerNode/FeedBackParticles")
 reference_node = NodePath("ReferenceNode")
 player_node = NodePath("PlayerNode")
-state_fill_rect = NodePath("CanvasLayer/Control/State/StateFill")
 blit_material = SubResource("ShaderMaterial_h2yge")
 progress_bar = NodePath("CanvasLayer/Control/ProgressBar")
 
-[node name="PlayerAudioGenerator" parent="." unique_id=1099815716 node_paths=PackedStringArray("_asp") instance=ExtResource("3_5vw27")]
-_asp = NodePath("AudioStreamPlayer2D2")
-audio_stream = SubResource("AudioStreamWAV_dg77c")
+[node name="GameManager" type="Node" parent="." unique_id=361987355]
+unique_name_in_owner = true
+script = ExtResource("3_w48qg")
+all_text = Array[String](["Bienvenue dans Theremin Hero.[br] Dans cette expérience multisensorielle, coopérer pour jouer de votre instrument et suivre la mélodie indiquée.", "Joueur 1, à gauche, vous contrôlez l’intensité de la note. Placez votre main devant le capteur et déplacez la de haut en bas, allez y !", "Essayez maintenant de suivre l'intensité indiquée. Elle est représentée visuellement et correspond à la basse que vous pouvez entendre.", "Joueur 2, à droite, vous contrôlez la hauteur de la note. Placez votre main devant le capteur et déplacez la horizontalement, allez y !", "Essayez maintenant de suivre la mélodie indiquée. Elle est représentée visuellement et correspond à la basse que vous pouvez entendre."])
 
-[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="PlayerAudioGenerator" unique_id=1232935863]
-stream = ExtResource("4_kek77")
+[node name="PlayerAudioGenerator" parent="." unique_id=1099815716 instance=ExtResource("3_5vw27")]
+audio_stream = ExtResource("4_kek77")
 
 [node name="ReferenceAudioGenerator" parent="." unique_id=597659095 instance=ExtResource("3_5vw27")]
 audio_stream = SubResource("AudioStream_dg77c")
@@ -162,10 +162,11 @@ texture = SubResource("DrawableTexture2D_5vw27")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=326661253]
 
 [node name="ReferenceNode" type="Node2D" parent="." unique_id=1401998448]
+unique_name_in_owner = true
+visible = false
 position = Vector2(393, 9.095456)
 
 [node name="ReferenceParticles" type="GPUParticles2D" parent="ReferenceNode" unique_id=952775802]
-visible = false
 amount = 1000
 texture = ExtResource("4_1bvp3")
 lifetime = 12.0
@@ -199,6 +200,8 @@ scale = Vector2(0.40787408, 0.40787408)
 texture = ExtResource("10_vivmo")
 
 [node name="PlayerNode" type="Node2D" parent="." unique_id=1004822030]
+unique_name_in_owner = true
+visible = false
 position = Vector2(393, -86.99051)
 
 [node name="PlayerParticles" type="GPUParticles2D" parent="PlayerNode" unique_id=381877796]
@@ -257,7 +260,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="DisplayedLabel" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=312952374]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -407.0
+offset_top = -146.0
+offset_right = 412.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "Blablabla blabla blabla blablabla bla.[br] Bla bla."
+fit_content = true
+horizontal_alignment = 1
+
 [node name="ProgressBar" parent="CanvasLayer/Control" unique_id=595242573 instance=ExtResource("8_4c57u")]
+unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_left = 0.0
 offset_top = 0.0
@@ -265,24 +289,6 @@ offset_right = 1113.0
 offset_bottom = 49.0
 max_value = 1.0
 value = 0.04
-
-[node name="State" type="Control" parent="CanvasLayer/Control" unique_id=1968642648]
-visible = false
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 20.0
-grow_horizontal = 2
-
-[node name="StateFill" type="TextureRect" parent="CanvasLayer/Control/State" unique_id=1575890335]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1e-05, 1)
-texture = ExtResource("5_lquwl")
 
 [node name="Serial" type="Node2D" parent="." unique_id=1993022613]
 script = ExtResource("6_7mycd")

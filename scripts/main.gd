@@ -35,11 +35,13 @@ var reference_current_speed : float
 @export var feedback_particles: GPUParticles2D
 @export var reference_node: Node2D
 @export var player_node: Node2D
-@export var state_fill_rect: TextureRect
 @export var blit_material: ShaderMaterial
 @export var progress_bar: ProgressBar
 
 @onready var mesh_instance_2d: MeshInstance2D = $MeshInstance2D
+
+@onready var game_manager: GameManager = %GameManager
+
 
 var drawable_texture: DrawableTexture2D
 var mesh_size : Vector2
@@ -53,12 +55,13 @@ func _ready() -> void:
 	player_node.position.y = 0.0
 	reference_node.position.y = 0.0
 	set_target_note(target_notes[target_note_index], 0.5)
-	
-	
+
+
 func draw_to_texture():
 	var mouse_position = get_global_mouse_position() + mesh_size / 2.0
 	var rect = Rect2(mouse_position.x, mesh_size.y - mouse_position.y, 10, 10)
 	drawable_texture.blit_rect(rect, preload("res://sprites/brush.png"), Color.BLACK, 0, blit_material)
+
 
 func set_target_note(pitch_value: float, volume_value:float):
 	current_time_to_reach = Time.get_ticks_msec() / 1000.0
@@ -81,14 +84,13 @@ func _process(delta: float) -> void:
 	var player_target_dist = abs(player_target - player_node.position.y) / 100.0
 	player_current_speed = move_toward(player_current_speed, sign(player_target - player_node.position.y) * player_speed * player_target_dist, delta * player_rotation_speed)
 	player_node.position.y += player_current_speed
-	#player_particles.scale = player_particles.scale.move_toward(get_global_mouse_position().x / mesh_size.x * Vector2.ONE, delta)
 	
-	#reference_particles.scale = reference_particles.scale.move_toward(reference_scale_target * Vector2.ONE, delta)
 	var reference_target_dist = abs(reference_target - reference_node.position.y) / 100.0
 	reference_current_speed = move_toward(reference_current_speed, sign(reference_target - reference_node.position.y) * reference_speed * reference_target_dist, delta * reference_rotation_speed)
 	reference_node.position.y += reference_current_speed 
 	
 
+	#calcul de distance
 	if abs(player_target - reference_target) < pitch_validation_distance * 500.0 and abs(player_scale_target - reference_scale_target) < volume_validation_distance:
 		state += delta
 		print("Volume and pitch are matching")
@@ -96,7 +98,6 @@ func _process(delta: float) -> void:
 	AudioEffectManager._value_snapping()
 	AudioEffectManager._fx_application()
 	
-	state_fill_rect.scale = Vector2(state, 1.0)
 	set_progress_bar_value(state)
 	
 	if state >= 1.0 or Time.get_ticks_msec() / 1000.0 - current_time_to_reach > time_to_reach:
@@ -119,10 +120,13 @@ func _process(delta: float) -> void:
 	draw_to_texture()
 	queue_redraw()
 
+
 func set_progress_bar_value(value):
 	progress_bar.value = clamp(value, 0.04, 1.0)
 
+
 func _draw() -> void:
-	draw_circle(reference_node.position, 10.0 + reference_scale_target * 30.0, reference_color, false, 3, true)
-	draw_circle(player_node.position, 10.0 + player_scale_target * 30.0, player_color, false, 3, true)
-	pass
+	if player_node.visible:
+		draw_circle(player_node.position, 10.0 + player_scale_target * 30.0, player_color, false, 3, true)
+	if reference_node.visible:
+		draw_circle(reference_node.position, 10.0 + reference_scale_target * 30.0, reference_color, false, 3, true)
