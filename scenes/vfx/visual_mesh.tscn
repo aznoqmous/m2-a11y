@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://d05stvjd88l60"]
+
+[ext_resource type="Script" uid="uid://kvj7yco5kejl" path="res://scripts/vfx/visual_mesh.gd" id="1_j360g"]
+[ext_resource type="Shader" uid="uid://dufl7c43xdghw" path="res://shaders/visual_mesh.gdshader" id="2_j360g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_04gse"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_edem5"]
+shader = ExtResource("2_j360g")
+shader_parameter/draw_position = Vector2(0, 0)
+shader_parameter/size = Vector2(0, 0)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qmn6i"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j360g"]
+shader = ExtResource("2_j360g")
+shader_parameter/draw_position = Vector2(0, 0)
+shader_parameter/size = Vector2(0, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_gdeqf"]
+size = Vector2(814.5, 463.5)
+
+[sub_resource type="DrawableTexture2D" id="DrawableTexture2D_edem5"]
+
+[node name="VisualMesh" type="Node2D" unique_id=1767247094 node_paths=PackedStringArray("mesh_instance_2d", "texture_rect")]
+script = ExtResource("1_j360g")
+mesh_instance_2d = NodePath("SubViewport/MeshInstance2D")
+blit_material = SubResource("ShaderMaterial_04gse")
+texture_rect = NodePath("CanvasLayer/TextureRect")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=926038499]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=514668178]
+material = SubResource("ShaderMaterial_edem5")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_qmn6i")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1626338644]
+render_target_clear_mode = 2
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="SubViewport" unique_id=1908180696]
+material = SubResource("ShaderMaterial_j360g")
+mesh = SubResource("QuadMesh_gdeqf")
+texture = SubResource("DrawableTexture2D_edem5")

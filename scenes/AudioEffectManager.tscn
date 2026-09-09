@@ -10,3 +10,4 @@ script = ExtResource("1_ldvii")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1987242257]
 stream = ExtResource("2_ykbb4")
+panning_strength = 0.0
