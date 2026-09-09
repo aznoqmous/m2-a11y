@@ -2,6 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://c8g6emk1iwpuy" path="res://sprites/T_VFX_N41.PNG" id="1_ntjik"]
 [ext_resource type="Script" uid="uid://da185m3ldrgnh" path="res://scripts/Trail2.gd" id="2_ntjik"]
+[ext_resource type="Texture2D" uid="uid://dqcve5uc3f6uw" path="res://icon.svg" id="3_d76r8"]
+[ext_resource type="Shader" uid="uid://cqna3nq8f202y" path="res://shaders/wavy_lines.gdshader" id="3_im75g"]
 
 [sub_resource type="Curve" id="Curve_u8v7j"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -10,6 +12,10 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_ntjik"]
 offsets = PackedFloat32Array(0, 0.5327869)
 colors = PackedColorArray(0.9136233, 6.285876e-05, 0.6920994, 0, 9.433627e-06, 0.90115386, 0.9725229, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u8v7j"]
+shader = ExtResource("3_im75g")
+shader_parameter/frequency = 60.0
 
 [node name="Vfx" type="Node2D" unique_id=846204079]
 
@@ -30,4 +36,13 @@ antialiased = true
 script = ExtResource("2_ntjik")
 
 [node name="Trail Timer" type="Timer" parent="." unique_id=1342958970]
-wait_time = 0.018000000000000002
+wait_time = 0.018
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=736019669]
+position = Vector2(292, 202)
+texture = ExtResource("3_d76r8")
+
+[node name="WavyLinesFIlter" type="Sprite2D" parent="." unique_id=782453704]
+material = SubResource("ShaderMaterial_u8v7j")
+position = Vector2(228, 215)
+texture = ExtResource("3_d76r8")
