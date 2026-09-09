@@ -1,13 +1,16 @@
 [gd_scene format=3 uid="uid://cb5tpcg7xc4hk"]
 
-[ext_resource type="Script" uid="uid://d3p85ep1xwr2b" path="res://main.gd" id="1_gan73"]
-[ext_resource type="Shader" uid="uid://bsjh6ph4t6p1x" path="res://blit.gdshader" id="2_aqqv8"]
-[ext_resource type="Shader" uid="uid://c415l53bkoffy" path="res://main.gdshader" id="3_tve4y"]
+[ext_resource type="Script" uid="uid://d3p85ep1xwr2b" path="res://scripts/main.gd" id="1_gan73"]
+[ext_resource type="Shader" uid="uid://bsjh6ph4t6p1x" path="res://shaders/blit.gdshader" id="2_aqqv8"]
+[ext_resource type="Shader" uid="uid://c415l53bkoffy" path="res://shaders/main.gdshader" id="3_tve4y"]
 [ext_resource type="Texture2D" uid="uid://dsnyvbbkrrl8t" path="res://sprites/brush.png" id="4_jm8sc"]
 [ext_resource type="Texture2D" uid="uid://c8g6emk1iwpuy" path="res://sprites/T_VFX_N41.PNG" id="5_7xchx"]
 [ext_resource type="Script" uid="uid://da185m3ldrgnh" path="res://scripts/Trail2.gd" id="6_gqmro"]
 [ext_resource type="Texture2D" uid="uid://dmpwahq60xas3" path="res://sprites/rect.png" id="7_rhcrc"]
-[ext_resource type="Script" uid="uid://c5ownt22gf1nq" path="res://serial.gd" id="8_cj7w7"]
+[ext_resource type="PackedScene" uid="uid://b2sg6xifikqbv" path="res://scenes/uis/progress_bar.tscn" id="8_aqqv8"]
+[ext_resource type="Script" uid="uid://c5ownt22gf1nq" path="res://scripts/serial.gd" id="8_cj7w7"]
+[ext_resource type="PackedScene" uid="uid://c4se0ckbe01k5" path="res://scenes/audioGenerator.tscn" id="10_jm8sc"]
+[ext_resource type="AudioStream" uid="uid://dit1l0k44utje" path="res://audio/bass_wave.wav" id="11_7xchx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h2yge"]
 shader = ExtResource("2_aqqv8")
@@ -47,13 +50,8 @@ point_count = 2
 offsets = PackedFloat32Array(0, 0.5327869)
 colors = PackedColorArray(0.9136233, 6.285876e-05, 0.6920994, 0, 9.433627e-06, 0.90115386, 0.9725229, 1)
 
-[node name="Main" type="Node2D" unique_id=259715746 node_paths=PackedStringArray("reference_particles", "player_particles", "reference_node", "player_node", "state_fill_rect")]
+[node name="Main" type="Node2D" unique_id=259715746 node_paths=PackedStringArray("player_audio_generator", "reference_audio_generator", "reference_particles", "player_particles", "feedback_particles", "reference_node", "player_node", "state_fill_rect", "progress_bar")]
 script = ExtResource("1_gan73")
-reference_particles = NodePath("ReferenceNode/ReferenceParticles")
-player_particles = NodePath("PlayerNode/PlayerParticles")
-reference_node = NodePath("ReferenceNode")
-player_node = NodePath("PlayerNode")
-state_fill_rect = NodePath("CanvasLayer/Control/State/StateFill")
 player_color = Color(0, 1, 1, 1)
 reference_color = Color(1, 0, 1, 1)
 target_notes = Array[float]([0.6, 0.3, 0.2, 0.5, 0.7])
@@ -61,7 +59,16 @@ player_speed = 2.0
 reference_speed = 2.0
 player_rotation_speed = 20.0
 reference_rotation_speed = 5.0
+player_audio_generator = NodePath("PlayerAudioGenerator")
+reference_audio_generator = NodePath("ReferenceAudioGenerator")
+reference_particles = NodePath("ReferenceNode/ReferenceParticles")
+player_particles = NodePath("PlayerNode/PlayerParticles")
+feedback_particles = NodePath("PlayerNode/PlayerParticles")
+reference_node = NodePath("ReferenceNode")
+player_node = NodePath("PlayerNode")
+state_fill_rect = NodePath("CanvasLayer/Control/State/StateFill")
 blit_material = SubResource("ShaderMaterial_h2yge")
+progress_bar = NodePath("CanvasLayer/Control/ProgressBar")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1655387417]
 visible = false
@@ -106,6 +113,9 @@ end_cap_mode = 2
 antialiased = true
 script = ExtResource("6_gqmro")
 
+[node name="Trail Timer" type="Timer" parent="PlayerNode/Trail2" unique_id=525360388]
+wait_time = 0.009
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1327059218]
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=1270954090]
@@ -133,8 +143,16 @@ grow_vertical = 2
 scale = Vector2(1e-05, 1)
 texture = ExtResource("7_rhcrc")
 
+[node name="ProgressBar" parent="CanvasLayer/Control" unique_id=595242573 instance=ExtResource("8_aqqv8")]
+layout_mode = 0
+max_value = 1.0
+value = 0.04
+
 [node name="Serial" type="Node2D" parent="." unique_id=1993022613]
 script = ExtResource("8_cj7w7")
 
-[node name="Trail Timer" type="Timer" parent="." unique_id=525360388]
-wait_time = 0.009
+[node name="PlayerAudioGenerator" parent="." unique_id=1099815716 instance=ExtResource("10_jm8sc")]
+audio_stream = ExtResource("11_7xchx")
+
+[node name="ReferenceAudioGenerator" parent="." unique_id=1585152948 instance=ExtResource("10_jm8sc")]
+audio_stream = ExtResource("11_7xchx")

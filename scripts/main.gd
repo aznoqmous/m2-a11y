@@ -36,8 +36,10 @@ var reference_current_speed : float
 @export var reference_node: Node2D
 @export var player_node: Node2D
 @export var state_fill_rect: TextureRect
-@onready var mesh_instance_2d: MeshInstance2D = $MeshInstance2D
 @export var blit_material: ShaderMaterial
+@export var progress_bar: ProgressBar
+
+@onready var mesh_instance_2d: MeshInstance2D = $MeshInstance2D
 
 var drawable_texture: DrawableTexture2D
 var mesh_size : Vector2
@@ -88,6 +90,8 @@ func _process(delta: float) -> void:
 		state += delta
 	
 	state_fill_rect.scale = Vector2(state, 1.0)
+	set_progress_bar_value(state)
+	
 	if state >= 1.0 or Time.get_ticks_msec() / 1000.0 - current_time_to_reach > time_to_reach:
 		if state >= 1.0:
 			feedback_particles.emitting = true
@@ -107,6 +111,9 @@ func _process(delta: float) -> void:
 	
 	draw_to_texture()
 	queue_redraw()
+
+func set_progress_bar_value(value):
+	progress_bar.value = clamp(value, 0.04, 1.0)
 
 func _draw() -> void:
 	draw_circle(player_node.position, 10.0 + player_scale_target * 30.0, player_color, false, 3, true)

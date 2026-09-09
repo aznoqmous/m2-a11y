@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dit1l0k44utje"
-path="res://.godot/imported/bass_wave.wav-260e5578ca2f1837fab7efceb2854c54.sample"
+path="res://.godot/imported/bass_wave.wav-0caa47bb9f95f66cdf6bc0692fb3904c.sample"
 
 [deps]
 
-source_file="res://Audio/bass_wave.wav"
-dest_files=["res://.godot/imported/bass_wave.wav-260e5578ca2f1837fab7efceb2854c54.sample"]
+source_file="res://audio/bass_wave.wav"
+dest_files=["res://.godot/imported/bass_wave.wav-0caa47bb9f95f66cdf6bc0692fb3904c.sample"]
 
 [params]
 
