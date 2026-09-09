@@ -1,7 +1,7 @@
 extends Node2D
 class_name AudioGenerator
 
-@onready var _asp: AudioStreamPlayer2D = $"./AudioStreamPlayer2D"
+@export var _asp: AudioStreamPlayer2D
 @onready var AudioEffetManager: Node = $"./AudioEffetManager"
 @export var audio_stream: AudioStream
 
