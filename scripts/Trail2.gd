@@ -12,9 +12,13 @@ func updateTrail():
 	if points.size() == max_trail_count:
 		remove_point(0)
 	
+	#if Engine.is_editor_hint(): add_point(Vector2.UP * sin(Time.get_ticks_msec() / 1000.0 * TAU) * 100.0)
+	#else: add_point(get_parent().position)
+	
 	add_point(get_parent().position)
 
 func _process(delta: float) -> void:
 	for i in points.size():
 		set_point_position(i, points[i] + Vector2.LEFT * delta * 100.0)
+		
 		

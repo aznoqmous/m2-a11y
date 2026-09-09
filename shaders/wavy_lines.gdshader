@@ -1,17 +1,21 @@
 shader_type canvas_item;
 uniform sampler2D existing_screen: hint_screen_texture, filter_linear_mipmap;
 uniform float frequency = 60;
+uniform float speed = 10.0;
+uniform float amplitude = 1.0;
+uniform sampler2D tex: repeat_enable;
+uniform sampler2D gradient;
+uniform float texSpeedx = 0.1;
+uniform float texSpeedy = 0.1;
+
 
 void vertex() {
-	// Called for every vertex the material is visible on.
+	VERTEX.y += sin(VERTEX.x * frequency + TIME * speed) * amplitude;
 }
 
 void fragment() {
-	vec2 new_uv = SCREEN_UV;
-	new_uv.x += sin(new_uv.y * frequency  + TIME ) * 0.005;
 	
-	vec3 new_colors = textureLod(existing_screen, new_uv, 0.0).rgb;
-	COLOR.rgb = new_colors;
+	COLOR = texture(tex, UV + vec2(TIME * texSpeedy, TIME) + vec2(UV.x + TIME * texSpeedx)) * texture(gradient, UV);
 }
 
 //void light() {
