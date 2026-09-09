@@ -123,6 +123,6 @@ func set_progress_bar_value(value):
 	progress_bar.value = clamp(value, 0.04, 1.0)
 
 func _draw() -> void:
-	draw_circle(player_node.position, 10.0 + player_scale_target * 30.0, player_color, false, 3, true)
 	draw_circle(reference_node.position, 10.0 + reference_scale_target * 30.0, reference_color, false, 3, true)
+	draw_circle(player_node.position, 10.0 + player_scale_target * 30.0, player_color, false, 3, true)
 	pass
