@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://g3oyf45612th" path="res://scripts/generator.gd" id="1_qcf81"]
 [ext_resource type="Script" uid="uid://c3pg8uf7dvlej" path="res://scripts/audio_effect_manager.gd" id="2_7ldk7"]
-[ext_resource type="AudioStream" uid="uid://dit1l0k44utje" path="res://Audio/bass_wave.wav" id="2_73nho"]
+[ext_resource type="AudioStream" uid="uid://dit1l0k44utje" path="res://audio/bass_wave.wav" id="2_73nho"]
 
 [node name="AudioGenerator" type="Node2D" unique_id=1099815716]
 script = ExtResource("1_qcf81")

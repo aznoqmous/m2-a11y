@@ -1,19 +1,20 @@
+@tool
 extends Line2D
 
-@export var MAX_TRAIl_COUNT : int = 40
+@export var max_trail_count : int = 40
+@export var timer: Timer
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$"../../Trail Timer".timeout.connect(updateTrail)
-	$"../../Trail Timer".start()
+	timer.timeout.connect(updateTrail)
+	timer.start()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func updateTrail():
-
-	if points.size() == MAX_TRAIl_COUNT:
+	if points.size() == max_trail_count:
 		remove_point(0)
-	#var pos = get_global_mouse_position()
 	
-	add_point($"..".position)
-	
+	add_point(get_parent().position)
+
+func _process(delta: float) -> void:
+	for i in points.size():
+		set_point_position(i, points[i] + Vector2.LEFT * delta * 100.0)
+		
