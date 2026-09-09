@@ -1,17 +1,12 @@
 shader_type canvas_item;
-uniform vec2 draw_position;
-uniform vec2 size;
-uniform sampler2D ttexture;
 
 void vertex() {
 	// Called for every vertex the material is visible on.
 }
 
 void fragment() {
-	vec2 uvv = (vec2(UV.x, -UV.y) - vec2(0.5, -0.5)) * size;
-	//COLOR = mix(vec4(vec3(distance(draw_position, uvv) / 100.0), 1.0), texture(TEXTURE, UV + vec2(1.0 / size.x, 0.0)), 0.9);
-	//COLOR = vec4(UV.x, UV.y, 0, 1);
 	// Called for every pixel the material is visible on.
+	if(texture(TEXTURE, UV) == vec4(1.0)) COLOR.a = 0.0;
 }
 
 //void light() {
