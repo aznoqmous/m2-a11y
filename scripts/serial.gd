@@ -20,7 +20,6 @@ func connect_port():
 		# Configuration et connexion unique
 		serial.set_port(ports[port].port_name)  # Ajustez selon votre système
 		serial.set_baud_rate(115200)
-		
 		# Ouvre la connexion une seule fois et la maintient ouverte
 		if serial.open():
 			is_connected = true

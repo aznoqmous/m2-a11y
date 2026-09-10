@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://m4krl54cr2jo"]
+
+[ext_resource type="Texture2D" uid="uid://bsqyvvrf0aeok" path="res://sprites/circle.png" id="1_h4s2l"]
+[ext_resource type="Script" uid="uid://01empc54ay2y" path="res://scripts/vfx/feed_back_particles.gd" id="2_w1j25"]
+
+[sub_resource type="Curve" id="Curve_d13ii"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xancx"]
+curve = SubResource("Curve_d13ii")
+
+[sub_resource type="Curve" id="Curve_1u8w0"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_naghh"]
+curve = SubResource("Curve_1u8w0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0odxb"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_naghh")
+alpha_curve = SubResource("CurveTexture_xancx")
+
+[node name="FeedBackParticles" type="GPUParticles2D" unique_id=54766275]
+emitting = false
+amount = 1
+texture = ExtResource("1_h4s2l")
+one_shot = true
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_0odxb")
+script = ExtResource("2_w1j25")
