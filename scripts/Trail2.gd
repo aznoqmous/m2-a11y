@@ -20,7 +20,7 @@ func updateTrail():
 	#add_point(get_parent().position)
 
 func _process(delta: float) -> void:
-	
+	if not is_visible_in_tree() and points.size(): clear_points()
 	for i in points.size():
 		set_point_position(i, points[i] + Vector2.LEFT * delta * 100.0)
 		

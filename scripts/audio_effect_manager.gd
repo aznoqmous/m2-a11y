@@ -1,8 +1,7 @@
+@tool
 extends Node
 
-@export
-
-var player_bus: int
+@export var player_bus: int
 
 var player_fx_chorus: AudioEffect
 var player_fx_compressor: AudioEffect

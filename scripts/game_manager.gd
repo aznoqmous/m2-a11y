@@ -7,7 +7,7 @@ class_name GameManager extends Node2D
 @onready var progress_bar: ProgressBar = %ProgressBar
 @onready var player_node: Node2D = %PlayerNode
 @onready var reference_node: Node2D = %ReferenceNode
-@onready var main: Node2D = get_parent() as MainNode
+@export var main: Main
 
 
 var steps: Array[Callable] = []
