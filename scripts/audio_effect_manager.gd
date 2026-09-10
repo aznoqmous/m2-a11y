@@ -31,7 +31,6 @@ func _ready() -> void:
 
 func _value_snapping() -> void:
 	audio_fx_intensity = clamp(abs(target_scale - player_scale), 0.0, 1.0)
-	print(audio_fx_intensity)
 
 
 func _fx_application() -> void:

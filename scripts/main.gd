@@ -1,4 +1,4 @@
-extends Node2D
+class_name MainNode extends Node2D
 
 @onready var serial: Node2D = $Serial
 
@@ -57,56 +57,12 @@ func _ready() -> void:
 	set_target_note(target_notes[target_note_index], 0.5)
 
 
-func draw_to_texture():
-	var mouse_position = get_global_mouse_position() + mesh_size / 2.0
-	var rect = Rect2(mouse_position.x, mesh_size.y - mouse_position.y, 10, 10)
-	drawable_texture.blit_rect(rect, preload("res://sprites/brush.png"), Color.BLACK, 0, blit_material)
-
-
-func set_target_note(pitch_value: float, volume_value:float):
-	current_time_to_reach = Time.get_ticks_msec() / 1000.0
-	reference_target = pitch_value * mesh_size.y * 2.0 - mesh_size.y
-	reference_scale_target = volume_value
-	state = 0
-
-
-func _process(delta: float) -> void:
-	if serial.is_connected:
-		player_target = clamp(serial.value_a, 0, hand_distance) / hand_distance * mesh_size.y * 2.0 - mesh_size.y
-		player_scale_target = move_toward(player_scale_target, 1.0 - clamp(serial.value_b, 0, hand_distance) / hand_distance, delta * 2.0)
-	else:
-		player_target = get_global_mouse_position().y
-		player_scale_target = get_global_mouse_position().x / mesh_size.x
-	
+func _process(_delta: float) -> void:
 	AudioEffectManager.player_scale = player_scale_target
 	AudioEffectManager.target_scale = reference_scale_target
-
-	var player_target_dist = abs(player_target - player_node.position.y) / 100.0
-	player_current_speed = move_toward(player_current_speed, sign(player_target - player_node.position.y) * player_speed * player_target_dist, delta * player_rotation_speed)
-	player_node.position.y += player_current_speed
-	
-	var reference_target_dist = abs(reference_target - reference_node.position.y) / 100.0
-	reference_current_speed = move_toward(reference_current_speed, sign(reference_target - reference_node.position.y) * reference_speed * reference_target_dist, delta * reference_rotation_speed)
-	reference_node.position.y += reference_current_speed 
-	
-
-	#calcul de distance
-	if abs(player_target - reference_target) < pitch_validation_distance * 500.0 and abs(player_scale_target - reference_scale_target) < volume_validation_distance:
-		state += delta
-		print("Volume and pitch are matching")
 	
 	AudioEffectManager._value_snapping()
 	AudioEffectManager._fx_application()
-	
-	set_progress_bar_value(state)
-	
-	if state >= 1.0 or Time.get_ticks_msec() / 1000.0 - current_time_to_reach > time_to_reach:
-		if state >= 1.0:
-			feedback_particles.emitting = true
-		
-		AudioEffectManager.audio_completion.play()
-		target_note_index += 1
-		set_target_note(target_notes[target_note_index % target_notes.size()], randf())
 	
 	player_audio_generator.set_pitch((player_node.position.y + mesh_size.y ) / mesh_size.y / 2.0  )
 	player_audio_generator.set_volume(player_scale_target * 16.0 - 16.0)
@@ -121,12 +77,66 @@ func _process(delta: float) -> void:
 	queue_redraw()
 
 
-func set_progress_bar_value(value):
-	progress_bar.value = clamp(value, 0.04, 1.0)
-
-
 func _draw() -> void:
 	if player_node.visible:
 		draw_circle(player_node.position, 10.0 + player_scale_target * 30.0, player_color, false, 3, true)
-	if reference_node.visible:
+	if reference_node.visible and game_manager.has_player_targeted_tuto_height:
 		draw_circle(reference_node.position, 10.0 + reference_scale_target * 30.0, reference_color, false, 3, true)
+
+
+func draw_to_texture():
+	var mouse_position = get_global_mouse_position() + mesh_size / 2.0
+	var rect = Rect2(mouse_position.x, mesh_size.y - mouse_position.y, 10, 10)
+	drawable_texture.blit_rect(rect, preload("res://sprites/brush.png"), Color.BLACK, 0, blit_material)
+
+##########################################################
+
+func handle_player_amplitude(delta: float) -> void:
+	if serial.is_connected:
+		player_scale_target = move_toward(player_scale_target, 1.0 - clamp(serial.value_b, 0, hand_distance) / hand_distance, delta * 2.0)
+	else:
+		player_scale_target = get_global_mouse_position().x / mesh_size.x
+
+
+func handle_player_height(delta: float) -> void:
+	if serial.is_connected:
+		player_target = clamp(serial.value_a, 0, hand_distance) / hand_distance * mesh_size.y * 2.0 - mesh_size.y
+	else:
+		player_target = get_global_mouse_position().y
+	
+	var player_target_dist = abs(player_target - player_node.position.y) / 100.0
+	player_current_speed = move_toward(player_current_speed, sign(player_target - player_node.position.y) * player_speed * player_target_dist, delta * player_rotation_speed)
+	player_node.position.y += player_current_speed
+
+
+func handle_reference_track(delta: float) -> void:
+	var reference_target_dist = abs(reference_target - reference_node.position.y) / 100.0
+	reference_current_speed = move_toward(reference_current_speed, sign(reference_target - reference_node.position.y) * reference_speed * reference_target_dist, delta * reference_rotation_speed)
+	reference_node.position.y += reference_current_speed
+
+
+func handle_main_game(delta: float) -> void:
+	if abs(player_node.position.y - reference_target) < pitch_validation_distance * 500.0 and abs(player_scale_target - reference_scale_target) < volume_validation_distance:
+		state += delta
+	set_progress_bar_value(state)
+	if state >= 1.0 or Time.get_ticks_msec() / 1000.0 - current_time_to_reach > time_to_reach:
+		if state >= 1.0:
+			feedback_particles.emitting = true
+		
+		AudioEffectManager.audio_completion.play()
+		target_note_index += 1
+		set_target_note(target_notes[target_note_index % target_notes.size()], randf())
+
+
+##########################################################
+
+
+func set_target_note(pitch_value: float, volume_value: float = 1.0):
+	current_time_to_reach = Time.get_ticks_msec() / 1000.0
+	reference_target = pitch_value * mesh_size.y * 2.0 - mesh_size.y
+	reference_scale_target = volume_value
+	state = 0
+
+
+func set_progress_bar_value(value):
+	progress_bar.value = clamp(value, 0.04, 1.0)
