@@ -91,7 +91,7 @@ func _process(delta: float) -> void:
 
 	if abs(player_target - reference_target) < pitch_validation_distance * 500.0 and abs(player_scale_target - reference_scale_target) < volume_validation_distance:
 		state += delta
-		print("Volume and pitch are matching")
+		#print("Volume and pitch are matching")
 	
 	AudioEffectManager._value_snapping()
 	AudioEffectManager._fx_application()
@@ -104,6 +104,7 @@ func _process(delta: float) -> void:
 			feedback_particles.emitting = true
 		
 		AudioEffectManager.audio_completion.play()
+		AudioEffectManager._track_buildup()
 		target_note_index += 1
 		set_target_note(target_notes[target_note_index % target_notes.size()], randf())
 	
