@@ -36,14 +36,6 @@ var third_tuto_height_target: float = 0.5
 
 
 func _ready() -> void:
-	steps= [
-		display_introduction,
-		wait_player_amplitude_movement,
-		wait_player_target_amplitude_reference,
-		wait_player_height_movement,
-		wait_player_target_height_reference,
-		launch_game,
-	]
 	if not skip_tuto:
 		run_game()
 	else:
@@ -68,6 +60,14 @@ func _draw() -> void:
 ## SYSTEM FUNCTIONS ##
 
 func run_game() -> void:
+	steps= [
+		display_introduction,
+		wait_player_amplitude_movement,
+		wait_player_target_amplitude_reference,
+		wait_player_height_movement,
+		wait_player_target_height_reference,
+		launch_game,
+	]
 	for callable:Callable in steps:
 		await callable.call()
 		curr_step += 1
@@ -174,8 +174,12 @@ func skip_tutorial() -> void:
 	add_on_process(main.handle_main_game.bind(delta_t))
 	player_node.visible = true
 	reference_node.visible = true
+	player_node.is_display_amplitude = true
+	player_node.is_display_height = true
+	reference_node.is_display_amplitude = true
+	reference_node.is_display_height = true
 	progress_bar.visible = true
-	has_player_get_amplitude = false
+	has_player_get_amplitude = true
 	has_player_targeted_tuto_amplitude = true
 	has_player_get_height = true
 	has_player_targeted_tuto_height = true
