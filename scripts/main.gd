@@ -49,7 +49,7 @@ var reference_current_speed : float
 @onready var game_manager: GameManager = %GameManager
 var mesh_size : Vector2
 
-var current_note
+var current_note = 0.0
 func _ready() -> void:
 	mesh_size = (Vector2(1152, 648) if Engine.is_editor_hint() else get_viewport().get_visible_rect().size ) / 2.0
 	mesh_instance_2d.mesh.set("size", mesh_size * 2.0)
@@ -58,10 +58,6 @@ func _ready() -> void:
 	reference_node.position.y = 0.0
 	random_target_note()
 
-
-func random_target_note(volume:=0.5):
-	current_note = target_notes.filter(func(n): return n != current_note).pick_random()
-	set_target_note(current_note/2.0, volume)
 
 func _process(_delta: float) -> void:
 	#print(get_serial_value(serial.value_a), " ", get_serial_value(serial.value_b))
@@ -142,6 +138,10 @@ func set_target_note(pitch_value: float, volume_value: float = 1.0):
 	reference_target = ((pitch_value) * (max_pitch_target - min_pitch_target) + min_pitch_target) * mesh_size.y * 2.0 - mesh_size.y
 	reference_scale_target = volume_value
 	state = 0
+
+func random_target_note(volume:=0.5):
+	current_note = target_notes.filter(func(n): return n != current_note and abs(current_note - n) > 2.0/12.0).pick_random()
+	set_target_note(current_note/2.0, volume)
 
 
 func set_progress_bar_value(value):
