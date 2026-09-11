@@ -7,7 +7,9 @@
 [ext_resource type="Script" uid="uid://xt4wfoqnq35o" path="res://scripts/game_manager.gd" id="3_w48qg"]
 [ext_resource type="PackedScene" uid="uid://sv1ikfar2u1a" path="res://scenes/displayed_label_texte.tscn" id="5_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://bsqyvvrf0aeok" path="res://sprites/circle.png" id="5_272bh"]
+[ext_resource type="AudioStream" uid="uid://c3t4je30msdqf" path="res://audio/music/Theremin_B [2026-09-11 101401].wav" id="5_yaehf"]
 [ext_resource type="Script" uid="uid://c5ownt22gf1nq" path="res://scripts/serial.gd" id="6_7mycd"]
+[ext_resource type="AudioStream" uid="uid://fgjvjdwx0vtn" path="res://audio/Theremin.wav" id="6_yaehf"]
 [ext_resource type="Script" uid="uid://drka77hvik8kp" path="res://scripts/game_renderer.gd" id="7_vivmo"]
 [ext_resource type="Shader" uid="uid://cqna3nq8f202y" path="res://shaders/wavy_lines.gdshader" id="7_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://b2sg6xifikqbv" path="res://scenes/uis/progress_bar.tscn" id="8_4c57u"]
@@ -118,7 +120,13 @@ script = ExtResource("3_w48qg")
 all_text = Array[String](["Bienvenue dans Theremin Hero.[br] Dans cette expérience multisensorielle, coopérer pour jouer de votre instrument et suivre la mélodie indiquée.", "Joueur 1, à gauche, vous contrôlez l’intensité de la note. Placez votre main devant le capteur et déplacez la de haut en bas, allez y !", "Essayez maintenant de suivre l'intensité indiquée. Elle est représentée visuellement et correspond à la basse que vous pouvez entendre.", "Joueur 2, à droite, vous contrôlez la hauteur de la note. Placez votre main devant le capteur et déplacez la horizontalement, allez y !", "Essayez maintenant de suivre la mélodie indiquée. Elle est représentée visuellement et correspond à la basse que vous pouvez entendre."])
 main = NodePath("..")
 
-[node name="PlayerAudioGenerator" parent="." unique_id=1099815716 instance=ExtResource("3_5vw27")]
+[node name="PlayerAudioGenerator" parent="." unique_id=1099815716 node_paths=PackedStringArray("_asp") instance=ExtResource("3_5vw27")]
+_asp = NodePath("AudioStreamPlayer2D2")
+audio_stream = ExtResource("5_yaehf")
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="PlayerAudioGenerator" unique_id=1696416375]
+stream = ExtResource("6_yaehf")
+bus = &"Player_Note"
 
 [node name="ReferenceAudioGenerator" parent="." unique_id=597659095 instance=ExtResource("3_5vw27")]
 

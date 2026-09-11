@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c3t4je30msdqf"
+path="res://.godot/imported/Theremin_B [2026-09-11 101401].wav-fe231b8c0f51a363e89e1eae301b9fa9.sample"
+
+[deps]
+
+source_file="res://audio/music/Theremin_B [2026-09-11 101401].wav"
+dest_files=["res://.godot/imported/Theremin_B [2026-09-11 101401].wav-fe231b8c0f51a363e89e1eae301b9fa9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
