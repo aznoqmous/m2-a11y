@@ -27,8 +27,6 @@ func _ready():
 func _process(delta: float) -> void:
 	if not main: return;
 	update_visuals(delta)
-	reference_indicatior_node.visible = main.reference_node.visible
-	player_indicatior_node.visible = main.player_node.visible
 	reference_indicatior_node.rotate(delta)
 	player_indicatior_node.rotate(delta)
 func emit_score_feedback():

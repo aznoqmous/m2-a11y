@@ -5,7 +5,6 @@
 [ext_resource type="Shader" uid="uid://bsjh6ph4t6p1x" path="res://shaders/blit.gdshader" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://c4se0ckbe01k5" path="res://scenes/audioGenerator.tscn" id="3_5vw27"]
 [ext_resource type="Script" uid="uid://xt4wfoqnq35o" path="res://scripts/game_manager.gd" id="3_w48qg"]
-[ext_resource type="Texture2D" uid="uid://dsnyvbbkrrl8t" path="res://sprites/brush.png" id="4_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://bsqyvvrf0aeok" path="res://sprites/circle.png" id="5_272bh"]
 [ext_resource type="Script" uid="uid://c5ownt22gf1nq" path="res://scripts/serial.gd" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://drka77hvik8kp" path="res://scripts/game_renderer.gd" id="7_vivmo"]
@@ -14,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c8g6emk1iwpuy" path="res://sprites/T_VFX_N41.PNG" id="8_dg77c"]
 [ext_resource type="Shader" uid="uid://cu6p224hslgeu" path="res://shaders/visual_mesh_target.gdshader" id="9_2cqfq"]
 [ext_resource type="Script" uid="uid://da185m3ldrgnh" path="res://scripts/Trail2.gd" id="9_ycdy4"]
+[ext_resource type="Script" uid="uid://banqymjeuo5v" path="res://scripts/trail_node.gd" id="10_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://bsxysdns5ggfg" path="res://sprites/Print.png" id="10_vivmo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h2yge"]
@@ -48,15 +48,6 @@ shader_parameter/borealis_frequency = 10.000000149012
 [sub_resource type="QuadMesh" id="QuadMesh_qmn6i"]
 size = Vector2(1152, 648)
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yaehf"]
-particle_flag_disable_z = true
-direction = Vector3(-1, 0, 0)
-spread = 0.0
-initial_velocity_min = 100.0
-initial_velocity_max = 100.0
-gravity = Vector3(0, 0, 0)
-color = Color(1, 0, 1, 1)
-
 [sub_resource type="Gradient" id="Gradient_074og"]
 colors = PackedColorArray(0, 0, 0, 0, 18.540003, 0, 18.264605, 1)
 
@@ -79,16 +70,6 @@ point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_getpj"]
 colors = PackedColorArray(1, 0.4117647, 0.78431374, 0, 0.03137255, 1, 1, 1)
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ryguw"]
-particle_flag_disable_z = true
-particle_flag_inherit_emitter_scale = true
-direction = Vector3(-1, 0, 0)
-spread = 0.0
-initial_velocity_min = 100.0
-initial_velocity_max = 100.0
-gravity = Vector3(0, 0, 0)
-color = Color(0, 1, 1, 1)
 
 [sub_resource type="Gradient" id="Gradient_lswn8"]
 colors = PackedColorArray(0.52156866, 0.003921569, 0.85882354, 0, 0, 18.328726, 18.68087, 1)
@@ -125,8 +106,8 @@ player_rotation_speed = 20.0
 reference_rotation_speed = 5.0
 player_audio_generator = NodePath("PlayerAudioGenerator")
 reference_audio_generator = NodePath("ReferenceAudioGenerator")
-reference_particles = NodePath("GameRenderer/TrailSubViewport/LinesContainer/ReferenceNode/ReferenceParticles")
-player_particles = NodePath("GameRenderer/TrailSubViewport/LinesContainer/PlayerNode/PlayerParticles")
+reference_particles = NodePath("")
+player_particles = NodePath("")
 reference_node = NodePath("GameRenderer/TrailSubViewport/LinesContainer/ReferenceNode")
 player_node = NodePath("GameRenderer/TrailSubViewport/LinesContainer/PlayerNode")
 blit_material = SubResource("ShaderMaterial_h2yge")
@@ -222,23 +203,19 @@ mesh = SubResource("QuadMesh_qmn6i")
 [node name="LinesContainer" type="Node2D" parent="GameRenderer/TrailSubViewport" unique_id=555375952]
 position = Vector2(0, 324)
 
-[node name="ReferenceNode" type="Node2D" parent="GameRenderer/TrailSubViewport/LinesContainer" unique_id=437888848]
+[node name="ReferenceNode" type="Node2D" parent="GameRenderer/TrailSubViewport/LinesContainer" unique_id=437888848 node_paths=PackedStringArray("line", "indicator_node")]
 unique_name_in_owner = true
-visible = false
 position = Vector2(800, 0)
-
-[node name="ReferenceParticles" type="GPUParticles2D" parent="GameRenderer/TrailSubViewport/LinesContainer/ReferenceNode" unique_id=699272996]
-visible = false
-amount = 1000
-texture = ExtResource("4_1bvp3")
-lifetime = 12.0
-trail_lifetime = 1.0
-process_material = SubResource("ParticleProcessMaterial_yaehf")
+script = ExtResource("10_2cqfq")
+is_display_height = false
+is_display_amplitude = false
+line = NodePath("Trail2")
+indicator_node = NodePath("../../../TrailIndicators/ReferenceIndicatorNode")
 
 [node name="Trail2" type="Line2D" parent="GameRenderer/TrailSubViewport/LinesContainer/ReferenceNode" unique_id=222456985 node_paths=PackedStringArray("timer")]
+visible = false
 top_level = true
 material = SubResource("ShaderMaterial_cegan")
-points = PackedVector2Array(800, 324)
 width = 30.0
 width_curve = SubResource("Curve_82xsv")
 gradient = SubResource("Gradient_getpj")
@@ -256,23 +233,19 @@ editor_offset = 0.2
 [node name="Trail Timer" type="Timer" parent="GameRenderer/TrailSubViewport/LinesContainer/ReferenceNode/Trail2" unique_id=1239820735]
 wait_time = 0.05
 
-[node name="PlayerNode" type="Node2D" parent="GameRenderer/TrailSubViewport/LinesContainer" unique_id=81178420]
+[node name="PlayerNode" type="Node2D" parent="GameRenderer/TrailSubViewport/LinesContainer" unique_id=81178420 node_paths=PackedStringArray("line", "indicator_node")]
 unique_name_in_owner = true
-visible = false
 position = Vector2(800, 0)
-
-[node name="PlayerParticles" type="GPUParticles2D" parent="GameRenderer/TrailSubViewport/LinesContainer/PlayerNode" unique_id=1030963240]
-visible = false
-amount = 1000
-texture = ExtResource("4_1bvp3")
-lifetime = 12.0
-trail_lifetime = 1.0
-process_material = SubResource("ParticleProcessMaterial_ryguw")
+script = ExtResource("10_2cqfq")
+is_display_height = false
+is_display_amplitude = false
+line = NodePath("Trail2")
+indicator_node = NodePath("../../../TrailIndicators/PlayerIndicatorNode")
 
 [node name="Trail2" type="Line2D" parent="GameRenderer/TrailSubViewport/LinesContainer/PlayerNode" unique_id=1742277414 node_paths=PackedStringArray("timer")]
+visible = false
 top_level = true
 material = SubResource("ShaderMaterial_a6jrf")
-points = PackedVector2Array(800, 324)
 width_curve = SubResource("Curve_xuqvo")
 gradient = SubResource("Gradient_qsp4k")
 texture = ExtResource("8_dg77c")
@@ -295,7 +268,7 @@ position = Vector2(-576, 0)
 unique_name_in_owner = true
 visible = false
 position = Vector2(800, 0)
-rotation = 218.08867
+rotation = 1041.1802
 
 [node name="BouleLumiere" type="Sprite2D" parent="GameRenderer/TrailIndicators/ReferenceIndicatorNode" unique_id=1363930096]
 modulate = Color(18.401226, 0.07364793, 14.373839, 1)
@@ -314,7 +287,7 @@ texture = ExtResource("5_272bh")
 unique_name_in_owner = true
 visible = false
 position = Vector2(800, 0)
-rotation = 218.08867
+rotation = 1041.1802
 
 [node name="BouleLumiere" type="Sprite2D" parent="GameRenderer/TrailIndicators/PlayerIndicatorNode" unique_id=1864408564]
 modulate = Color(0, 18.892157, 18.892157, 1)

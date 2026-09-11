@@ -5,8 +5,8 @@ class_name GameManager extends Node2D
 
 @onready var displayed_label: RichTextLabel = %DisplayedLabel
 @onready var progress_bar: ProgressBar = %ProgressBar
-@onready var player_node: Node2D = %PlayerNode
-@onready var reference_node: Node2D = %ReferenceNode
+@onready var player_node: TrailNode = %PlayerNode
+@onready var reference_node: TrailNode = %ReferenceNode
 @export var main: Main
 
 
@@ -126,7 +126,7 @@ func display_introduction() -> void:
 
 
 func wait_player_amplitude_movement() -> void:
-	player_node.visible = true
+	player_node.is_display_amplitude = true
 	await display_text(all_text[text_step])
 	progress_bar.visible = true
 	add_on_process(main.handle_player_amplitude.bind(delta_t))
@@ -136,6 +136,7 @@ func wait_player_amplitude_movement() -> void:
 
 
 func wait_player_target_amplitude_reference() -> void:
+	reference_node.is_display_amplitude = true
 	await display_text(all_text[text_step])
 	add_on_temp_draw(draw_amplitude_tuto_reference)
 	await wait(0.5)
@@ -145,6 +146,7 @@ func wait_player_target_amplitude_reference() -> void:
 
 func wait_player_height_movement() -> void:
 	await display_text(all_text[text_step])
+	player_node.is_display_height = true
 	add_on_process(main.handle_player_height.bind(delta_t))
 	add_on_temp_process(detect_height_for_tutorial)
 	old_height_value = player_node.position.y
@@ -155,7 +157,7 @@ func wait_player_target_height_reference() -> void:
 	await display_text(all_text[text_step])
 	add_on_process(main.handle_reference_track.bind(delta_t))
 	main.set_target_note(first_tuto_height_target)
-	reference_node.visible = true
+	reference_node.is_display_height = true
 	add_on_temp_process(detect_tuto_height)
 	await wait_until(has_player_targeted_tuto_height_f)
 
@@ -232,6 +234,7 @@ func detect_tuto_amplitude() -> void:
 		detection_gauge = 0.0
 		main.set_progress_bar_value(0.0)
 		counter += 1
+		main.game_renderer.emit_score_feedback()
 		if counter >= 3:
 			has_player_targeted_tuto_amplitude = true
 			counter = 0
@@ -263,6 +266,7 @@ func detect_tuto_height() -> void:
 		detection_gauge = 0.0
 		main.set_progress_bar_value(0.0)
 		counter += 1
+		main.game_renderer.emit_score_feedback()
 		if counter < 3:
 			var targ: float = second_tuto_height_target if counter == 1 else third_tuto_height_target
 			main.set_target_note(targ)
