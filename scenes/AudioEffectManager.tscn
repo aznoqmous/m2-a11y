@@ -43,6 +43,7 @@ bus = &"base_Music"
 
 [node name="Bells" type="AudioStreamPlayer2D" parent="." unique_id=225780063]
 stream = ExtResource("6_w6xaq")
+volume_db = -22.637
 bus = &"base_Music"
 
 [node name="bells2" type="AudioStreamPlayer2D" parent="." unique_id=1498412570]

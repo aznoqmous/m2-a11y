@@ -42,7 +42,7 @@ resource_local_to_scene = true
 shader = ExtResource("9_2cqfq")
 shader_parameter/noise = SubResource("NoiseTexture2D_j360g")
 shader_parameter/trail_power = 0.02
-shader_parameter/borealis_power = 0.31999999999999995
+shader_parameter/borealis_power = 0.2
 shader_parameter/borealis_color = Color(1, 1, 1, 1)
 shader_parameter/borealis_frequency = 10.000000149012
 
@@ -211,7 +211,8 @@ indicator_node = NodePath("../../../TrailIndicators/ReferenceIndicatorNode")
 visible = false
 top_level = true
 material = SubResource("ShaderMaterial_cegan")
-width = 30.0
+points = PackedVector2Array(800, 324)
+width = 20.0
 width_curve = SubResource("Curve_82xsv")
 gradient = SubResource("Gradient_getpj")
 texture = ExtResource("8_dg77c")
@@ -241,6 +242,7 @@ indicator_node = NodePath("../../../TrailIndicators/PlayerIndicatorNode")
 visible = false
 top_level = true
 material = SubResource("ShaderMaterial_a6jrf")
+points = PackedVector2Array(800, 324)
 width_curve = SubResource("Curve_xuqvo")
 gradient = SubResource("Gradient_qsp4k")
 texture = ExtResource("8_dg77c")
@@ -263,7 +265,7 @@ position = Vector2(-576, 0)
 unique_name_in_owner = true
 visible = false
 position = Vector2(800, 0)
-rotation = 4040.129
+rotation = 4383.223
 
 [node name="BouleLumiere" type="Sprite2D" parent="GameRenderer/TrailIndicators/ReferenceIndicatorNode" unique_id=1363930096]
 modulate = Color(18.401226, 0.07364793, 14.373839, 1)
@@ -281,7 +283,7 @@ texture = ExtResource("5_272bh")
 unique_name_in_owner = true
 visible = false
 position = Vector2(800, 0)
-rotation = 4040.129
+rotation = 4383.223
 
 [node name="BouleLumiere" type="Sprite2D" parent="GameRenderer/TrailIndicators/PlayerIndicatorNode" unique_id=1864408564]
 modulate = Color(0, 18.892157, 18.892157, 1)
