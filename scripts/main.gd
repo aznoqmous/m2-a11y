@@ -42,6 +42,7 @@ var reference_current_speed : float
 @export var player_node: Node2D
 @export var blit_material: ShaderMaterial
 @export var progress_bar: ProgressBar
+@export var lines_container: Node2D
 
 @export var game_renderer: GameRenderer
 @export var mesh_instance_2d: MeshInstance2D
@@ -51,9 +52,10 @@ var mesh_size : Vector2
 
 var current_note = 0.0
 func _ready() -> void:
-	mesh_size = (Vector2(1152, 648) if Engine.is_editor_hint() else get_viewport().get_visible_rect().size ) / 2.0
-	mesh_instance_2d.mesh.set("size", mesh_size * 2.0)
-	
+	mesh_size = (Vector2(2560, 1440) if Engine.is_editor_hint() else get_window().size ) / 2.0
+	print(mesh_size * 2.0)
+	mesh_instance_2d.mesh.size = mesh_size * 2.0
+	lines_container.position = mesh_size
 	player_node.position.y = 0.0
 	reference_node.position.y = 0.0
 	random_target_note()
