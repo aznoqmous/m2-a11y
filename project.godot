@@ -25,6 +25,8 @@ AudioEffectManager="*uid://bbm2i1fgffdiy"
 
 [display]
 
+window/size/mode=3
+window/size/borderless=true
 window/defaults/default_clear_color=Color(0.3, 0.3, 0.3, 1)
 
 [editor_plugins]

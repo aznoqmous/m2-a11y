@@ -205,7 +205,7 @@ func detect_amplitude_for_tutorial() -> void:
 	var player_scale_target: float = main.player_scale_target
 	var diff: float = abs(player_scale_target - old_amplitude_value)
 	if diff > 0.0:
-		detection_gauge += diff * 0.1
+		detection_gauge += diff * 0.35
 		old_amplitude_value = player_scale_target
 	main.set_progress_bar_value(detection_gauge)
 	if detection_gauge >= 1.0:

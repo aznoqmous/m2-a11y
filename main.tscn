@@ -7,9 +7,9 @@
 [ext_resource type="Script" uid="uid://xt4wfoqnq35o" path="res://scripts/game_manager.gd" id="3_w48qg"]
 [ext_resource type="PackedScene" uid="uid://sv1ikfar2u1a" path="res://scenes/displayed_label_texte.tscn" id="5_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://bsqyvvrf0aeok" path="res://sprites/circle.png" id="5_272bh"]
-[ext_resource type="AudioStream" uid="uid://c3t4je30msdqf" path="res://audio/music/Theremin_B [2026-09-11 101401].wav" id="5_yaehf"]
+[ext_resource type="AudioStream" uid="uid://c3t4je30msdqf" path="res://Audio/music/Theremin_B [2026-09-11 101401].wav" id="5_yaehf"]
 [ext_resource type="Script" uid="uid://c5ownt22gf1nq" path="res://scripts/serial.gd" id="6_7mycd"]
-[ext_resource type="AudioStream" uid="uid://fgjvjdwx0vtn" path="res://audio/Theremin.wav" id="6_yaehf"]
+[ext_resource type="AudioStream" uid="uid://fgjvjdwx0vtn" path="res://Audio/Theremin.wav" id="6_yaehf"]
 [ext_resource type="Script" uid="uid://drka77hvik8kp" path="res://scripts/game_renderer.gd" id="7_vivmo"]
 [ext_resource type="Shader" uid="uid://cqna3nq8f202y" path="res://shaders/wavy_lines.gdshader" id="7_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://b2sg6xifikqbv" path="res://scenes/uis/progress_bar.tscn" id="8_4c57u"]
@@ -26,7 +26,7 @@ shader = ExtResource("2_h2yge")
 shader = ExtResource("2_0xm2m")
 
 [sub_resource type="QuadMesh" id="QuadMesh_ig7tw"]
-size = Vector2(1152, 648)
+size = Vector2(2560, 1440)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_yaehf"]
 viewport_path = NodePath("GameRenderer/TrailSubViewport")
@@ -42,12 +42,12 @@ resource_local_to_scene = true
 shader = ExtResource("9_2cqfq")
 shader_parameter/noise = SubResource("NoiseTexture2D_j360g")
 shader_parameter/trail_power = 0.02
-shader_parameter/borealis_power = 0.375757805
+shader_parameter/borealis_power = 0.2
 shader_parameter/borealis_color = Color(1, 1, 1, 1)
 shader_parameter/borealis_frequency = 10.000000149012
 
 [sub_resource type="QuadMesh" id="QuadMesh_qmn6i"]
-size = Vector2(1152, 648)
+size = Vector2(2560, 1440)
 
 [sub_resource type="Gradient" id="Gradient_074og"]
 colors = PackedColorArray(0, 0, 0, 0, 18.540003, 0, 18.264605, 1)
@@ -95,7 +95,7 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_qsp4k"]
 colors = PackedColorArray(1, 0.4117647, 0.78431374, 0, 0.03137255, 1, 1, 1)
 
-[node name="Main" type="Node2D" unique_id=259715746 node_paths=PackedStringArray("player_audio_generator", "reference_audio_generator", "reference_node", "player_node", "progress_bar", "game_renderer", "mesh_instance_2d")]
+[node name="Main" type="Node2D" unique_id=259715746 node_paths=PackedStringArray("player_audio_generator", "reference_audio_generator", "reference_node", "player_node", "progress_bar", "lines_container", "game_renderer", "mesh_instance_2d")]
 script = ExtResource("1_ig7tw")
 player_color = Color(0, 1, 1, 1)
 reference_color = Color(1, 0, 1, 1)
@@ -113,6 +113,7 @@ reference_node = NodePath("GameRenderer/TrailSubViewport/LinesContainer/Referenc
 player_node = NodePath("GameRenderer/TrailSubViewport/LinesContainer/PlayerNode")
 blit_material = SubResource("ShaderMaterial_h2yge")
 progress_bar = NodePath("CanvasLayer/Control/ProgressBar")
+lines_container = NodePath("GameRenderer/TrailSubViewport/LinesContainer")
 game_renderer = NodePath("GameRenderer")
 mesh_instance_2d = NodePath("GameRenderer/TrailRenderer")
 
@@ -187,33 +188,29 @@ texture = SubResource("ViewportTexture_yaehf")
 
 [node name="TrailSubViewport" type="SubViewport" parent="GameRenderer" unique_id=683846919]
 transparent_bg = true
-size = Vector2i(1152, 648)
+size = Vector2i(2560, 1440)
 render_target_clear_mode = 2
 render_target_update_mode = 4
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="GameRenderer/TrailSubViewport" unique_id=1160172188]
 material = SubResource("ShaderMaterial_074og")
-position = Vector2(576, 324)
+position = Vector2(1280, 720)
 scale = Vector2(1, -1)
 mesh = SubResource("QuadMesh_qmn6i")
 
 [node name="LinesContainer" type="Node2D" parent="GameRenderer/TrailSubViewport" unique_id=555375952]
-position = Vector2(0, 324)
+position = Vector2(1280, 720)
 
 [node name="ReferenceNode" type="Node2D" parent="GameRenderer/TrailSubViewport/LinesContainer" unique_id=437888848 node_paths=PackedStringArray("line", "indicator_node")]
 unique_name_in_owner = true
-position = Vector2(800, 0)
 script = ExtResource("10_2cqfq")
-is_display_height = false
-is_display_amplitude = false
 line = NodePath("Trail2")
 indicator_node = NodePath("../../../TrailIndicators/ReferenceIndicatorNode")
 
 [node name="Trail2" type="Line2D" parent="GameRenderer/TrailSubViewport/LinesContainer/ReferenceNode" unique_id=222456985 node_paths=PackedStringArray("timer")]
-visible = false
 top_level = true
 material = SubResource("ShaderMaterial_cegan")
-points = PackedVector2Array(800, 324)
+points = PackedVector2Array(-25.59455, 720, -24.066711, 720, -22.538807, 720, -21.01087, 720, -19.482996, 720, -17.925308, 720, -16.25858, 720, -14.595209, 720, -12.928547, 720, -11.262978, 720, -9.599607, 720, -7.939288, 720, -6.272621, 720, -4.6059546, 720, -2.939288, 720, -1.2726133, 720, 0.39405394, 720, 2.0607057, 720, 3.727388, 720, 5.3940854, 720, 7.060783, 720, 8.727449, 720, 10.394142, 720, 12.060808, 720, 13.727474, 720, 15.39414, 720, 17.060806, 720, 18.727472, 720, 20.394138, 720, 22.060804, 720, 23.72747, 720, 25.394136, 720, 27.060804, 720, 28.72747, 720, 30.394138, 720, 32.060806, 720, 33.727474, 720, 35.394142, 720, 37.06081, 720, 38.727478, 720, 40.394146, 720, 42.060814, 720, 43.727512, 720, 45.39421, 720, 47.06088, 720, 48.727608, 720, 50.394283, 720, 52.06095, 720, 53.72762, 720, 55.394287, 720, 57.060955, 720, 58.72768, 720, 60.39435, 720, 62.061043, 720, 63.727707, 720, 65.39437, 720, 67.061035, 720, 68.7277, 720, 70.39436, 720, 75.394394, 720, 80.39439, 720, 85.39438, 720, 90.39437, 720, 95.39436, 720, 100.394325, 720, 105.39441, 720, 110.39449, 720, 115.39458, 720, 120.39466, 720, 125.39473, 720, 130.39474, 720, 135.39476, 720, 140.39478, 720, 145.39479, 720, 150.3948, 720, 155.39482, 720, 160.39484, 720, 165.39485, 720, 170.39487, 720, 175.39488, 720, 180.3949, 720, 185.39491, 720, 190.39493, 720, 195.39494, 720, 200.39496, 720, 205.39496, 720, 210.39497, 720, 215.39499, 720, 220.395, 720, 225.39502, 720, 230.39503, 720, 235.39505, 720, 240.39507, 720, 245.39508, 720, 250.39508, 720, 255.39507, 720, 260.3951, 720, 265.39508, 720, 270.39505, 720, 275.39502, 720, 280.395, 720, 285.39496, 720, 290.39487, 720, 295.39484, 720, 300.3948, 720, 305.39478, 720, 310.39474, 720, 315.3947, 720, 320.39462, 720, 325.39447, 720, 330.39444, 720, 335.39435, 720, 340.39432, 720, 345.3943, 720, 350.39426, 720, 355.39423, 720, 360.3942, 720, 365.39417, 720, 370.39413, 720, 375.3941, 720, 380.39407, 720, 385.39407, 720, 390.39392, 720, 395.3939, 720, 400.3935, 720, 405.39328, 720, 410.39325, 720, 415.39322, 720, 420.39307, 720, 425.39304, 720, 430.393, 720, 435.393, 720, 440.39297, 720, 445.39294, 720, 450.3929, 720, 455.39288, 720, 460.39285, 720, 465.39282, 720, 470.3928, 720, 475.39276, 720, 480.39273, 720, 485.39258, 720, 490.39212, 720, 495.39178, 720, 500.39175, 720, 505.39172, 720, 510.39175, 720, 515.3917, 720, 520.3915, 720, 525.3915, 720, 530.39154, 720, 535.3916, 720, 540.39166, 720, 545.73157, 720, 550.7316, 720, 555.7316, 720, 560.7315, 720, 565.73157, 720, 570.7315, 720, 576.03754, 720, 580.93335, 720, 585.9333, 720, 590.916, 720, 595.9161, 720, 600.91614, 720, 605.9162, 720, 610.91626, 720, 615.9161, 720, 620.9159, 720, 625.9158, 720, 630.9156, 720, 635.9156, 720, 641.0538, 720, 645.98, 720, 650.98004, 720, 656.2571, 720, 660.99664, 720, 665.9967, 720, 670.99677, 720, 675.98755, 720, 680.9876, 720, 685.9877, 720, 690.98773, 720, 695.9878, 720, 700.98785, 720, 705.9879, 720, 710.988, 720, 715.98804, 720, 720.9881, 720, 725.98816, 720, 730.9882, 720, 735.9883, 720, 741.4467, 720, 746.0736, 720, 751.0434, 720, 756.04346, 720, 761.0435, 720, 766.0436, 720, 771.4131, 720, 776.10724, 720, 781.0818, 720, 786.08185, 720, 791.0819, 720, 796.082, 720, 801.08203, 720, 806.0821, 720, 812.2053, 720, 816.9499, 720, 821.94995, 720, 825.42834, 720, 831.9354, 720, 836.9355, 720, 840.4078, 720, 846.961, 720, 851.96106, 720, 856.9611, 720, 861.9612, 720, 866.96124, 720, 871.4215, 720, 876.184, 720, 880.94995, 720, 885.93634, 720, 890.9326, 720, 895.9233, 720, 900.92334, 720, 905.9234, 720, 910.92346, 720, 915.9235, 720, 920.9236, 720, 925.92365, 720, 930.9237, 720, 935.92377, 720, 940.9238, 720, 945.9239, 720, 950.9239, 720, 955.92395, 720, 960.924, 720, 965.9241, 720, 970.9241, 720, 975.92413, 720, 980.9242, 720, 985.92426, 720, 990.9243, 720, 995.9244, 720, 1000.92444, 720, 1005.9245, 720, 1010.92456, 720, 1015.9246, 720, 1020.92456, 720, 1026.8502, 720, 1031.8501, 720, 1036.85, 720, 1041.8499, 720, 1046.8497, 720, 1051.8496, 720, 1056.8495, 720, 1061.8494, 720, 1066.8492, 720, 1071.8491, 720, 1076.849, 720, 1081.8489, 720, 1086.8488, 720, 1091.8486, 720, 1096.8485, 720, 1101.8484, 720, 1106.8483, 720, 1111.8481, 720, 1116.848, 720, 1121.8479, 720, 1126.8478, 720, 1131.8477, 720, 1136.8475, 720, 1141.8474, 720, 1146.8473, 720, 1151.9861, 720, 1156.986, 720, 1161.9858, 720, 1166.9857, 720, 1171.9856, 720, 1176.9855, 720, 1181.9854, 720, 1186.9852, 720, 1191.9851, 720, 1196.985, 720, 1202.1238, 720, 1205.457, 720, 1210.4569, 720, 1215.4568, 720, 1220.4567, 720, 1225.4797, 720, 1230.4796, 720, 1235.4795, 720, 1240.4794, 720, 1245.4792, 720, 1250.4791, 720, 1255.479, 720, 1260.4789, 720, 1265.4788, 720, 1270.4786, 720, 1275.709, 720)
 width = 20.0
 width_curve = SubResource("Curve_82xsv")
 gradient = SubResource("Gradient_getpj")
@@ -233,18 +230,14 @@ wait_time = 0.05
 
 [node name="PlayerNode" type="Node2D" parent="GameRenderer/TrailSubViewport/LinesContainer" unique_id=81178420 node_paths=PackedStringArray("line", "indicator_node")]
 unique_name_in_owner = true
-position = Vector2(800, 0)
 script = ExtResource("10_2cqfq")
-is_display_height = false
-is_display_amplitude = false
 line = NodePath("Trail2")
 indicator_node = NodePath("../../../TrailIndicators/PlayerIndicatorNode")
 
 [node name="Trail2" type="Line2D" parent="GameRenderer/TrailSubViewport/LinesContainer/PlayerNode" unique_id=1742277414 node_paths=PackedStringArray("timer")]
-visible = false
 top_level = true
 material = SubResource("ShaderMaterial_a6jrf")
-points = PackedVector2Array(800, 324)
+points = PackedVector2Array(-25.59455, 720, -24.066711, 720, -22.538807, 720, -21.01087, 720, -19.482996, 720, -17.925308, 720, -16.25858, 720, -14.595209, 720, -12.928547, 720, -11.262978, 720, -9.599607, 720, -7.939288, 720, -6.272621, 720, -4.6059546, 720, -2.939288, 720, -1.2726133, 720, 0.39405394, 720, 2.0607057, 720, 3.727388, 720, 5.3940854, 720, 7.060783, 720, 8.727449, 720, 10.394142, 720, 12.060808, 720, 13.727474, 720, 15.39414, 720, 17.060806, 720, 18.727472, 720, 20.394138, 720, 22.060804, 720, 23.72747, 720, 25.394136, 720, 27.060804, 720, 28.72747, 720, 30.394138, 720, 32.060806, 720, 33.727474, 720, 35.394142, 720, 37.06081, 720, 38.727478, 720, 40.394146, 720, 42.060814, 720, 43.727512, 720, 45.39421, 720, 47.06088, 720, 48.727608, 720, 50.394283, 720, 52.06095, 720, 53.72762, 720, 55.394287, 720, 57.060955, 720, 58.72768, 720, 60.39435, 720, 62.061043, 720, 63.727707, 720, 65.39437, 720, 67.061035, 720, 68.7277, 720, 70.39436, 720, 75.394394, 720, 80.39439, 720, 85.39438, 720, 90.39437, 720, 95.39436, 720, 100.394325, 720, 105.39441, 720, 110.39449, 720, 115.39458, 720, 120.39466, 720, 125.39473, 720, 130.39474, 720, 135.39476, 720, 140.39478, 720, 145.39479, 720, 150.3948, 720, 155.39482, 720, 160.39484, 720, 165.39485, 720, 170.39487, 720, 175.39488, 720, 180.3949, 720, 185.39491, 720, 190.39493, 720, 195.39494, 720, 200.39496, 720, 205.39496, 720, 210.39497, 720, 215.39499, 720, 220.395, 720, 225.39502, 720, 230.39503, 720, 235.39505, 720, 240.39507, 720, 245.39508, 720, 250.39508, 720, 255.39507, 720, 260.3951, 720, 265.39508, 720, 270.39505, 720, 275.39502, 720, 280.395, 720, 285.39496, 720, 290.39487, 720, 295.39484, 720, 300.3948, 720, 305.39478, 720, 310.39474, 720, 315.3947, 720, 320.39462, 720, 325.39447, 720, 330.39444, 720, 335.39435, 720, 340.39432, 720, 345.3943, 720, 350.39426, 720, 355.39423, 720, 360.3942, 720, 365.39417, 720, 370.39413, 720, 375.3941, 720, 380.39407, 720, 385.39407, 720, 390.39392, 720, 395.3939, 720, 400.3935, 720, 405.39328, 720, 410.39325, 720, 415.39322, 720, 420.39307, 720, 425.39304, 720, 430.393, 720, 435.393, 720, 440.39297, 720, 445.39294, 720, 450.3929, 720, 455.39288, 720, 460.39285, 720, 465.39282, 720, 470.3928, 720, 475.39276, 720, 480.39273, 720, 485.39258, 720, 490.39212, 720, 495.39178, 720, 500.39175, 720, 505.39172, 720, 510.39175, 720, 515.3917, 720, 520.3915, 720, 525.3915, 720, 530.39154, 720, 535.3916, 720, 540.39166, 720, 545.73157, 720, 550.7316, 720, 555.7316, 720, 560.7315, 720, 565.73157, 720, 570.7315, 720, 576.03754, 720, 580.93335, 720, 585.9333, 720, 590.916, 720, 595.9161, 720, 600.91614, 720, 605.9162, 720, 610.91626, 720, 615.9161, 720, 620.9159, 720, 625.9158, 720, 630.9156, 720, 635.9156, 720, 641.0538, 720, 645.98, 720, 650.98004, 720, 656.2571, 720, 660.99664, 720, 665.9967, 720, 670.99677, 720, 675.98755, 720, 680.9876, 720, 685.9877, 720, 690.98773, 720, 695.9878, 720, 700.98785, 720, 705.9879, 720, 710.988, 720, 715.98804, 720, 720.9881, 720, 725.98816, 720, 730.9882, 720, 735.9883, 720, 741.4467, 720, 746.0736, 720, 751.0434, 720, 756.04346, 720, 761.0435, 720, 766.0436, 720, 771.4131, 720, 776.10724, 720, 781.0818, 720, 786.08185, 720, 791.0819, 720, 796.082, 720, 801.08203, 720, 806.0821, 720, 812.2053, 720, 816.9499, 720, 821.94995, 720, 825.42834, 720, 831.9354, 720, 836.9355, 720, 840.4078, 720, 846.961, 720, 851.96106, 720, 856.9611, 720, 861.9612, 720, 866.96124, 720, 871.4215, 720, 876.184, 720, 880.94995, 720, 885.93634, 720, 890.9326, 720, 895.9233, 720, 900.92334, 720, 905.9234, 720, 910.92346, 720, 915.9235, 720, 920.9236, 720, 925.92365, 720, 930.9237, 720, 935.92377, 720, 940.9238, 720, 945.9239, 720, 950.9239, 720, 955.92395, 720, 960.924, 720, 965.9241, 720, 970.9241, 720, 975.92413, 720, 980.9242, 720, 985.92426, 720, 990.9243, 720, 995.9244, 720, 1000.92444, 720, 1005.9245, 720, 1010.92456, 720, 1015.9246, 720, 1020.92456, 720, 1026.8502, 720, 1031.8501, 720, 1036.85, 720, 1041.8499, 720, 1046.8497, 720, 1051.8496, 720, 1056.8495, 720, 1061.8494, 720, 1066.8492, 720, 1071.8491, 720, 1076.849, 720, 1081.8489, 720, 1086.8488, 720, 1091.8486, 720, 1096.8485, 720, 1101.8484, 720, 1106.8483, 720, 1111.8481, 720, 1116.848, 720, 1121.8479, 720, 1126.8478, 720, 1131.8477, 720, 1136.8475, 720, 1141.8474, 720, 1146.8473, 720, 1151.9861, 720, 1156.986, 720, 1161.9858, 720, 1166.9857, 720, 1171.9856, 720, 1176.9855, 720, 1181.9854, 720, 1186.9852, 720, 1191.9851, 720, 1196.985, 720, 1202.1238, 720, 1205.457, 720, 1210.4569, 720, 1215.4568, 720, 1220.4567, 720, 1225.4797, 720, 1230.4796, 720, 1235.4795, 720, 1240.4794, 720, 1245.4792, 720, 1250.4791, 720, 1255.479, 720, 1260.4789, 720, 1265.4788, 720, 1270.4786, 720, 1275.709, 720)
 width_curve = SubResource("Curve_xuqvo")
 gradient = SubResource("Gradient_qsp4k")
 texture = ExtResource("8_dg77c")
@@ -261,13 +254,10 @@ timer = NodePath("Trail Timer")
 wait_time = 0.05
 
 [node name="TrailIndicators" type="Node2D" parent="GameRenderer" unique_id=1691555677]
-position = Vector2(-576, 0)
 
 [node name="ReferenceIndicatorNode" type="Node2D" parent="GameRenderer/TrailIndicators" unique_id=1286879463]
 unique_name_in_owner = true
-visible = false
-position = Vector2(800, 0)
-rotation = 5103.73
+rotation = 6833.954
 
 [node name="BouleLumiere" type="Sprite2D" parent="GameRenderer/TrailIndicators/ReferenceIndicatorNode" unique_id=1363930096]
 modulate = Color(18.401226, 0.07364793, 14.373839, 1)
@@ -283,9 +273,7 @@ texture = ExtResource("5_272bh")
 
 [node name="PlayerIndicatorNode" type="Node2D" parent="GameRenderer/TrailIndicators" unique_id=69487365]
 unique_name_in_owner = true
-visible = false
-position = Vector2(800, 0)
-rotation = 5103.73
+rotation = 6833.954
 
 [node name="BouleLumiere" type="Sprite2D" parent="GameRenderer/TrailIndicators/PlayerIndicatorNode" unique_id=1864408564]
 modulate = Color(0, 18.892157, 18.892157, 1)

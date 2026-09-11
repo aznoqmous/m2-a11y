@@ -21,7 +21,8 @@ func _ready():
 		return;
 	main.ready.connect(func():
 		sub_viewport.size = main.mesh_size * 2.0
-		mesh_instance_2d.mesh.set("size", main.mesh_size * 2.0)
+		mesh_instance_2d.mesh.size = main.mesh_size * 2.0
+		mesh_instance_2d.position = mesh_instance_2d.mesh.size / 2.0
 	)
 
 func _process(delta: float) -> void:
