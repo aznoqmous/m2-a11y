@@ -2,12 +2,39 @@
 
 [ext_resource type="Script" uid="uid://c3pg8uf7dvlej" path="res://scripts/audio_effect_manager.gd" id="1_ldvii"]
 [ext_resource type="AudioStream" uid="uid://b5mcmxmpxkhfe" path="res://audio/feedbacks/completion_stab.wav" id="2_ykbb4"]
+[ext_resource type="AudioStream" uid="uid://bhcnkao2bs6h" path="res://audio/music/base_music_Arps.wav" id="3_ahbkg"]
+[ext_resource type="AudioStream" uid="uid://b2wv3f2pkq2rt" path="res://audio/music/base_music_Chimes.wav" id="4_c4fug"]
+[ext_resource type="AudioStream" uid="uid://dbdrarrgt8yf4" path="res://audio/music/base_music_Pads.wav" id="5_v0lfq"]
+[ext_resource type="AudioStream" uid="uid://cplsbv70y2tfh" path="res://audio/music/base_music_Piano_Reversed.wav" id="6_pi0vo"]
+[ext_resource type="AudioStream" uid="uid://bhhcwd5q8760o" path="res://audio/music/base_music_Piano_Chords.wav" id="7_j8ogq"]
+[ext_resource type="AudioStream" uid="uid://evt3qb53onbn" path="res://audio/music/base_music_Texture.wav" id="8_qx5j0"]
 
-[node name="AudioEffectManager" type="Node2D" unique_id=1480341746]
+[node name="AudioEffectManager" type="Node2D" unique_id=1480341746 node_paths=PackedStringArray("base_track_part_queue")]
 script = ExtResource("1_ldvii")
+base_track_part_queue = [NodePath("Base MusicArps"), NodePath("Base MusicChimes"), NodePath("Base MusicPads"), NodePath("Base MusicPiano"), NodePath("Base MusicChords"), NodePath("Base MusicTexture")]
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1994688250]
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1987242257]
+[node name="Feedback" type="AudioStreamPlayer2D" parent="." unique_id=1987242257]
 stream = ExtResource("2_ykbb4")
+pitch_scale = 1.1
 panning_strength = 0.0
+
+[node name="Base MusicArps" type="AudioStreamPlayer2D" parent="." unique_id=1642033192]
+stream = ExtResource("3_ahbkg")
+
+[node name="Base MusicChimes" type="AudioStreamPlayer2D" parent="." unique_id=1202587626]
+stream = ExtResource("4_c4fug")
+
+[node name="Base MusicPads" type="AudioStreamPlayer2D" parent="." unique_id=2089696749]
+stream = ExtResource("5_v0lfq")
+
+[node name="Base MusicPiano" type="AudioStreamPlayer2D" parent="." unique_id=225780063]
+stream = ExtResource("6_pi0vo")
+
+[node name="Base MusicChords" type="AudioStreamPlayer2D" parent="." unique_id=1498412570]
+stream = ExtResource("7_j8ogq")
+
+[node name="Base MusicTexture" type="AudioStreamPlayer2D" parent="." unique_id=53112965]
+stream = ExtResource("8_qx5j0")
+volume_db = -14.073
