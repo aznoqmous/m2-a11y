@@ -19,3 +19,4 @@ bbcode_enabled = true
 text = "tutoriel faut suivre la ligne"
 fit_content = true
 horizontal_alignment = 1
+visible_characters_behavior = 1

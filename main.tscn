@@ -5,6 +5,7 @@
 [ext_resource type="Shader" uid="uid://bsjh6ph4t6p1x" path="res://shaders/blit.gdshader" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://c4se0ckbe01k5" path="res://scenes/audioGenerator.tscn" id="3_5vw27"]
 [ext_resource type="Script" uid="uid://xt4wfoqnq35o" path="res://scripts/game_manager.gd" id="3_w48qg"]
+[ext_resource type="PackedScene" uid="uid://sv1ikfar2u1a" path="res://scenes/displayed_label_texte.tscn" id="5_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://bsqyvvrf0aeok" path="res://sprites/circle.png" id="5_272bh"]
 [ext_resource type="Script" uid="uid://c5ownt22gf1nq" path="res://scripts/serial.gd" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://drka77hvik8kp" path="res://scripts/game_renderer.gd" id="7_vivmo"]
@@ -38,8 +39,8 @@ seamless = true
 resource_local_to_scene = true
 shader = ExtResource("9_2cqfq")
 shader_parameter/noise = SubResource("NoiseTexture2D_j360g")
-shader_parameter/trail_power = 0.23999999999999996
-shader_parameter/borealis_power = 0.2999999932944
+shader_parameter/trail_power = 0.02
+shader_parameter/borealis_power = 0.31999999999999995
 shader_parameter/borealis_color = Color(1, 1, 1, 1)
 shader_parameter/borealis_frequency = 10.000000149012
 
@@ -131,24 +132,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DisplayedLabel" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=312952374]
+[node name="DisplayedLabel" parent="CanvasLayer/Control" unique_id=134966011 instance=ExtResource("5_2cqfq")]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -407.0
-offset_top = -146.0
-offset_right = 412.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_font_sizes/normal_font_size = 20
-bbcode_enabled = true
-text = "Blablabla blabla blabla blablabla bla.[br] Bla bla."
-fit_content = true
-horizontal_alignment = 1
+offset_left = -409.5
+offset_right = 409.5
 
 [node name="ProgressBar" parent="CanvasLayer/Control" unique_id=595242573 instance=ExtResource("8_4c57u")]
 unique_name_in_owner = true
@@ -215,8 +203,7 @@ indicator_node = NodePath("../../../TrailIndicators/ReferenceIndicatorNode")
 visible = false
 top_level = true
 material = SubResource("ShaderMaterial_cegan")
-points = PackedVector2Array(800, 324)
-width = 30.0
+width = 20.0
 width_curve = SubResource("Curve_82xsv")
 gradient = SubResource("Gradient_getpj")
 texture = ExtResource("8_dg77c")
@@ -246,7 +233,6 @@ indicator_node = NodePath("../../../TrailIndicators/PlayerIndicatorNode")
 visible = false
 top_level = true
 material = SubResource("ShaderMaterial_a6jrf")
-points = PackedVector2Array(800, 324)
 width_curve = SubResource("Curve_xuqvo")
 gradient = SubResource("Gradient_qsp4k")
 texture = ExtResource("8_dg77c")
@@ -269,7 +255,7 @@ position = Vector2(-576, 0)
 unique_name_in_owner = true
 visible = false
 position = Vector2(800, 0)
-rotation = 1969.2313
+rotation = 3490.3586
 
 [node name="BouleLumiere" type="Sprite2D" parent="GameRenderer/TrailIndicators/ReferenceIndicatorNode" unique_id=1363930096]
 modulate = Color(18.401226, 0.07364793, 14.373839, 1)
@@ -287,7 +273,7 @@ texture = ExtResource("5_272bh")
 unique_name_in_owner = true
 visible = false
 position = Vector2(800, 0)
-rotation = 1969.2313
+rotation = 3490.3586
 
 [node name="BouleLumiere" type="Sprite2D" parent="GameRenderer/TrailIndicators/PlayerIndicatorNode" unique_id=1864408564]
 modulate = Color(0, 18.892157, 18.892157, 1)

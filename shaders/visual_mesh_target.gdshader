@@ -33,5 +33,6 @@ void fragment() {
 	);
 	//borealis.rgb = borealis_color * borealis.b;
 	//borealis.b *= mod(TIME, 1.0);
+	borealis = shift_hue(borealis, mod(TIME, 1.0) * 0.5);
 	COLOR += borealis * clamp(length(COLOR.rgb) / borealis_power, 0.0, 1.0);
 }

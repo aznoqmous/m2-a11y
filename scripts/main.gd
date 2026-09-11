@@ -84,7 +84,7 @@ func handle_player_amplitude(delta: float) -> void:
 	if serial.is_connected:
 		player_scale_target = move_toward(player_scale_target, 1.0 - get_serial_value(serial.value_b), delta * 2.0)
 	else:
-		player_scale_target = get_global_mouse_position().x / mesh_size.x
+		player_scale_target = clamp(get_global_mouse_position().x / mesh_size.x, 0, 1)
 
 
 func handle_player_height(delta: float) -> void:
