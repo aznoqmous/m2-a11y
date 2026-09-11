@@ -39,7 +39,7 @@ func _fx_application() -> void:
 	player_fx_chorus.set_wet(0+audio_fx_intensity)
 	player_fx_chorus.set_dry(1-audio_fx_intensity)
 	player_fx_compressor.set_threshold(-audio_fx_intensity*30)
-	player_fx_distortion.set_drive(audio_fx_intensity/2)
+	player_fx_distortion.set_drive(audio_fx_intensity/3)
 	#print(player_fx_distortion.get_drive())
 	#print(master_fx_chorus.get_dry())
 
