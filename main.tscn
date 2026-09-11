@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://c4se0ckbe01k5" path="res://scenes/audioGenerator.tscn" id="3_5vw27"]
 [ext_resource type="Script" uid="uid://xt4wfoqnq35o" path="res://scripts/game_manager.gd" id="3_w48qg"]
 [ext_resource type="Texture2D" uid="uid://bsqyvvrf0aeok" path="res://sprites/circle.png" id="5_272bh"]
+[ext_resource type="AudioStream" uid="uid://c3t4je30msdqf" path="res://audio/music/Theremin_B [2026-09-11 101401].wav" id="5_yaehf"]
 [ext_resource type="Script" uid="uid://c5ownt22gf1nq" path="res://scripts/serial.gd" id="6_7mycd"]
+[ext_resource type="AudioStream" uid="uid://cpivwpwao14yl" path="res://audio/feedbacks/Rosebeef_bass_Low.wav" id="6_yaehf"]
 [ext_resource type="Script" uid="uid://drka77hvik8kp" path="res://scripts/game_renderer.gd" id="7_vivmo"]
 [ext_resource type="Shader" uid="uid://cqna3nq8f202y" path="res://shaders/wavy_lines.gdshader" id="7_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://b2sg6xifikqbv" path="res://scenes/uis/progress_bar.tscn" id="8_4c57u"]
@@ -118,8 +120,10 @@ all_text = Array[String](["Bienvenue dans Theremin Hero.[br] Dans cette expérie
 main = NodePath("..")
 
 [node name="PlayerAudioGenerator" parent="." unique_id=1099815716 instance=ExtResource("3_5vw27")]
+audio_stream = ExtResource("5_yaehf")
 
 [node name="ReferenceAudioGenerator" parent="." unique_id=597659095 instance=ExtResource("3_5vw27")]
+audio_stream = ExtResource("6_yaehf")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1327059218]
 
@@ -211,6 +215,7 @@ indicator_node = NodePath("../../../TrailIndicators/ReferenceIndicatorNode")
 visible = false
 top_level = true
 material = SubResource("ShaderMaterial_cegan")
+points = PackedVector2Array(800, 324)
 width = 30.0
 width_curve = SubResource("Curve_82xsv")
 gradient = SubResource("Gradient_getpj")
@@ -241,6 +246,7 @@ indicator_node = NodePath("../../../TrailIndicators/PlayerIndicatorNode")
 visible = false
 top_level = true
 material = SubResource("ShaderMaterial_a6jrf")
+points = PackedVector2Array(800, 324)
 width_curve = SubResource("Curve_xuqvo")
 gradient = SubResource("Gradient_qsp4k")
 texture = ExtResource("8_dg77c")
@@ -263,7 +269,7 @@ position = Vector2(-576, 0)
 unique_name_in_owner = true
 visible = false
 position = Vector2(800, 0)
-rotation = 1374.0682
+rotation = 2453.532
 
 [node name="BouleLumiere" type="Sprite2D" parent="GameRenderer/TrailIndicators/ReferenceIndicatorNode" unique_id=1363930096]
 modulate = Color(18.401226, 0.07364793, 14.373839, 1)
@@ -282,7 +288,7 @@ texture = ExtResource("5_272bh")
 unique_name_in_owner = true
 visible = false
 position = Vector2(800, 0)
-rotation = 1374.0682
+rotation = 2453.532
 
 [node name="BouleLumiere" type="Sprite2D" parent="GameRenderer/TrailIndicators/PlayerIndicatorNode" unique_id=1864408564]
 modulate = Color(0, 18.892157, 18.892157, 1)
