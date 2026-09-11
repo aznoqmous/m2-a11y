@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dgmeww0dqv5m8"
-path="res://.godot/imported/Base_track Piano Chords.wav-05f41762ad6460b0eb5e2b948448c6ad.sample"
+path="res://.godot/imported/Base_track Piano Chords.wav-d84656b6ce00964551351c66b552ecd3.sample"
 
 [deps]
 
-source_file="res://audio/music/Base_track Piano Chords.wav"
-dest_files=["res://.godot/imported/Base_track Piano Chords.wav-05f41762ad6460b0eb5e2b948448c6ad.sample"]
+source_file="res://Audio/music/Base_track Piano Chords.wav"
+dest_files=["res://.godot/imported/Base_track Piano Chords.wav-d84656b6ce00964551351c66b552ecd3.sample"]
 
 [params]
 

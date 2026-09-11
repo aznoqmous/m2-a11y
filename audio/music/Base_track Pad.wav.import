@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://ub1hwakqp3jo"
-path="res://.godot/imported/Base_track Pad.wav-ceff52207068e390adc83a7172f378c4.sample"
+path="res://.godot/imported/Base_track Pad.wav-2ee69f364be4144b4371008c6c24651a.sample"
 
 [deps]
 
-source_file="res://audio/music/Base_track Pad.wav"
-dest_files=["res://.godot/imported/Base_track Pad.wav-ceff52207068e390adc83a7172f378c4.sample"]
+source_file="res://Audio/music/Base_track Pad.wav"
+dest_files=["res://.godot/imported/Base_track Pad.wav-2ee69f364be4144b4371008c6c24651a.sample"]
 
 [params]
 

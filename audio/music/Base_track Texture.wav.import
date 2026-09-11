@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://ch1p1qbf16oni"
-path="res://.godot/imported/Base_track Texture.wav-14b9f522de51f001e158e08a6f1f63b9.sample"
+path="res://.godot/imported/Base_track Texture.wav-a5f061d2f1bba9343128c839133434c8.sample"
 
 [deps]
 
-source_file="res://audio/music/Base_track Texture.wav"
-dest_files=["res://.godot/imported/Base_track Texture.wav-14b9f522de51f001e158e08a6f1f63b9.sample"]
+source_file="res://Audio/music/Base_track Texture.wav"
+dest_files=["res://.godot/imported/Base_track Texture.wav-a5f061d2f1bba9343128c839133434c8.sample"]
 
 [params]
 

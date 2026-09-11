@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://5n75qnd00con"
-path="res://.godot/imported/Base_track Piano Melody.wav-a131d45cafee440131b3d8231e288de9.sample"
+path="res://.godot/imported/Base_track Piano Melody.wav-cc30715fd983756b688559d44db0ca9c.sample"
 
 [deps]
 
-source_file="res://audio/music/Base_track Piano Melody.wav"
-dest_files=["res://.godot/imported/Base_track Piano Melody.wav-a131d45cafee440131b3d8231e288de9.sample"]
+source_file="res://Audio/music/Base_track Piano Melody.wav"
+dest_files=["res://.godot/imported/Base_track Piano Melody.wav-cc30715fd983756b688559d44db0ca9c.sample"]
 
 [params]
 

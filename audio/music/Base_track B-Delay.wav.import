@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dy5fe8nd6uqo6"
-path="res://.godot/imported/Base_track B-Delay.wav-ec685c4fd9c7bd5938ed80426f1921bd.sample"
+path="res://.godot/imported/Base_track B-Delay.wav-f5a5367dbe0138f3ede48a98072ce535.sample"
 
 [deps]
 
-source_file="res://audio/music/Base_track B-Delay.wav"
-dest_files=["res://.godot/imported/Base_track B-Delay.wav-ec685c4fd9c7bd5938ed80426f1921bd.sample"]
+source_file="res://Audio/music/Base_track B-Delay.wav"
+dest_files=["res://.godot/imported/Base_track B-Delay.wav-f5a5367dbe0138f3ede48a98072ce535.sample"]
 
 [params]
 

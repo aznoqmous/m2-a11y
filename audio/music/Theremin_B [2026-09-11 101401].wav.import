@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c3t4je30msdqf"
-path="res://.godot/imported/Theremin_B [2026-09-11 101401].wav-fe231b8c0f51a363e89e1eae301b9fa9.sample"
+path="res://.godot/imported/Theremin_B [2026-09-11 101401].wav-1e8cfd9e522acfd143d96691f742250e.sample"
 
 [deps]
 
-source_file="res://audio/music/Theremin_B [2026-09-11 101401].wav"
-dest_files=["res://.godot/imported/Theremin_B [2026-09-11 101401].wav-fe231b8c0f51a363e89e1eae301b9fa9.sample"]
+source_file="res://Audio/music/Theremin_B [2026-09-11 101401].wav"
+dest_files=["res://.godot/imported/Theremin_B [2026-09-11 101401].wav-1e8cfd9e522acfd143d96691f742250e.sample"]
 
 [params]
 

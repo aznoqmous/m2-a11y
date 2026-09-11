@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://ctvvmoka5jnsp"
-path="res://.godot/imported/Base_track Chimes-1.wav-bfd892d59928ab433bbf1549b8390d19.sample"
+path="res://.godot/imported/Base_track Chimes-1.wav-78e4509fb69d095f0675c45b77a1d94f.sample"
 
 [deps]
 
-source_file="res://audio/music/Base_track Chimes-1.wav"
-dest_files=["res://.godot/imported/Base_track Chimes-1.wav-bfd892d59928ab433bbf1549b8390d19.sample"]
+source_file="res://Audio/music/Base_track Chimes-1.wav"
+dest_files=["res://.godot/imported/Base_track Chimes-1.wav-78e4509fb69d095f0675c45b77a1d94f.sample"]
 
 [params]
 

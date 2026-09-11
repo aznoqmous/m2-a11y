@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://fgjvjdwx0vtn"
-path="res://.godot/imported/Theremin.wav-42a6fa73c692e58d6b314d8988a85739.sample"
+path="res://.godot/imported/Theremin.wav-f1d499f59ae2875c30dc43d523c32993.sample"
 
 [deps]
 
-source_file="res://audio/Theremin.wav"
-dest_files=["res://.godot/imported/Theremin.wav-42a6fa73c692e58d6b314d8988a85739.sample"]
+source_file="res://Audio/Theremin.wav"
+dest_files=["res://.godot/imported/Theremin.wav-f1d499f59ae2875c30dc43d523c32993.sample"]
 
 [params]
 

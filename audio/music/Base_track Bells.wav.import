@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cc2vmt7orggtf"
-path="res://.godot/imported/Base_track Bells.wav-f0cd85873ad465c1e83e090c781cb0e9.sample"
+path="res://.godot/imported/Base_track Bells.wav-e289bae1044800d304faef2fe2cd47d1.sample"
 
 [deps]
 
-source_file="res://audio/music/Base_track Bells.wav"
-dest_files=["res://.godot/imported/Base_track Bells.wav-f0cd85873ad465c1e83e090c781cb0e9.sample"]
+source_file="res://Audio/music/Base_track Bells.wav"
+dest_files=["res://.godot/imported/Base_track Bells.wav-e289bae1044800d304faef2fe2cd47d1.sample"]
 
 [params]
 

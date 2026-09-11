@@ -7,9 +7,9 @@
 [ext_resource type="Script" uid="uid://xt4wfoqnq35o" path="res://scripts/game_manager.gd" id="3_w48qg"]
 [ext_resource type="PackedScene" uid="uid://sv1ikfar2u1a" path="res://scenes/displayed_label_texte.tscn" id="5_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://bsqyvvrf0aeok" path="res://sprites/circle.png" id="5_272bh"]
-[ext_resource type="AudioStream" uid="uid://c3t4je30msdqf" path="res://audio/music/Theremin_B [2026-09-11 101401].wav" id="5_yaehf"]
+[ext_resource type="AudioStream" uid="uid://c3t4je30msdqf" path="res://Audio/music/Theremin_B [2026-09-11 101401].wav" id="5_yaehf"]
 [ext_resource type="Script" uid="uid://c5ownt22gf1nq" path="res://scripts/serial.gd" id="6_7mycd"]
-[ext_resource type="AudioStream" uid="uid://fgjvjdwx0vtn" path="res://audio/Theremin.wav" id="6_yaehf"]
+[ext_resource type="AudioStream" uid="uid://fgjvjdwx0vtn" path="res://Audio/Theremin.wav" id="6_yaehf"]
 [ext_resource type="Script" uid="uid://drka77hvik8kp" path="res://scripts/game_renderer.gd" id="7_vivmo"]
 [ext_resource type="Shader" uid="uid://cqna3nq8f202y" path="res://shaders/wavy_lines.gdshader" id="7_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://b2sg6xifikqbv" path="res://scenes/uis/progress_bar.tscn" id="8_4c57u"]
@@ -42,7 +42,7 @@ resource_local_to_scene = true
 shader = ExtResource("9_2cqfq")
 shader_parameter/noise = SubResource("NoiseTexture2D_j360g")
 shader_parameter/trail_power = 0.02
-shader_parameter/borealis_power = 0.375757805
+shader_parameter/borealis_power = 0.2
 shader_parameter/borealis_color = Color(1, 1, 1, 1)
 shader_parameter/borealis_frequency = 10.000000149012
 
@@ -119,6 +119,7 @@ mesh_instance_2d = NodePath("GameRenderer/TrailRenderer")
 [node name="GameManager" type="Node2D" parent="." unique_id=1573100094 node_paths=PackedStringArray("main")]
 unique_name_in_owner = true
 script = ExtResource("3_w48qg")
+skip_tuto = true
 all_text = Array[String](["Bienvenue dans Theremin Hero.[br] Dans cette expérience multisensorielle, coopérer pour jouer de votre instrument et suivre la mélodie indiquée.", "Joueur 1, à gauche, vous contrôlez l’intensité de la note. Placez votre main devant le capteur et déplacez la de haut en bas, allez y !", "Essayez maintenant de suivre l'intensité indiquée. Elle est représentée visuellement et correspond à la basse que vous pouvez entendre.", "Joueur 2, à droite, vous contrôlez la hauteur de la note. Placez votre main devant le capteur et déplacez la horizontalement, allez y !", "Essayez maintenant de suivre la mélodie indiquée. Elle est représentée visuellement et correspond à la basse que vous pouvez entendre."])
 main = NodePath("..")
 
@@ -267,7 +268,7 @@ position = Vector2(-576, 0)
 unique_name_in_owner = true
 visible = false
 position = Vector2(800, 0)
-rotation = 5103.73
+rotation = 6867.32
 
 [node name="BouleLumiere" type="Sprite2D" parent="GameRenderer/TrailIndicators/ReferenceIndicatorNode" unique_id=1363930096]
 modulate = Color(18.401226, 0.07364793, 14.373839, 1)
@@ -285,7 +286,7 @@ texture = ExtResource("5_272bh")
 unique_name_in_owner = true
 visible = false
 position = Vector2(800, 0)
-rotation = 5103.73
+rotation = 6867.32
 
 [node name="BouleLumiere" type="Sprite2D" parent="GameRenderer/TrailIndicators/PlayerIndicatorNode" unique_id=1864408564]
 modulate = Color(0, 18.892157, 18.892157, 1)
