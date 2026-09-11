@@ -14,7 +14,6 @@ var target_scale: float
 var audio_fx_intensity: float
 var last_selected_track: int
 
-@export var completion_feedback_queue: Array[AudioStreamPlayer2D]
 @export var base_track_part_queue: Array[AudioStreamPlayer2D]
 
 
