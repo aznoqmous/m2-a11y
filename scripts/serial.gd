@@ -47,7 +47,8 @@ func monitor_serial():
 		var vb = str_to_var(value[1])
 		if va != -1: value_a = va
 		if vb != -1: value_b = vb
-
+		
+	print("Monitor ", value_a, " ", value_b)
 	
 	serial.clear_buffer()
 

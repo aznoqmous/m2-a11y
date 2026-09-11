@@ -19,8 +19,6 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h2yge"]
 shader = ExtResource("2_h2yge")
 
-[sub_resource type="AudioStream" id="AudioStream_dg77c"]
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0xm2m"]
 shader = ExtResource("2_0xm2m")
 
@@ -94,7 +92,7 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_qsp4k"]
 colors = PackedColorArray(1, 0.4117647, 0.78431374, 0, 0.03137255, 1, 1, 1)
 
-[node name="Main" type="Node2D" unique_id=259715746 node_paths=PackedStringArray("player_audio_generator", "reference_audio_generator", "reference_particles", "player_particles", "reference_node", "player_node", "progress_bar", "game_renderer", "mesh_instance_2d")]
+[node name="Main" type="Node2D" unique_id=259715746 node_paths=PackedStringArray("player_audio_generator", "reference_audio_generator", "reference_node", "player_node", "progress_bar", "game_renderer", "mesh_instance_2d")]
 script = ExtResource("1_ig7tw")
 player_color = Color(0, 1, 1, 1)
 reference_color = Color(1, 0, 1, 1)
@@ -106,8 +104,6 @@ player_rotation_speed = 20.0
 reference_rotation_speed = 5.0
 player_audio_generator = NodePath("PlayerAudioGenerator")
 reference_audio_generator = NodePath("ReferenceAudioGenerator")
-reference_particles = NodePath("")
-player_particles = NodePath("")
 reference_node = NodePath("GameRenderer/TrailSubViewport/LinesContainer/ReferenceNode")
 player_node = NodePath("GameRenderer/TrailSubViewport/LinesContainer/PlayerNode")
 blit_material = SubResource("ShaderMaterial_h2yge")
@@ -124,7 +120,6 @@ main = NodePath("..")
 [node name="PlayerAudioGenerator" parent="." unique_id=1099815716 instance=ExtResource("3_5vw27")]
 
 [node name="ReferenceAudioGenerator" parent="." unique_id=597659095 instance=ExtResource("3_5vw27")]
-audio_stream = SubResource("AudioStream_dg77c")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1327059218]
 
@@ -268,7 +263,7 @@ position = Vector2(-576, 0)
 unique_name_in_owner = true
 visible = false
 position = Vector2(800, 0)
-rotation = 1041.1802
+rotation = 1374.0682
 
 [node name="BouleLumiere" type="Sprite2D" parent="GameRenderer/TrailIndicators/ReferenceIndicatorNode" unique_id=1363930096]
 modulate = Color(18.401226, 0.07364793, 14.373839, 1)
@@ -287,7 +282,7 @@ texture = ExtResource("5_272bh")
 unique_name_in_owner = true
 visible = false
 position = Vector2(800, 0)
-rotation = 1041.1802
+rotation = 1374.0682
 
 [node name="BouleLumiere" type="Sprite2D" parent="GameRenderer/TrailIndicators/PlayerIndicatorNode" unique_id=1864408564]
 modulate = Color(0, 18.892157, 18.892157, 1)

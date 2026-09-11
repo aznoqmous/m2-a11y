@@ -136,9 +136,8 @@ func wait_player_amplitude_movement() -> void:
 
 
 func wait_player_target_amplitude_reference() -> void:
-	reference_node.is_display_amplitude = true
 	await display_text(all_text[text_step])
-	add_on_temp_draw(draw_amplitude_tuto_reference)
+	reference_node.is_display_amplitude = true
 	await wait(0.5)
 	add_on_temp_process(detect_tuto_amplitude)
 	await wait_until(has_player_targeted_tuto_amplitude_f)
@@ -216,14 +215,10 @@ func detect_amplitude_for_tutorial() -> void:
 		clean_temp_process()
 
 
-func draw_amplitude_tuto_reference() -> void:
-	var targ: float = first_tuto_amplitude_target if counter == 0 else (second_tuto_amplitude_target if counter == 1 else third_tuto_amplitude_target)
-	draw_circle(main.reference_node.position, 10.0 + targ * 30.0, main.reference_color, false, 3, true)
-
-
 func detect_tuto_amplitude() -> void:
 	var targ: float = first_tuto_amplitude_target if counter == 0 else (second_tuto_amplitude_target if counter == 1 else third_tuto_amplitude_target)
 	var player_scale_target: float = main.player_scale_target
+	main.set_target_note(0.5, targ)
 	if abs(main.player_scale_target - targ) < 0.1:
 		detection_gauge += delta_t
 	else:
@@ -234,7 +229,7 @@ func detect_tuto_amplitude() -> void:
 		detection_gauge = 0.0
 		main.set_progress_bar_value(0.0)
 		counter += 1
-		main.game_renderer.emit_score_feedback()
+		main.display_completion_feedbacks()
 		if counter >= 3:
 			has_player_targeted_tuto_amplitude = true
 			counter = 0
@@ -266,7 +261,7 @@ func detect_tuto_height() -> void:
 		detection_gauge = 0.0
 		main.set_progress_bar_value(0.0)
 		counter += 1
-		main.game_renderer.emit_score_feedback()
+		main.display_completion_feedbacks()
 		if counter < 3:
 			var targ: float = second_tuto_height_target if counter == 1 else third_tuto_height_target
 			main.set_target_note(targ)

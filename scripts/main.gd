@@ -70,15 +70,7 @@ func _process(_delta: float) -> void:
 	
 	#audio_generator.set_pitch(reference_target)
 	#audio_generator.set_volume(reference_scale_target)
-	
-	queue_redraw()
 
-
-func _draw() -> void:
-	if player_node.visible:
-		draw_circle(player_node.position, 10.0 + player_scale_target * 30.0, player_color, false, 3, true)
-	if reference_node.visible and game_manager.has_player_targeted_tuto_height:
-		draw_circle(reference_node.position, 10.0 + reference_scale_target * 30.0, reference_color, false, 3, true)
 
 ##########################################################
 
@@ -113,14 +105,16 @@ func handle_main_game(delta: float) -> void:
 	if state >= 1.0 or Time.get_ticks_msec() / 1000.0 - current_time_to_reach > time_to_reach:
 		if state >= 1.0:
 			game_renderer.emit_score_feedback()
-		
-		AudioEffectManager.audio_completion.play()
+			display_completion_feedbacks(true)
 		target_note_index += 1
 		set_target_note(target_notes[target_note_index % target_notes.size()], randf())
 
+func display_completion_feedbacks(buildup:=false):
+		game_renderer.emit_score_feedback()
+		AudioEffectManager.audio_completion.play()
+		if buildup: AudioEffectManager._track_buildup()
 
 ##########################################################
-
 
 func set_target_note(pitch_value: float, volume_value: float = 1.0):
 	current_time_to_reach = Time.get_ticks_msec() / 1000.0

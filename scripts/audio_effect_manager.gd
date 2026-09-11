@@ -7,7 +7,7 @@ var player_fx_chorus: AudioEffect
 var player_fx_compressor: AudioEffect
 var player_fx_distortion: AudioEffect
 
-@onready var audio_completion: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@export var audio_completion: AudioStreamPlayer2D
 
 var player_scale: float
 var target_scale: float
