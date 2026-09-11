@@ -43,3 +43,4 @@ vertical_alignment = 1
 
 [node name="AudioEffetManager" type="Node" parent="." unique_id=2036185088]
 script = ExtResource("2_7ldk7")
+player_bus = 1

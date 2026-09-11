@@ -24,9 +24,9 @@ var detection_gauge: float = 0.0
 var has_player_get_amplitude: bool = false
 var old_amplitude_value: float
 var has_player_targeted_tuto_amplitude: bool = false
-var first_tuto_amplitude_target: float = 0.5
-var second_tuto_amplitude_target: float = 1.25
-var third_tuto_amplitude_target: float = 2.0
+var first_tuto_amplitude_target: float = 0.4
+var second_tuto_amplitude_target: float = 0.7
+var third_tuto_amplitude_target: float = 1.0
 var has_player_get_height: bool = false
 var old_height_value: float
 var has_player_targeted_tuto_height: bool = false
