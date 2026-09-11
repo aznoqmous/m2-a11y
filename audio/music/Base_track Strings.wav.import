@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ci6wkkxxjkej3"
+path="res://.godot/imported/Base_track Strings.wav-3bb7319ae2f95cc8721b959773e1ecce.sample"
+
+[deps]
+
+source_file="res://audio/music/Base_track Strings.wav"
+dest_files=["res://.godot/imported/Base_track Strings.wav-3bb7319ae2f95cc8721b959773e1ecce.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://g3oyf45612th" path="res://scripts/generator.gd" id="1_qcf81"]
 [ext_resource type="Script" uid="uid://c3pg8uf7dvlej" path="res://scripts/audio_effect_manager.gd" id="2_7ldk7"]
 [ext_resource type="AudioStream" uid="uid://dit1l0k44utje" path="res://audio/bass_wave.wav" id="2_73nho"]
+[ext_resource type="AudioStream" uid="uid://cpivwpwao14yl" path="res://audio/feedbacks/Rosebeef_bass_Low.wav" id="3_o8t4o"]
 
 [node name="AudioGenerator" type="Node2D" unique_id=1099815716 node_paths=PackedStringArray("_asp")]
 script = ExtResource("1_qcf81")
@@ -12,7 +13,7 @@ audio_stream = ExtResource("2_73nho")
 [node name="Generator" type="Node2D" parent="." unique_id=605994228]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=892567417]
-stream = ExtResource("2_73nho")
+stream = ExtResource("3_o8t4o")
 
 [node name="Control" type="Control" parent="." unique_id=815315368]
 visible = false

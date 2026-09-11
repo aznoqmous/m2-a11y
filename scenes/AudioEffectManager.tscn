@@ -2,16 +2,23 @@
 
 [ext_resource type="Script" uid="uid://c3pg8uf7dvlej" path="res://scripts/audio_effect_manager.gd" id="1_ldvii"]
 [ext_resource type="AudioStream" uid="uid://b5mcmxmpxkhfe" path="res://audio/feedbacks/completion_stab.wav" id="2_ykbb4"]
-[ext_resource type="AudioStream" uid="uid://bhcnkao2bs6h" path="res://audio/music/base_music_Arps.wav" id="3_ahbkg"]
-[ext_resource type="AudioStream" uid="uid://b2wv3f2pkq2rt" path="res://audio/music/base_music_Chimes.wav" id="4_c4fug"]
-[ext_resource type="AudioStream" uid="uid://dbdrarrgt8yf4" path="res://audio/music/base_music_Pads.wav" id="5_v0lfq"]
-[ext_resource type="AudioStream" uid="uid://cplsbv70y2tfh" path="res://audio/music/base_music_Piano_Reversed.wav" id="6_pi0vo"]
-[ext_resource type="AudioStream" uid="uid://bhhcwd5q8760o" path="res://audio/music/base_music_Piano_Chords.wav" id="7_j8ogq"]
-[ext_resource type="AudioStream" uid="uid://evt3qb53onbn" path="res://audio/music/base_music_Texture.wav" id="8_qx5j0"]
+[ext_resource type="AudioStream" uid="uid://ch1mpmg0of44a" path="res://audio/music/Base_track A-Reverb.wav" id="3_rshrg"]
+[ext_resource type="AudioStream" uid="uid://bjt2clhdvlbc6" path="res://audio/music/Base_track Arp.wav" id="4_t26vf"]
+[ext_resource type="AudioStream" uid="uid://dy5fe8nd6uqo6" path="res://audio/music/Base_track B-Delay.wav" id="5_q31ep"]
+[ext_resource type="AudioStream" uid="uid://cb8naeg002yal" path="res://audio/music/Base_track Bells-1.wav" id="6_w6xaq"]
+[ext_resource type="AudioStream" uid="uid://cc2vmt7orggtf" path="res://audio/music/Base_track Bells.wav" id="7_yvs3p"]
+[ext_resource type="AudioStream" uid="uid://ctvvmoka5jnsp" path="res://audio/music/Base_track Chimes-1.wav" id="8_rxma4"]
+[ext_resource type="AudioStream" uid="uid://xefcnh1ni0vr" path="res://audio/music/Base_track Organ.wav" id="9_14mwj"]
+[ext_resource type="AudioStream" uid="uid://ub1hwakqp3jo" path="res://audio/music/Base_track Pad.wav" id="10_vwtls"]
+[ext_resource type="AudioStream" uid="uid://dgmeww0dqv5m8" path="res://audio/music/Base_track Piano Chords.wav" id="11_lhba6"]
+[ext_resource type="AudioStream" uid="uid://5n75qnd00con" path="res://audio/music/Base_track Piano Melody.wav" id="12_exkvf"]
+[ext_resource type="AudioStream" uid="uid://ci6wkkxxjkej3" path="res://audio/music/Base_track Strings.wav" id="13_r0lgv"]
+[ext_resource type="AudioStream" uid="uid://ch1p1qbf16oni" path="res://audio/music/Base_track Texture.wav" id="14_omrqw"]
+[ext_resource type="AudioStream" uid="uid://dljpuaeciye5p" path="res://audio/music/Base_track Toybox.wav" id="15_x7teo"]
 
 [node name="AudioEffectManager" type="Node2D" unique_id=1480341746 node_paths=PackedStringArray("base_track_part_queue")]
 script = ExtResource("1_ldvii")
-base_track_part_queue = [NodePath("Base MusicArps"), NodePath("Base MusicChimes"), NodePath("Base MusicPads"), NodePath("Base MusicPiano"), NodePath("Base MusicChords"), NodePath("Base MusicTexture")]
+base_track_part_queue = [NodePath("Reverb"), NodePath("Arp"), NodePath("Delay"), NodePath("Bells"), NodePath("bells2"), NodePath("Chimes")]
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1994688250]
 
@@ -20,21 +27,57 @@ stream = ExtResource("2_ykbb4")
 pitch_scale = 1.1
 panning_strength = 0.0
 
-[node name="Base MusicArps" type="AudioStreamPlayer2D" parent="." unique_id=1642033192]
-stream = ExtResource("3_ahbkg")
+[node name="Reverb" type="AudioStreamPlayer2D" parent="." unique_id=1642033192]
+stream = ExtResource("3_rshrg")
+bus = &"base_Music"
 
-[node name="Base MusicChimes" type="AudioStreamPlayer2D" parent="." unique_id=1202587626]
-stream = ExtResource("4_c4fug")
+[node name="Arp" type="AudioStreamPlayer2D" parent="." unique_id=1202587626]
+stream = ExtResource("4_t26vf")
+bus = &"base_Music"
 
-[node name="Base MusicPads" type="AudioStreamPlayer2D" parent="." unique_id=2089696749]
-stream = ExtResource("5_v0lfq")
+[node name="Delay" type="AudioStreamPlayer2D" parent="." unique_id=2089696749]
+stream = ExtResource("5_q31ep")
+bus = &"base_Music"
 
-[node name="Base MusicPiano" type="AudioStreamPlayer2D" parent="." unique_id=225780063]
-stream = ExtResource("6_pi0vo")
+[node name="Bells" type="AudioStreamPlayer2D" parent="." unique_id=225780063]
+stream = ExtResource("6_w6xaq")
+bus = &"base_Music"
 
-[node name="Base MusicChords" type="AudioStreamPlayer2D" parent="." unique_id=1498412570]
-stream = ExtResource("7_j8ogq")
+[node name="bells2" type="AudioStreamPlayer2D" parent="." unique_id=1498412570]
+stream = ExtResource("7_yvs3p")
+bus = &"base_Music"
 
-[node name="Base MusicTexture" type="AudioStreamPlayer2D" parent="." unique_id=53112965]
-stream = ExtResource("8_qx5j0")
-volume_db = -14.073
+[node name="Chimes" type="AudioStreamPlayer2D" parent="." unique_id=53112965]
+stream = ExtResource("8_rxma4")
+volume_db = -40.0
+bus = &"base_Music"
+
+[node name="Organ" type="AudioStreamPlayer2D" parent="." unique_id=1618053185]
+stream = ExtResource("9_14mwj")
+bus = &"base_Music"
+
+[node name="Pad" type="AudioStreamPlayer2D" parent="." unique_id=1805423326]
+stream = ExtResource("10_vwtls")
+bus = &"base_Music"
+
+[node name="Piano" type="AudioStreamPlayer2D" parent="." unique_id=1838823553]
+stream = ExtResource("11_lhba6")
+bus = &"base_Music"
+
+[node name="Piano reversed" type="AudioStreamPlayer2D" parent="." unique_id=1453380231]
+stream = ExtResource("12_exkvf")
+bus = &"base_Music"
+
+[node name="Strings" type="AudioStreamPlayer2D" parent="." unique_id=895228200]
+stream = ExtResource("13_r0lgv")
+bus = &"base_Music"
+
+[node name="Texture" type="AudioStreamPlayer2D" parent="." unique_id=83800510]
+stream = ExtResource("14_omrqw")
+volume_db = -40.0
+bus = &"base_Music"
+
+[node name="Toybox" type="AudioStreamPlayer2D" parent="." unique_id=1097054642]
+stream = ExtResource("15_x7teo")
+volume_db = -40.0
+bus = &"base_Music"

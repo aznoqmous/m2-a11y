@@ -8,7 +8,7 @@ var player_fx_chorus: AudioEffect
 var player_fx_compressor: AudioEffect
 var player_fx_distortion: AudioEffect
 
-@onready var audio_completion: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var audio_completion: AudioStreamPlayer2D = $Feedback
 
 var player_scale: float
 var target_scale: float
@@ -20,11 +20,7 @@ var last_selected_track: int
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	
-	#base_track_part_queue
-	
-	
+func _ready() -> void:	
 	player_bus = AudioServer.get_bus_index("Player_Note")
 	if(player_bus == null):
 		print("No player bus to be found")
