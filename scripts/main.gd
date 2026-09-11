@@ -46,17 +46,22 @@ var reference_current_speed : float
 @onready var game_manager: GameManager = %GameManager
 var mesh_size : Vector2
 
+var current_note
 func _ready() -> void:
 	mesh_size = (Vector2(1152, 648) if Engine.is_editor_hint() else get_viewport().get_visible_rect().size ) / 2.0
 	mesh_instance_2d.mesh.set("size", mesh_size * 2.0)
 	
 	player_node.position.y = 0.0
 	reference_node.position.y = 0.0
-	set_target_note(target_notes[target_note_index], 0.5)
+	random_target_note()
 
+
+func random_target_note(volume:=0.5):
+	current_note = target_notes.filter(func(n): return n != current_note).pick_random()
+	set_target_note(current_note/2.0, volume)
 
 func _process(_delta: float) -> void:
-	print(get_serial_value(serial.value_a), " ", get_serial_value(serial.value_b))
+	#print(get_serial_value(serial.value_a), " ", get_serial_value(serial.value_b))
 	if Engine.is_editor_hint(): return;
 	AudioEffectManager.player_scale = player_scale_target
 	AudioEffectManager.target_scale = reference_scale_target
@@ -64,10 +69,10 @@ func _process(_delta: float) -> void:
 	AudioEffectManager._value_snapping()
 	AudioEffectManager._fx_application()
 	
-	player_audio_generator.set_pitch((player_node.position.y + mesh_size.y ) / mesh_size.y / 2.0  )
+	player_audio_generator.set_pitch((player_node.position.y + mesh_size.y ) / mesh_size.y )
 	player_audio_generator.set_volume(player_scale_target * 16.0 - 16.0)
 	
-	reference_audio_generator.set_pitch((reference_node.position.y + mesh_size.y ) / mesh_size.y / 2.0  )
+	reference_audio_generator.set_pitch(((reference_node.position.y + mesh_size.y ) / mesh_size.y ) + 0.1  )
 	reference_audio_generator.set_volume(reference_scale_target * 16.0 - 16.0)
 	
 	#audio_generator.set_pitch(reference_target)
@@ -113,7 +118,7 @@ func handle_main_game(delta: float) -> void:
 			game_renderer.emit_score_feedback()
 			display_completion_feedbacks(true)
 		target_note_index += 1
-		set_target_note(target_notes[target_note_index % target_notes.size()], randf())
+		random_target_note(randf())
 
 func display_completion_feedbacks(buildup:=false):
 		game_renderer.emit_score_feedback()
@@ -121,10 +126,11 @@ func display_completion_feedbacks(buildup:=false):
 		if buildup: AudioEffectManager._track_buildup()
 
 ##########################################################
-
+var min_pitch_target := 0.2
+var max_pitch_target := 0.9
 func set_target_note(pitch_value: float, volume_value: float = 1.0):
 	current_time_to_reach = Time.get_ticks_msec() / 1000.0
-	reference_target = pitch_value * mesh_size.y * 2.0 - mesh_size.y
+	reference_target = ((pitch_value) * (max_pitch_target - min_pitch_target) + min_pitch_target) * mesh_size.y * 2.0 - mesh_size.y
 	reference_scale_target = volume_value
 	state = 0
 

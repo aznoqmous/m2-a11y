@@ -19,7 +19,7 @@
 [node name="AudioEffectManager" type="Node2D" unique_id=1480341746 node_paths=PackedStringArray("base_track_part_queue")]
 script = ExtResource("1_ldvii")
 player_bus = 1
-base_track_part_queue = [NodePath("Reverb"), NodePath("Arp"), NodePath("Delay"), NodePath("Bells"), NodePath("bells2"), NodePath("Chimes"), NodePath("Organ"), NodePath("Pad"), NodePath("Piano"), NodePath("Piano reversed"), NodePath("Strings"), NodePath("Texture"), NodePath("Toybox")]
+base_track_part_queue = [NodePath("Arp"), NodePath("Delay"), NodePath("Bells"), NodePath("bells2"), NodePath("Chimes"), NodePath("Organ"), NodePath("Pad"), NodePath("Piano"), NodePath("Piano reversed"), NodePath("Strings"), NodePath("Texture"), NodePath("Toybox")]
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1994688250]
 
@@ -30,6 +30,7 @@ panning_strength = 0.0
 
 [node name="Reverb" type="AudioStreamPlayer2D" parent="." unique_id=1642033192]
 stream = ExtResource("3_rshrg")
+autoplay = true
 bus = &"base_Music"
 
 [node name="Arp" type="AudioStreamPlayer2D" parent="." unique_id=1202587626]
@@ -71,6 +72,7 @@ bus = &"base_Music"
 
 [node name="Strings" type="AudioStreamPlayer2D" parent="." unique_id=895228200]
 stream = ExtResource("13_r0lgv")
+volume_db = -8.265
 bus = &"base_Music"
 
 [node name="Texture" type="AudioStreamPlayer2D" parent="." unique_id=83800510]

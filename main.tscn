@@ -98,7 +98,7 @@ colors = PackedColorArray(1, 0.4117647, 0.78431374, 0, 0.03137255, 1, 1, 1)
 script = ExtResource("1_ig7tw")
 player_color = Color(0, 1, 1, 1)
 reference_color = Color(1, 0, 1, 1)
-target_notes = Array[float]([0.6, 0.3, 0.2, 0.5, 0.7])
+target_notes = Array[float]([0.0, 0.167, 0.25, 0.417, 0.583, 0.667, 0.833, 1.0, 1.25, 1.417, 1.583, 1.667, 1.833, 2.0])
 time_to_reach = 100000000.0
 player_speed = 2.0
 reference_speed = 2.0
@@ -223,7 +223,6 @@ indicator_node = NodePath("../../../TrailIndicators/ReferenceIndicatorNode")
 visible = false
 top_level = true
 material = SubResource("ShaderMaterial_cegan")
-points = PackedVector2Array(800, 324)
 width = 30.0
 width_curve = SubResource("Curve_82xsv")
 gradient = SubResource("Gradient_getpj")
@@ -254,7 +253,6 @@ indicator_node = NodePath("../../../TrailIndicators/PlayerIndicatorNode")
 visible = false
 top_level = true
 material = SubResource("ShaderMaterial_a6jrf")
-points = PackedVector2Array(800, 324)
 width_curve = SubResource("Curve_xuqvo")
 gradient = SubResource("Gradient_qsp4k")
 texture = ExtResource("8_dg77c")
@@ -277,7 +275,7 @@ position = Vector2(-576, 0)
 unique_name_in_owner = true
 visible = false
 position = Vector2(800, 0)
-rotation = 1969.2313
+rotation = 4040.129
 
 [node name="BouleLumiere" type="Sprite2D" parent="GameRenderer/TrailIndicators/ReferenceIndicatorNode" unique_id=1363930096]
 modulate = Color(18.401226, 0.07364793, 14.373839, 1)
@@ -295,7 +293,7 @@ texture = ExtResource("5_272bh")
 unique_name_in_owner = true
 visible = false
 position = Vector2(800, 0)
-rotation = 1969.2313
+rotation = 4040.129
 
 [node name="BouleLumiere" type="Sprite2D" parent="GameRenderer/TrailIndicators/PlayerIndicatorNode" unique_id=1864408564]
 modulate = Color(0, 18.892157, 18.892157, 1)
