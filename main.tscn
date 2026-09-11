@@ -161,11 +161,15 @@ horizontal_alignment = 1
 [node name="ProgressBar" parent="CanvasLayer/Control" unique_id=595242573 instance=ExtResource("8_4c57u")]
 unique_name_in_owner = true
 visible = false
-layout_mode = 0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 1113.0
-offset_bottom = 49.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -556.5
+offset_top = 25.0
+offset_right = 556.5
+offset_bottom = 74.0
+grow_horizontal = 2
 max_value = 1.0
 value = 0.04
 
@@ -219,6 +223,7 @@ indicator_node = NodePath("../../../TrailIndicators/ReferenceIndicatorNode")
 visible = false
 top_level = true
 material = SubResource("ShaderMaterial_cegan")
+points = PackedVector2Array(800, 324)
 width = 30.0
 width_curve = SubResource("Curve_82xsv")
 gradient = SubResource("Gradient_getpj")
@@ -249,6 +254,7 @@ indicator_node = NodePath("../../../TrailIndicators/PlayerIndicatorNode")
 visible = false
 top_level = true
 material = SubResource("ShaderMaterial_a6jrf")
+points = PackedVector2Array(800, 324)
 width_curve = SubResource("Curve_xuqvo")
 gradient = SubResource("Gradient_qsp4k")
 texture = ExtResource("8_dg77c")
@@ -271,7 +277,7 @@ position = Vector2(-576, 0)
 unique_name_in_owner = true
 visible = false
 position = Vector2(800, 0)
-rotation = 3243.1528
+rotation = 1969.2313
 
 [node name="BouleLumiere" type="Sprite2D" parent="GameRenderer/TrailIndicators/ReferenceIndicatorNode" unique_id=1363930096]
 modulate = Color(18.401226, 0.07364793, 14.373839, 1)
@@ -279,7 +285,6 @@ scale = Vector2(0.40787408, 0.40787408)
 texture = ExtResource("10_vivmo")
 
 [node name="ScaleIndicator" type="Node2D" parent="GameRenderer/TrailIndicators/ReferenceIndicatorNode" unique_id=568250174]
-scale = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="GameRenderer/TrailIndicators/ReferenceIndicatorNode/ScaleIndicator" unique_id=1817214294]
 modulate = Color(1, 0, 1, 1)
@@ -290,7 +295,7 @@ texture = ExtResource("5_272bh")
 unique_name_in_owner = true
 visible = false
 position = Vector2(800, 0)
-rotation = 3243.1528
+rotation = 1969.2313
 
 [node name="BouleLumiere" type="Sprite2D" parent="GameRenderer/TrailIndicators/PlayerIndicatorNode" unique_id=1864408564]
 modulate = Color(0, 18.892157, 18.892157, 1)
@@ -299,7 +304,7 @@ scale = Vector2(0.40787408, 0.40787408)
 texture = ExtResource("10_vivmo")
 
 [node name="ScaleIndicator" type="Node2D" parent="GameRenderer/TrailIndicators/PlayerIndicatorNode" unique_id=428130385]
-scale = Vector2(1e-05, 1e-05)
+scale = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="GameRenderer/TrailIndicators/PlayerIndicatorNode/ScaleIndicator" unique_id=1468833383]
 modulate = Color(0, 1, 0.953125, 1)

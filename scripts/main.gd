@@ -11,7 +11,8 @@ class_name Main
 @export_category("Game")
 @export var target_notes : Array[float]
 @export var time_to_reach := 10.0
-@export var hand_distance := 30.0
+@export var min_hand_distance := 5.0
+@export var max_hand_distance := 30.0
 @export var pitch_validation_distance := 0.05
 @export var volume_validation_distance := 0.2
 var current_time_to_reach := 0.0
@@ -55,6 +56,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	print(get_serial_value(serial.value_a), " ", get_serial_value(serial.value_b))
 	if Engine.is_editor_hint(): return;
 	AudioEffectManager.player_scale = player_scale_target
 	AudioEffectManager.target_scale = reference_scale_target
@@ -74,16 +76,20 @@ func _process(_delta: float) -> void:
 
 ##########################################################
 
+func get_serial_value(value):
+	var diff = max_hand_distance - min_hand_distance
+	return (clamp(value, min_hand_distance, max_hand_distance) - min_hand_distance) / diff
+
 func handle_player_amplitude(delta: float) -> void:
 	if serial.is_connected:
-		player_scale_target = move_toward(player_scale_target, 1.0 - clamp(serial.value_b, 0, hand_distance) / hand_distance, delta * 2.0)
+		player_scale_target = move_toward(player_scale_target, 1.0 - get_serial_value(serial.value_b), delta * 2.0)
 	else:
 		player_scale_target = get_global_mouse_position().x / mesh_size.x
 
 
 func handle_player_height(delta: float) -> void:
 	if serial.is_connected:
-		player_target = clamp(serial.value_a, 0, hand_distance) / hand_distance * mesh_size.y * 2.0 - mesh_size.y
+		player_target = get_serial_value(serial.value_a) * mesh_size.y * 2.0 - mesh_size.y
 	else:
 		player_target = get_global_mouse_position().y
 	

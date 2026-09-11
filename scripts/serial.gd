@@ -5,6 +5,9 @@ var is_connected: bool = false
 var value_a : float
 var value_b : float
 
+var history : Array
+var max_history_length := 10
+
 func _ready():
 	connect_port()
 
@@ -45,10 +48,20 @@ func monitor_serial():
 		if not str_to_var(value[1]): return
 		var va = str_to_var(value[0])
 		var vb = str_to_var(value[1])
-		if va != -1: value_a = va
-		if vb != -1: value_b = vb
+		if va != -1: 
+			value_a = va
+		if vb != -1: 
+			var avg = 0
+			if history.size():
+				for v in history:
+					avg += v
+				avg /= history.size()
+			history.append(vb)
+			if history.size() > max_history_length: history.pop_front()
+			if abs(avg - vb) < 5.0:
+				value_b = vb
 		
-	print("Monitor ", value_a, " ", value_b)
+	#print("Monitor ", value_a, " ", value_b)
 	
 	serial.clear_buffer()
 
