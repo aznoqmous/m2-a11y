@@ -20,7 +20,6 @@ func connect_port():
 		# Configuration et connexion unique
 		serial.set_port(ports[port].port_name)  # Ajustez selon votre système
 		serial.set_baud_rate(115200)
-		
 		# Ouvre la connexion une seule fois et la maintient ouverte
 		if serial.open():
 			is_connected = true
@@ -48,8 +47,8 @@ func monitor_serial():
 		var vb = str_to_var(value[1])
 		if va != -1: value_a = va
 		if vb != -1: value_b = vb
-		#if data != "": print("Monitor: ", value_a, " ", value_b)
-
+		
+	print("Monitor ", value_a, " ", value_b)
 	
 	serial.clear_buffer()
 

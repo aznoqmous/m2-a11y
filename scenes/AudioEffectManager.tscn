@@ -16,7 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://ch1p1qbf16oni" path="res://audio/music/Base_track Texture.wav" id="14_omrqw"]
 [ext_resource type="AudioStream" uid="uid://dljpuaeciye5p" path="res://audio/music/Base_track Toybox.wav" id="15_x7teo"]
 
-[node name="AudioEffectManager" type="Node2D" unique_id=1480341746 node_paths=PackedStringArray("base_track_part_queue")]
+[node name="AudioEffectManager" type="Node2D" unique_id=1480341746 node_paths=PackedStringArray("audio_completion", "base_track_part_queue")]
 script = ExtResource("1_ldvii")
 base_track_part_queue = [NodePath("Reverb"), NodePath("Arp"), NodePath("Delay"), NodePath("Bells"), NodePath("bells2"), NodePath("Chimes")]
 

@@ -1,0 +1,236 @@
+[gd_scene format=3 uid="uid://ba16mb56pjqwx"]
+
+[ext_resource type="Script" uid="uid://drka77hvik8kp" path="res://scripts/game_renderer.gd" id="1_i5h78"]
+[ext_resource type="Shader" uid="uid://c415l53bkoffy" path="res://shaders/main.gdshader" id="2_fxvia"]
+[ext_resource type="Shader" uid="uid://cu6p224hslgeu" path="res://shaders/visual_mesh_target.gdshader" id="3_fgctl"]
+[ext_resource type="Texture2D" uid="uid://dsnyvbbkrrl8t" path="res://sprites/brush.png" id="4_260xq"]
+[ext_resource type="Shader" uid="uid://cqna3nq8f202y" path="res://shaders/wavy_lines.gdshader" id="5_mlx81"]
+[ext_resource type="Texture2D" uid="uid://c8g6emk1iwpuy" path="res://sprites/T_VFX_N41.PNG" id="6_8k28r"]
+[ext_resource type="Script" uid="uid://da185m3ldrgnh" path="res://scripts/Trail2.gd" id="7_cegnr"]
+[ext_resource type="Texture2D" uid="uid://cix37h01clykj" path="res://sprites/light.png" id="8_cmd6b"]
+[ext_resource type="Texture2D" uid="uid://bsqyvvrf0aeok" path="res://sprites/circle.png" id="9_nnx61"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0xm2m"]
+shader = ExtResource("2_fxvia")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ig7tw"]
+size = Vector2(1152, 648)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_kq58d"]
+viewport_path = NodePath("GameRenderer/TrailSubViewport")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_04gse"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_j360g"]
+noise = SubResource("FastNoiseLite_04gse")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w48qg"]
+resource_local_to_scene = true
+shader = ExtResource("3_fgctl")
+shader_parameter/noise = SubResource("NoiseTexture2D_j360g")
+shader_parameter/trail_power = 0.16460000000000005
+shader_parameter/borealis_power = 0.2999999932944
+shader_parameter/borealis_color = Color(1, 1, 1, 1)
+shader_parameter/borealis_frequency = 10.000000149012
+
+[sub_resource type="QuadMesh" id="QuadMesh_qmn6i"]
+size = Vector2(1152, 648)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yaehf"]
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+color = Color(1, 0, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_074og"]
+colors = PackedColorArray(0, 0, 0, 0, 18.540003, 0, 18.264605, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gqmro"]
+gradient = SubResource("Gradient_074og")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cegan"]
+shader = ExtResource("5_mlx81")
+shader_parameter/frequency = 0.02
+shader_parameter/speed = 2.0
+shader_parameter/amplitude = 8.0
+shader_parameter/tex = ExtResource("6_8k28r")
+shader_parameter/gradient = SubResource("GradientTexture2D_gqmro")
+shader_parameter/texSpeedx = 0.01
+shader_parameter/texSpeedy = 0.1
+
+[sub_resource type="Curve" id="Curve_82xsv"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_getpj"]
+colors = PackedColorArray(1, 0.4117647, 0.78431374, 0, 0.03137255, 1, 1, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ryguw"]
+particle_flag_disable_z = true
+particle_flag_inherit_emitter_scale = true
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+color = Color(0, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_lswn8"]
+colors = PackedColorArray(0.52156866, 0.003921569, 0.85882354, 0, 0, 18.328726, 18.68087, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_d76r8"]
+gradient = SubResource("Gradient_lswn8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a6jrf"]
+shader = ExtResource("5_mlx81")
+shader_parameter/frequency = 0.02
+shader_parameter/speed = 3.0
+shader_parameter/amplitude = 8.0
+shader_parameter/tex = ExtResource("6_8k28r")
+shader_parameter/gradient = SubResource("GradientTexture2D_d76r8")
+shader_parameter/texSpeedx = 0.1
+shader_parameter/texSpeedy = 0.1
+
+[sub_resource type="Curve" id="Curve_xuqvo"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_qsp4k"]
+colors = PackedColorArray(1, 0.4117647, 0.78431374, 0, 0.03137255, 1, 1, 1)
+
+[node name="GameRenderer" type="Node2D" unique_id=1086274380 node_paths=PackedStringArray("trail_indicators_container", "reference_indicatior_node", "player_indicatior_node", "reference_scale_indicator_node", "player_scale_indicator_node", "reference_trail", "player_trail", "mesh_instance_2d", "sub_viewport")]
+script = ExtResource("1_i5h78")
+trail_indicators_container = NodePath("TrailIndicators")
+reference_indicatior_node = NodePath("TrailIndicators/ReferenceNode")
+player_indicatior_node = NodePath("TrailIndicators/PlayerNode")
+reference_scale_indicator_node = NodePath("TrailIndicators/ReferenceNode/ScaleIndicator")
+player_scale_indicator_node = NodePath("TrailIndicators/PlayerNode/ScaleIndicator")
+reference_trail = NodePath("TrailSubViewport/LinesContainer/ReferenceNode/Trail2")
+player_trail = NodePath("TrailSubViewport/LinesContainer/PlayerNode/Trail2")
+mesh_instance_2d = NodePath("TrailSubViewport/MeshInstance2D")
+sub_viewport = NodePath("TrailSubViewport")
+
+[node name="TrailRenderer" type="MeshInstance2D" parent="." unique_id=1524970804]
+material = SubResource("ShaderMaterial_0xm2m")
+scale = Vector2(1, -1)
+mesh = SubResource("QuadMesh_ig7tw")
+texture = SubResource("ViewportTexture_kq58d")
+
+[node name="TrailSubViewport" type="SubViewport" parent="." unique_id=683846919]
+transparent_bg = true
+size = Vector2i(1152, 648)
+render_target_clear_mode = 2
+render_target_update_mode = 4
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="TrailSubViewport" unique_id=1160172188]
+material = SubResource("ShaderMaterial_w48qg")
+position = Vector2(576, 324)
+scale = Vector2(1, -1)
+mesh = SubResource("QuadMesh_qmn6i")
+
+[node name="LinesContainer" type="Node2D" parent="TrailSubViewport" unique_id=555375952]
+position = Vector2(0, 324)
+
+[node name="ReferenceNode" type="Node2D" parent="TrailSubViewport/LinesContainer" unique_id=437888848]
+position = Vector2(800, -129.59962)
+
+[node name="ReferenceParticles" type="GPUParticles2D" parent="TrailSubViewport/LinesContainer/ReferenceNode" unique_id=699272996]
+visible = false
+amount = 1000
+texture = ExtResource("4_260xq")
+lifetime = 12.0
+trail_lifetime = 1.0
+process_material = SubResource("ParticleProcessMaterial_yaehf")
+
+[node name="Trail2" type="Line2D" parent="TrailSubViewport/LinesContainer/ReferenceNode" unique_id=222456985 node_paths=PackedStringArray("timer")]
+top_level = true
+material = SubResource("ShaderMaterial_cegan")
+points = PackedVector2Array(-697.76154, 194.40038, -692.76154, 194.40038, -687.76154, 194.40038, -682.7615, 194.40038, -677.7613, 194.40038, -672.7613, 194.40038, -667.7612, 194.40038, -662.7612, 194.40038, -657.7611, 194.40038, -652.7609, 194.40038, -647.76086, 194.40038, -642.76074, 194.40038, -638.0816, 194.40038, -632.34735, 194.40038, -627.33844, 194.40038, -622.3425, 194.40038, -617.3267, 194.40038, -612.32666, 194.40038, -607.3266, 194.40038, -602.31067, 194.40038, -597.29816, 194.40038, -592.2981, 194.40038, -587.298, 194.40038, -582.28876, 194.40038, -577.2887, 194.40038, -572.28864, 194.40038, -567.25226, 194.40038, -562.2522, 194.40038, -557.2521, 194.40038, -552.9292, 194.40038, -547.65137, 194.40038, -542.6513, 194.40038, -537.65125, 194.40038, -532.6512, 194.40038, -527.6511, 194.40038, -522.65094, 194.40038, -517.65094, 194.40038, -512.6509, 194.40038, -507.65088, 194.40038, -502.65094, 194.40038, -497.65097, 194.40038, -492.65097, 194.40038, -487.651, 194.40038, -482.65103, 194.40038, -477.6511, 194.40038, -472.65112, 194.40038, -467.65115, 194.40038, -462.65115, 194.40038, -457.65118, 194.40038, -452.65118, 194.40038, -447.65112, 194.40038, -442.65106, 194.40038, -437.651, 194.40038, -432.6509, 194.40038, -427.561, 194.40038, -422.42212, 194.40038, -417.42203, 194.40038, -412.42197, 194.40038, -407.42188, 194.40038, -402.42184, 194.40038, -397.4218, 194.40038, -393.2386, 194.40038, -387.1422, 194.40038, -382.15012, 194.40038, -377.15015, 194.40038, -372.56693, 194.40038, -367.94095, 194.40038, -362.97165, 194.40038, -357.6976, 194.40038, -352.97546, 194.40038, -347.978, 194.40038, -342.8689, 194.40038, -337.96097, 194.40038, -332.961, 194.40038, -327.96097, 194.40038, -322.961, 194.40038, -317.96103, 194.40038, -312.96106, 194.40038, -307.9611, 194.40038, -302.96112, 194.40038, -297.96112, 194.40038, -292.96115, 194.40038, -287.96118, 194.40038, -282.9612, 194.40038, -277.96124, 194.40038, -272.87192, 194.40038, -267.88794, 194.40038, -262.88797, 194.40038, -257.88797, 194.40038, -252.88795, 194.40038, -247.88792, 194.40038, -241.96281, 194.40038, -237.31815, 194.40038, -232.7349, 194.40038, -227.85393, 194.40038, -222.85391, 194.40038, -217.8539, 194.40038, -212.85388, 194.40038, -207.85387, 194.40038, -202.8539, 194.40038, -197.85388, 194.40038, -192.85387, 194.40038, -187.85385, 194.40038, -182.85384, 194.40038, -177.85382, 194.40038, -172.85382, 194.40038, -167.8538, 194.40038, -160.32652, 194.40038, -148.89684, 194.40038, -139.49402, 194.40038, -138.91554, 194.40038, -138.52954, 194.40038, -137.78297, 194.40038, -131.94809, 194.40038, -126.93883, 194.40038, -121.92376, 194.40038, -118.570015, 194.40038, -112.57615, 194.40038, -107.30162, 194.40038, -102.30163, 194.40038, -97.301636, 194.40038, -92.30164, 194.40038, -87.30165, 194.40038, -82.30166, 194.40038, -77.30167, 194.40038, -72.30161, 194.40038, -67.30161, 194.40038, -62.301605, 194.40038, -57.3016, 194.40038, -52.301598, 194.40038, -47.301594, 194.40038, -42.15767, 194.40038, -37.15767, 194.40038, -32.15767, 194.40038, -27.157671, 194.40038, -22.157671, 194.40038, -17.157671, 194.40038, -12.157671, 194.40038, -7.15764, 194.40038, -2.157609, 194.40038, 2.842392, 194.40038, 7.8423934, 194.40038, 12.8424225, 194.40038, 17.842512, 194.40038, 22.842602, 194.40038, 27.842665, 194.40038, 32.842667, 194.40038, 37.84267, 194.40038, 42.842674, 194.40038, 47.842678, 194.40038, 52.842712, 194.40038, 57.842804, 194.40038, 62.842827, 194.40038, 67.84282, 194.40038, 72.84281, 194.40038, 77.842804, 194.40038, 82.8428, 194.40038, 87.84279, 194.40038, 92.84278, 194.40038, 97.84277, 194.40038, 102.842766, 194.40038, 107.84276, 194.40038, 112.84275, 194.40038, 117.84274, 194.40038, 122.84275, 194.40038, 127.84277, 194.40038, 132.84279, 194.40038, 137.84286, 194.40038, 142.84288, 194.40038, 147.8429, 194.40038, 152.84291, 194.40038, 157.84293, 194.40038, 162.84294, 194.40038, 167.84296, 194.40038, 172.84297, 194.40038, 177.84299, 194.40038, 182.843, 194.40038, 187.84302, 194.40038, 192.84303, 194.40038, 197.84305, 194.40038, 202.84306, 194.40038, 207.84308, 194.40038, 212.88179, 194.40038, 217.8818, 194.40038, 222.88182, 194.40038, 227.88184, 194.40038, 232.88185, 194.40038, 237.88187, 194.40038, 242.88188, 194.40038, 247.8819, 194.40038, 252.88187, 194.40038, 257.88184, 194.40038, 262.8818, 194.40038, 267.88177, 194.40038, 272.88174, 194.40038, 278.02054, 194.40038, 281.91837, 194.40038, 286.77686, 194.40038, 291.77682, 194.40038, 296.7768, 194.40038, 301.49893, 194.40038, 307.69196, 194.40038, 312.6852, 194.40038, 317.59894, 194.40038, 322.5989, 194.40038, 327.59888, 194.40038, 332.59885, 194.40038, 337.59308, 194.40038, 342.62216, 194.40038, 347.6142, 194.40038, 352.61417, 194.40038, 357.61414, 194.40038, 362.6141, 194.40038, 367.61407, 194.40038, 372.61362, 194.40038, 377.6136, 194.40038, 382.61356, 194.40038, 387.61353, 194.40038, 392.6135, 194.40038, 397.61346, 194.40038, 402.61343, 194.40038, 407.6134, 194.40038, 412.61337, 194.40038, 417.61334, 194.40038, 422.61807, 194.40038, 427.61804, 194.40038, 432.618, 194.40038, 437.61798, 194.40038, 442.61795, 194.40038, 447.61792, 194.40038, 452.6179, 194.40038, 457.61786, 194.40038, 462.61783, 194.40038, 467.6178, 194.40038, 472.61777, 194.40038, 477.61774, 194.40038, 482.6177, 194.40038, 487.61768, 194.40038, 492.61765, 194.40038, 497.6176, 194.40038, 502.61758, 194.40038, 507.6176, 194.40038, 512.6177, 194.40038, 517.61774, 194.40038, 522.6178, 194.40038, 527.61786, 194.40038, 532.6179, 194.40038, 537.618, 194.40038, 542.61804, 194.40038, 547.6181, 194.40038, 552.61816, 194.40038, 557.6182, 194.40038, 562.6183, 194.40038, 567.61835, 194.40038, 572.6184, 194.40038, 577.61847, 194.40038, 582.6185, 194.40038, 587.6186, 194.40038, 592.61865, 194.40038, 597.6187, 194.40038, 602.6188, 194.40038, 607.61884, 194.40038, 612.6189, 194.40038, 617.61896, 194.40038, 622.619, 194.40038, 627.6191, 194.40038, 632.61914, 194.40038, 637.6192, 194.40038, 642.61926, 194.40038, 647.6193, 194.40038, 652.6194, 194.40038, 657.61945, 194.40038, 662.6195, 194.40038, 667.61957, 194.40038, 672.6196, 194.40038, 677.6197, 194.40038, 682.61975, 194.40038, 687.6198, 194.40038, 692.6199, 194.40038, 697.61993, 194.40038, 702.62, 194.40038, 707.62006, 194.40038, 712.6201, 194.40038, 717.6202, 194.40038, 722.62024, 194.40038, 727.6203, 194.40038, 732.62036, 194.40038, 737.6204, 194.40038, 742.6205, 194.40038, 747.62054, 194.40038, 752.6206, 194.40038, 757.62067, 194.40038, 762.6207, 194.40038, 767.6208, 194.40038, 772.62085, 194.40038, 777.6209, 194.40038, 782.621, 194.40038, 787.62103, 194.40038, 796.2005, 194.40038, 800, 194.40038)
+width = 33.90097
+width_curve = SubResource("Curve_82xsv")
+gradient = SubResource("Gradient_getpj")
+texture = ExtResource("6_8k28r")
+texture_mode = 2
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+script = ExtResource("7_cegnr")
+max_trail_count = 300
+timer = NodePath("Trail Timer")
+editor_offset = 0.2
+
+[node name="Trail Timer" type="Timer" parent="TrailSubViewport/LinesContainer/ReferenceNode/Trail2" unique_id=1239820735]
+wait_time = 0.05
+
+[node name="PlayerNode" type="Node2D" parent="TrailSubViewport/LinesContainer" unique_id=81178420]
+position = Vector2(800, 16.63085)
+
+[node name="PlayerParticles" type="GPUParticles2D" parent="TrailSubViewport/LinesContainer/PlayerNode" unique_id=1030963240]
+visible = false
+amount = 1000
+texture = ExtResource("4_260xq")
+lifetime = 12.0
+trail_lifetime = 1.0
+process_material = SubResource("ParticleProcessMaterial_ryguw")
+
+[node name="Trail2" type="Line2D" parent="TrailSubViewport/LinesContainer/PlayerNode" unique_id=1742277414 node_paths=PackedStringArray("timer")]
+top_level = true
+material = SubResource("ShaderMaterial_a6jrf")
+points = PackedVector2Array(-697.76154, 340.63086, -692.76154, 340.63086, -687.76154, 340.63086, -682.7615, 340.63086, -677.7613, 340.63086, -672.7613, 340.63086, -667.7612, 340.63086, -662.7612, 340.63086, -657.7611, 340.63086, -652.7609, 340.63086, -647.76086, 340.63086, -642.76074, 340.63086, -638.0816, 340.63086, -632.34735, 340.63086, -627.33844, 340.63086, -622.3425, 340.63086, -617.3267, 340.63086, -612.32666, 340.63086, -607.3266, 340.63086, -602.31067, 340.63086, -597.29816, 340.63086, -592.2981, 340.63086, -587.298, 340.63086, -582.28876, 340.63086, -577.2887, 340.63086, -572.28864, 340.63086, -567.25226, 340.63086, -562.2522, 340.63086, -557.2521, 340.63086, -552.9292, 340.63086, -547.65137, 340.63086, -542.6513, 340.63086, -537.65125, 340.63086, -532.6512, 340.63086, -527.6511, 340.63086, -522.65094, 340.63086, -517.65094, 340.63086, -512.6509, 340.63086, -507.65088, 340.63086, -502.65094, 340.63086, -497.65097, 340.63086, -492.65097, 340.63086, -487.651, 340.63086, -482.65103, 340.63086, -477.6511, 340.63086, -472.65112, 340.63086, -467.65115, 340.63086, -462.65115, 340.63086, -457.65118, 340.63086, -452.65118, 340.63086, -447.65112, 340.63086, -442.65106, 340.63086, -437.651, 340.63086, -432.6509, 340.63086, -427.561, 340.63086, -422.42212, 340.63086, -417.42203, 340.63086, -412.42197, 340.63086, -407.42188, 340.63086, -402.42184, 340.63086, -397.4218, 340.63086, -393.2386, 340.63086, -387.1422, 340.63086, -382.15012, 340.63086, -377.15015, 340.63086, -372.56693, 340.63086, -367.94095, 340.63086, -362.97165, 340.63086, -357.6976, 340.63086, -352.97546, 340.63086, -347.978, 340.63086, -342.8689, 340.63086, -337.96097, 340.63086, -332.961, 340.63086, -327.96097, 340.63086, -322.961, 340.63086, -317.96103, 340.63086, -312.96106, 340.63086, -307.9611, 340.63086, -302.96112, 340.63086, -297.96112, 340.63086, -292.96115, 340.63086, -287.96118, 340.63086, -282.9612, 340.63086, -277.96124, 340.63086, -272.87192, 340.63086, -267.88794, 340.63086, -262.88797, 340.63086, -257.88797, 340.63086, -252.88795, 340.63086, -247.88792, 340.63086, -241.96281, 340.63086, -237.31815, 340.63086, -232.7349, 340.63086, -227.85393, 340.63086, -222.85391, 340.63086, -217.8539, 340.63086, -212.85388, 340.63086, -207.85387, 340.63086, -202.8539, 340.63086, -197.85388, 340.63086, -192.85387, 340.63086, -187.85385, 340.63086, -182.85384, 340.63086, -177.85382, 340.63086, -172.85382, 340.63086, -167.8538, 340.63086, -160.32652, 340.63086, -148.89684, 340.63086, -139.49402, 340.63086, -138.91554, 340.63086, -138.52954, 340.63086, -137.78297, 340.63086, -131.94809, 340.63086, -126.93883, 340.63086, -121.92376, 340.63086, -118.570015, 340.63086, -112.57615, 340.63086, -107.30162, 340.63086, -102.30163, 340.63086, -97.301636, 340.63086, -92.30164, 340.63086, -87.30165, 340.63086, -82.30166, 340.63086, -77.30167, 340.63086, -72.30161, 340.63086, -67.30161, 340.63086, -62.301605, 340.63086, -57.3016, 340.63086, -52.301598, 340.63086, -47.301594, 340.63086, -42.15767, 340.63086, -37.15767, 340.63086, -32.15767, 340.63086, -27.157671, 340.63086, -22.157671, 340.63086, -17.157671, 340.63086, -12.157671, 340.63086, -7.15764, 340.63086, -2.157609, 340.63086, 2.842392, 340.63086, 7.8423934, 340.63086, 12.8424225, 340.63086, 17.842512, 340.63086, 22.842602, 340.63086, 27.842665, 340.63086, 32.842667, 340.63086, 37.84267, 340.63086, 42.842674, 340.63086, 47.842678, 340.63086, 52.842712, 340.63086, 57.842804, 340.63086, 62.842827, 340.63086, 67.84282, 340.63086, 72.84281, 340.63086, 77.842804, 340.63086, 82.8428, 340.63086, 87.84279, 340.63086, 92.84278, 340.63086, 97.84277, 340.63086, 102.842766, 340.63086, 107.84276, 340.63086, 112.84275, 340.63086, 117.84274, 340.63086, 122.84275, 340.63086, 127.84277, 340.63086, 132.84279, 340.63086, 137.84286, 340.63086, 142.84288, 340.63086, 147.8429, 340.63086, 152.84291, 340.63086, 157.84293, 340.63086, 162.84294, 340.63086, 167.84296, 340.63086, 172.84297, 340.63086, 177.84299, 340.63086, 182.843, 340.63086, 187.84302, 340.63086, 192.84303, 340.63086, 197.84305, 340.63086, 202.84306, 340.63086, 207.84308, 340.63086, 212.88179, 340.63086, 217.8818, 340.63086, 222.88182, 340.63086, 227.88184, 340.63086, 232.88185, 340.63086, 237.88187, 340.63086, 242.88188, 340.63086, 247.8819, 340.63086, 252.88187, 340.63086, 257.88184, 340.63086, 262.8818, 340.63086, 267.88177, 340.63086, 272.88174, 340.63086, 278.02054, 340.63086, 281.91837, 340.63086, 286.77686, 340.63086, 291.77682, 340.63086, 296.7768, 340.63086, 301.49893, 340.63086, 307.69196, 340.63086, 312.6852, 340.63086, 317.59894, 340.63086, 322.5989, 340.63086, 327.59888, 340.63086, 332.59885, 340.63086, 337.59308, 340.63086, 342.62216, 340.63086, 347.6142, 340.63086, 352.61417, 340.63086, 357.61414, 340.63086, 362.6141, 340.63086, 367.61407, 340.63086, 372.61362, 340.63086, 377.6136, 340.63086, 382.61356, 340.63086, 387.61353, 340.63086, 392.6135, 340.63086, 397.61346, 340.63086, 402.61343, 340.63086, 407.6134, 340.63086, 412.61337, 340.63086, 417.61334, 340.63086, 422.61807, 340.63086, 427.61804, 340.63086, 432.618, 340.63086, 437.61798, 340.63086, 442.61795, 340.63086, 447.61792, 340.63086, 452.6179, 340.63086, 457.61786, 340.63086, 462.61783, 340.63086, 467.6178, 340.63086, 472.61777, 340.63086, 477.61774, 340.63086, 482.6177, 340.63086, 487.61768, 340.63086, 492.61765, 340.63086, 497.6176, 340.63086, 502.61758, 340.63086, 507.6176, 340.63086, 512.6177, 340.63086, 517.61774, 340.63086, 522.6178, 340.63086, 527.61786, 340.63086, 532.6179, 340.63086, 537.618, 340.63086, 542.61804, 340.63086, 547.6181, 340.63086, 552.61816, 340.63086, 557.6182, 340.63086, 562.6183, 340.63086, 567.61835, 340.63086, 572.6184, 340.63086, 577.61847, 340.63086, 582.6185, 340.63086, 587.6186, 340.63086, 592.61865, 340.63086, 597.6187, 340.63086, 602.6188, 340.63086, 607.61884, 340.63086, 612.6189, 340.63086, 617.61896, 340.63086, 622.619, 340.63086, 627.6191, 340.63086, 632.61914, 340.63086, 637.6192, 340.63086, 642.61926, 340.63086, 647.6193, 340.63086, 652.6194, 340.63086, 657.61945, 340.63086, 662.6195, 340.63086, 667.61957, 340.63086, 672.6196, 340.63086, 677.6197, 340.63086, 682.61975, 340.63086, 687.6198, 340.63086, 692.6199, 340.63086, 697.61993, 340.63086, 702.62, 340.63086, 707.62006, 340.63086, 712.6201, 340.63086, 717.6202, 340.63086, 722.62024, 340.63086, 727.6203, 340.63086, 732.62036, 340.63086, 737.6204, 340.63086, 742.6205, 340.63086, 747.62054, 340.63086, 752.6206, 340.63086, 757.62067, 340.63086, 762.6207, 340.63086, 767.6208, 340.63086, 772.62085, 340.63086, 777.6209, 340.63086, 782.621, 340.63086, 787.62103, 340.63086, 796.2005, 340.63086, 800, 340.63086)
+width = 11.28
+width_curve = SubResource("Curve_xuqvo")
+gradient = SubResource("Gradient_qsp4k")
+texture = ExtResource("6_8k28r")
+texture_mode = 2
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+script = ExtResource("7_cegnr")
+max_trail_count = 300
+timer = NodePath("Trail Timer")
+
+[node name="Trail Timer" type="Timer" parent="TrailSubViewport/LinesContainer/PlayerNode/Trail2" unique_id=553127117]
+wait_time = 0.05
+
+[node name="TrailIndicators" type="Node2D" parent="." unique_id=1691555677]
+position = Vector2(-576, 0)
+
+[node name="ReferenceNode" type="Node2D" parent="TrailIndicators" unique_id=1286879463]
+position = Vector2(800, -129.59962)
+
+[node name="Sprite2D2" type="Sprite2D" parent="TrailIndicators/ReferenceNode" unique_id=63833788]
+modulate = Color(2.1389596, 0.338116, 2.1471453, 0.7764706)
+position = Vector2(-7.7599936, 0.6396332)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("8_cmd6b")
+
+[node name="ScaleIndicator" type="Node2D" parent="TrailIndicators/ReferenceNode" unique_id=568250174]
+scale = Vector2(0.5975243, 0.5975243)
+
+[node name="Sprite2D" type="Sprite2D" parent="TrailIndicators/ReferenceNode/ScaleIndicator" unique_id=1817214294]
+modulate = Color(1, 0, 1, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("9_nnx61")
+
+[node name="PlayerNode" type="Node2D" parent="TrailIndicators" unique_id=69487365]
+position = Vector2(800, 16.63085)
+
+[node name="Sprite2D2" type="Sprite2D" parent="TrailIndicators/PlayerNode" unique_id=1695117309]
+modulate = Color(0.338, 2.1470003, 2.1470003, 0.776)
+position = Vector2(-6.999999, 0.29560092)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("8_cmd6b")
+
+[node name="ScaleIndicator" type="Node2D" parent="TrailIndicators/PlayerNode" unique_id=428130385]
+scale = Vector2(0.032, 0.032)
+
+[node name="Sprite2D" type="Sprite2D" parent="TrailIndicators/PlayerNode/ScaleIndicator" unique_id=1468833383]
+modulate = Color(0, 1, 0.953125, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("9_nnx61")
