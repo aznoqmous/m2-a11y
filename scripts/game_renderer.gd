@@ -32,8 +32,8 @@ func _process(delta: float) -> void:
 	
 func emit_score_feedback():
 	var fbp = FEED_BACK_PARTICLES.instantiate()
-	trail_indicators_container.add_child(fbp)
-	fbp.position = main.player_node.position
+	main.player_node.add_child(fbp)
+	#fbp.position = main.player_node.position
 
 func update_visuals(delta):
 	player_indicatior_node.position = main.player_node.position

@@ -19,6 +19,8 @@ curve = SubResource("Curve_1u8w0")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0odxb"]
 particle_flag_disable_z = true
+angular_velocity_min = 171.08998
+angular_velocity_max = 171.08998
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_naghh")
 alpha_curve = SubResource("CurveTexture_xancx")

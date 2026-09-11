@@ -15,6 +15,9 @@ class_name Main
 @export var max_hand_distance := 30.0
 @export var pitch_validation_distance := 0.05
 @export var volume_validation_distance := 0.2
+@export var increase_difficulty_each := 4
+@export var difficulties : Array[int]
+
 var current_time_to_reach := 0.0
 var target_note_index := 0
 
@@ -115,9 +118,15 @@ func handle_main_game(delta: float) -> void:
 	set_progress_bar_value(state)
 	if state >= 1.0 or Time.get_ticks_msec() / 1000.0 - current_time_to_reach > time_to_reach:
 		if state >= 1.0:
+			target_note_index += 1
 			game_renderer.emit_score_feedback()
-			display_completion_feedbacks(true)
-		target_note_index += 1
+			if not target_note_index % increase_difficulty_each:
+				display_completion_feedbacks(true)
+				var diff_index = min(target_note_index / increase_difficulty_each, difficulties.size() - 1)
+				time_to_reach = difficulties[diff_index]
+				print("DIFFICULTY UP ", time_to_reach)
+			else:
+				display_completion_feedbacks()
 		random_target_note(randf())
 
 func display_completion_feedbacks(buildup:=false):

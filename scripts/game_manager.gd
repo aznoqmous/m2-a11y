@@ -9,7 +9,6 @@ class_name GameManager extends Node2D
 @onready var reference_node: TrailNode = %ReferenceNode
 @export var main: Main
 
-
 var steps: Array[Callable] = []
 var on_process: Array[Callable]
 var on_temp_process: Array[Callable]
@@ -128,7 +127,7 @@ func display_introduction() -> void:
 func wait_player_amplitude_movement() -> void:
 	player_node.is_display_amplitude = true
 	await display_text(all_text[text_step])
-	progress_bar.visible = true
+	#progress_bar.visible = true
 	add_on_process(main.handle_player_amplitude.bind(delta_t))
 	add_on_temp_process(detect_amplitude_for_tutorial)
 	old_amplitude_value = main.player_scale_target
@@ -201,10 +200,7 @@ func has_player_get_height_f() -> bool:
 func has_player_targeted_tuto_height_f() -> bool:
 	return has_player_targeted_tuto_height
 
-
-
 ## PROCESS FUNCTIONS ##
-
 func detect_amplitude_for_tutorial() -> void:
 	var player_scale_target: float = main.player_scale_target
 	var diff: float = abs(player_scale_target - old_amplitude_value)
